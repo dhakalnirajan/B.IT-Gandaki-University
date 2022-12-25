@@ -20,3 +20,5 @@
 |<a href="https://github.com/dhakalnirajan/B.IT-Gandaki-University/tree/main/First%20Year/First%20Semester/Workshop:%20Problem%20Solving%20And%20Logic"> Workshop: Problem-Solving and logic </a>|    1    |
 
 In the table above, there are links provided so you can directly jump in the subjects syllabus provided by Co-ordinator.
+
+There is a folder called <a href="https://github.com/dhakalnirajan/B.IT-Gandaki-University/tree/main/First%20Year/First%20Semester/Assignments"> Assignments </a> where various asignments can be accessed assigned by lecturers.
