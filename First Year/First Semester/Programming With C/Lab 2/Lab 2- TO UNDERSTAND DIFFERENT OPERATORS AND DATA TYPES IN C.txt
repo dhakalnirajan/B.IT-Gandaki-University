@@ -1,0 +1,11 @@
+OBJECTIVE: TO UNDERSTAND DIFFERENT OPERATORS AND DATA TYPES IN C.
+
+THEORY: Explain different datatypes and operators in C.
+
+PRPGRAMS:
+
+1. WAP to enter days and convert days into years, weeks and days. (Hint: years = days / 365, weeks = (days % 365) / 7, days = days - ((years * 365) + (weeks * 7))
+2. WAP to find the largest number using ternay operators.
+3. WAP to take an integer number from user and display whether the given number is positive, negative or zero.
+4. WAP to check whether the number is divisible by (5 and 8) or not.
+5. WAP to enter an integer number and find its cube root.
