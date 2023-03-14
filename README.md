@@ -4,7 +4,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/dhakalnirajan/B.IT-Gandaki-University/graphs/commit-activity) &nbsp;
 [![Maintainer](https://img.shields.io/badge/maintainer-dhakalnirajan-blue)](https://github.com/dhakalnirajan) &nbsp;
 [![GitHub watchers](https://img.shields.io/github/watchers/dhakalnirajan/B.IT-Gandaki-University.svg?style=social&label=Watch&maxAge=2592000)](https://github.com/dhakalnirajan/B.IT-Gandaki-University) &nbsp;
-[![GitHub contributors](https://badgen.net/github/contributors/dhakalnirajan/B.IT-Gandaki-University)](https://GitHub.com/dhakalnirajan/B.IT-Gandaki-University/graphs/contributors/) &nbsp;
+[![GitHub contributors](https://badgen.net/github/contributors/dhakalnirajan/B.IT-Gandaki-University)](https://github.com/dhakalnirajan/B.IT-Gandaki-University/graphs/contributors/) &nbsp;
 
 
 <a href="https://www.gandakiuniversity.edu.np/"> <img src="https://github.com/dhakalnirajan/B.IT-Gandaki-University/blob/main/Images/GU%20Logo.png"> </a>
