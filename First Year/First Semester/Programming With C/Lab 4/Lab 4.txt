@@ -1,0 +1,42 @@
+Lab No. 4
+
+OBJECTIVE: TO UNDERSTAND LOOPS IN C.
+
+THEORY: 
+        Syntax of: 
+                    i. While
+                    ii. do...While
+                    iii. for
+                    iv. continue
+                    v. break
+
+
+PROGRAMS:
+
+1. WAP to print the sum of n natural numbers using:
+    a. while loop
+    b. do.. while loop
+    c. for loop
+
+2. WAP to print the multiplication table of a given number using:
+    a. while loop
+    b. do... while loop
+    c. for loop
+
+3. WAP to print the following patterns:
+
+        a.      1
+                1  2
+                1  2  3
+                1  2  3  4
+        
+        b.      4  4  4  4
+                3  3  3
+                2  2
+                1
+
+4. WAP to print the following series:
+
+    1 2 4 5 7 8 10
+
+5. WAP to ask user a number until the number is not divisible by 5.
