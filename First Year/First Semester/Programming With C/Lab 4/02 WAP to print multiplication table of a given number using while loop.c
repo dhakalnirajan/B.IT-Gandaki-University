@@ -3,12 +3,13 @@
 #include <stdio.h>
 int main(){
     int i, n;
-    printf("Enter a number to print its table: ");
+    printf("Enter a number to print its multiplication table: ");
     scanf("%d", &n);
 
     while (i <= 10)
     {
-        printf("%d * %d = %d", n, i, n*i);
+        printf("%d * %d = %d\n", n, i, n*i);
+        i = i+1;
     }
     return 0;
 }
