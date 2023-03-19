@@ -8,6 +8,6 @@ int main(){
         sum = sum + i;
         i++;
     } while (i <= n);
-    printf("The sum using do.. while loop is: %d. \n", sum);
+    printf("The sum of n natural number upto %d is: %d", n, sum);
     return 0;
 }
