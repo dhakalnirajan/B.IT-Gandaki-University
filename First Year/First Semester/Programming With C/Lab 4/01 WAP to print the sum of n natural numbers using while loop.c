@@ -6,11 +6,10 @@ int main(){
     printf("Enter a number to calculate sum of numbers upto that number: ");
     scanf("%d", &n);
 
-    while (i <= n)
-    {
+    while (i <= n){
         sum = sum + i;
         i++;
     }
-    printf("The sum using while loop is: %d. \n", sum);
+    printf("The sum of n natural number upto %d is: %d", n, sum);
     return 0;
 }
