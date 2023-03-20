@@ -1,0 +1,20 @@
+Lab-5:
+
+OBJECTIVE: TO UNDERSTAND ARRAY IN C.
+
+THEORY:
+Array
+	- Definition
+	- Syntax for declaring array for
+		- Single Dimensional
+		- Multi-dimensional (2D)
+
+PROGRAM:
+
+1. WAP to ask user any 5 number and print their sum using the concept of array.
+2. WAP to ask user any 5 numbers and print them in reverse order.
+3. WAP to ask user any 10 numbers and print them in ascending order.
+4. WAP to ask user any 10 numbers and print the maximum and minimum number.
+5. WAP to perform matrix addition of 2x2 matrix.
+6. WAP to perform matrix multiplication of any giveen matrix.
+7. WAP to perform matrix transpose of any given matrix.
