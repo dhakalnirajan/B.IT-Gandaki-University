@@ -16,5 +16,5 @@ PROGRAM:
 3. WAP to ask user any 10 numbers and print them in ascending order.
 4. WAP to ask user any 10 numbers and print the maximum and minimum number.
 5. WAP to perform matrix addition of 2x2 matrix.
-6. WAP to perform matrix multiplication of any giveen matrix.
+6. WAP to perform matrix multiplication of any given matrix.
 7. WAP to perform matrix transpose of any given matrix.
