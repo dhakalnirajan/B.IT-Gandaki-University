@@ -14,7 +14,7 @@ THEORY:
 PROGRAM:
 
 1. WAP to ask user a number and find its square root using library function.
-2. WAP to ask user the length, breadth & height of a box. Then createe a function volume() to calculate volume of a box by using following function types;
+2. WAP to ask user the length, breadth & height of a box. Then create a function volume() to calculate volume of a box by using following function types;
     - with return type, with arguments
     - with return type, without arguments
     - without return type, with arguments
