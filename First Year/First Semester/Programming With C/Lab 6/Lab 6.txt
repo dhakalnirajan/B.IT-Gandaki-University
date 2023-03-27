@@ -1,0 +1,25 @@
+Lab-6:
+
+OBJECTIVE: TO UNDERSTAND FUNCTION IN C.
+
+THEORY:
+	- Definition
+    - Types
+	- List of Syntax of each type
+
+    Recursive Function
+    - Definition
+    - Syntax
+
+PROGRAM:
+
+1. WAP to ask user a number and find its square root using library function.
+2. WAP to ask user the length, breadth & height of a box. Then createe a function volume() to calculate volume of a box by using following function types;
+    - with return type, with arguments
+    - with return type, without arguments
+    - without return type, with arguments
+    - without return type, without arguments
+3. WAP that contains findarea() and findvolume() function to find area and volume of a circle of radius r, define PI = 3.14 as MACRO.
+4. WAP to find sum of n natural numbers using recursive function.
+5. WAP to print the fibonacci series upto n terms using recursion.
+6. WAP to find factorial of any number using recursion.
