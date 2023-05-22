@@ -1,7 +1,6 @@
 #include<stdio.h>
 
-int
- checknum(int x);
+intchecknum(int x);
 int main(){
 	int n;
 	printf("Enter a number:");
