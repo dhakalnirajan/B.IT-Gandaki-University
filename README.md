@@ -7,7 +7,7 @@
 [![GitHub contributors](https://badgen.net/github/contributors/dhakalnirajan/B.IT-Gandaki-University)](https://github.com/dhakalnirajan/B.IT-Gandaki-University/graphs/contributors/) &nbsp;
 
 
-<a href="https://www.gandakiuniversity.edu.np/"> <img src="https://github.com/dhakalnirajan/B.IT-Gandaki-University/blob/main/Images/GU%20Logo.png"> </a>
+<a href="https://www.gandakiuniversity.edu.np/"> <img src="./Images/logo.png"> </a>
 
 <h3> About Gandaki University </h3>
 
