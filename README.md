@@ -11,7 +11,7 @@
 
 <h3> About Gandaki University </h3>
 
-Located in the lap of the Fishtail and Annpurna Mountains and situated in the valley of the lakes, Gandaki University (GU) is located in the beautiful city of Pokhara, a metropolitan area quickly becoming the education hub of the south-east Asia. Gandaki University was established in 2019 to provide world class education in keeping with the most recent international trends in university education.
+Located in the lap of the Fishtail and Annapurna Mountains and situated in the valley of the lakes, Gandaki University (GU) is located in the beautiful city of Pokhara, a metropolitan area quickly becoming the education hub of the south-east Asia. Gandaki University was established in 2019 to provide world class education in keeping with the most recent international trends in university education.
 
 # <a href="https://www.gandakiuniversity.edu.np/degrees-and-programs/bachelor-in-information-technology/"> Bachelors of Information Technology </a>
 
