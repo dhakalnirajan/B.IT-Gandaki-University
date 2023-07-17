@@ -1,0 +1,184 @@
+* {
+    padding: auto;
+    margin: auto;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h2 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 800;
+    color: #fa0f0f;
+    padding-bottom: 20px;
+}
+
+fieldset {
+    border: #040e50 solid 3px;
+    padding-bottom: 30px;
+}
+
+form {
+    width: 50%;
+    margin-top: 30px;
+    margin-left: 25%;
+    padding: 0px;
+    border: 8px solid #18b8b8;
+    box-sizing: content-box;
+}
+
+p {
+    font-weight: 600;
+    color: #6c0612;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+#name {
+    font-weight: 600;
+    color: #6c0612;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    padding-left: 30px;
+}
+
+input[type=text] {
+    border: 2px solid #ff1f5f;
+    border-radius: 4px;
+    width: 50%;
+    margin: 8px 0;
+    align-items: end;
+    color: #0039ac;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    padding: 5px 10px;
+    font-size: 18px;
+}
+
+input[type=date] {
+    border: 2px solid #ff1f5f;
+    border-radius: 4px;
+    width: 50%;
+    margin: 8px 0;
+    padding: 7px 9px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+input[type=email] {
+    border: 2px solid #ff1f5f;
+    border-radius: 4px;
+    width: 50%;
+    margin: 8px 0;
+    color: rgb(0, 57, 172);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    padding: 5px 10px;
+    font-size: 18px;
+}
+
+input[type=password] {
+    border: 2px solid #ff1f5f;
+    border-radius: 4px;
+    width: 50%;
+    margin: 8px 0;
+    padding: 8px 0;
+    color: #0039ac;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    padding: 5px 10px;
+    font-size: 18px;
+}
+
+.ccode {
+    /* Select menu dropdown */
+    background: white;
+    stroke-width: 3px;
+    border: 2px solid #808380;
+    width: 7%;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 3px 0;
+}
+
+input[type=number] {
+    border: 2px solid #ff1f5f;
+    border-radius: 4px;
+    width: 40%;
+    margin: 8px 0;
+    color: #040e50;
+    padding: 8px 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+textarea {
+    border: 2px solid #ff1f5f;
+    border-radius: 4px;
+    width: 43%;
+    color: #040e50;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 4px 35px;
+}
+
+#state_para {
+    padding-left: 30px;
+}
+
+#state {
+    background-color: white;
+    stroke-width: 3px;
+    border: 2px solid #ff1f5f;
+    border-radius: 4px;
+    width: 52.5%;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    padding: 6px 0;
+}
+
+#hobbies {
+    font-weight: 600;
+    color: #6c0612;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    padding-left: 36px;
+}
+
+#photo {
+    display: inline;
+    padding-right: 30px;
+}
+
+span {
+    color: red;
+    padding-top: -30px;
+    padding-left: 300px;
+    font-weight: 400px;
+}
+
+input[type=file] {
+    background-color: white;
+    border: 2px;
+}
+
+#pledge {
+    padding-left: 30px;
+    font-weight: 400;
+    color: black;
+    font-size: 14px;
+}
+
+input[type=submit] {
+    background: rgb(1, 17, 99);
+    background: linear-gradient(355deg, rgb(12, 27, 106) 0%, rgb(173, 23, 68) 76%);
+    border-radius: 5px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    padding-bottom: 3px;
+    width: 20%;
+    font-size: 18px;
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Registration Form</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
+            rel="stylesheet">
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </head>
+    <body>
+        <form>
+            <fieldset>
+                <h2><center>STUDENT REGISTRATION FORM</center></h2>
+                <p id="name">
+                    First Name
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="fname"
+                        placeholder="  Enter First name" required>
+                </p>
+                <p id="name">
+                    Last Name
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="lname"
+                        placeholder="  Enter Last Name" required>
+                </p>
+                <p id="name">
+                    Gender
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="male" name="gender">&nbsp;Male
+                    &nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="female" name="gender">&nbsp;Female
+                </p>
+                <p id="name">
+                    Age
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="age"
+                        placeholder="   Enter your age">
+                </p>
+                <p id="name">
+                    Date Of Birth
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="date" name="dob" placeholder="dd-mm-yyyy">
+                </p>
+                <p id="name">
+                    Email Address
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="email" name="email"
+                        placeholder="   Enter your email">
+                </p>
+                <p id="name">
+                    Password
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="password" name="password"
+                        placeholder="   Enter your password min 8 characters">
+                </p>
+                <p id="name">
+                    Confirm Password
+                    &nbsp;&nbsp;
+                    <input type="password" name="cpassword"
+                        placeholder="   Enter your password again">
+                </p>
+                <p id="name">
+                    Phone Number
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<select
+                        name="country_code"
+                        class="ccode"
+                        aria-label="Default select example">
+                        <option value="+91">+91</option>
+                        <option value="+977">+977</option>
+                    </select>
+                    &nbsp;&nbsp;
+                    <input type="number" name="number"
+                        placeholder="  Enter your phone number">
+                </p>
+
+                <p id="name">Address
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <textarea rows="3" cols="30"
+                        placeholder="   Enter your address"></textarea>
+                </p>
+                <br>
+                <p id="state_para">
+                    <label for="state">State</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <select id="state" name="state">
+                        <option value="--Select Your State--">--Select Your
+                            State--</option>
+                        <option value="Koshi">Koshi</option>
+                        <option value="Janakpur">Janakpur</option>
+                        <option value="Bagmati">Bagmati</option>
+                        <option value="Gandaki">Gandaki</option>
+                        <option value="Lumbini">Lumbini</option>
+                        <option value="Karnali">Karnali</option>
+                        <option value="Sudurpaschim">Sudurpaschim</option>
+                    </select>
+                </p>
+                <p id="name">
+                    Pin Code
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="pincode" type="number" name="pincode"
+                        placeholder="   Enter your pin code"
+                        style="border: 2px solid #ff1f5f; border-radius: 4px; width: 40%; margin: 8px 0; color: #040e50; padding: 8px 47px; font-family: 'Montserrat', sans-serif; font-weight: 500;">
+                </p>
+                <br>
+                <p id="name">
+                    Hobbies
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" value="Music"
+                        style="position: relative;cursor: pointer;"> Music
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" value="Movies"
+                        style="position: relative;cursor: pointer;"> Movies
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" value="Sports"
+                        style="position: relative;cursor: pointer;"> Sports
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" value="Travel"
+                        style="position: relative;cursor: pointer;"> Travel
+                </p>
+                <br>
+
+                <div id="photo">
+                    <p id="name">Upload Photo</p>
+                    <span>*Max size 100Kb</span>
+                    <input type="file" name="photo">
+                </div>
+                <br>
+                <br>
+                <p id="pledge">
+                    <input type="checkbox" name="pledge"
+                        style="position: relative; cursor: pointer; border: 2px; border-color:#ff1f5f">
+                    I hereby declare that the above information provided is true
+                    and correct.
+                </p>
+                <br>
+                <!-- RECAPTCHA API -->
+                <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+                <br><br>
+
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="submit" name="Register" id="submit"
+                        value="Register">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="submit" name="Register" id="submit"
+                        value="Submit">
+                </p>
+            </fieldset>
+        </form>
+    </body>
+</html>

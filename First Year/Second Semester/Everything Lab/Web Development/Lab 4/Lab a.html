@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Personal Details Form</title>
+    </head>
+    <body>
+        <form>
+            <fieldset>
+                <legend>Personal Details</legend>
+                <p>Salutation:
+                    <select name="salutation" id="salute" autofocus required>
+                        <option value="--None--">--None--</option>
+                        <option value="Mr.">Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Ms.">Ms.</option>
+                        <option value="Dr.">Dr.</option>
+                        <option value="Prof.">Prof.</option>
+                    </select>
+                </p>
+                <p>First name:
+                    <input type="text" id="first_name" name="first_name"
+                        required>
+                </p>
+                <p>Last name:
+                    <input type="text" id="last_name" name="last_name" required>
+                </p>
+                <p>Gender:
+                    <input type="radio" id="male" name="gender" value="male">Male
+                    <input type="radio" id="female" name="gender" value="female">Female
+                </p>
+                <p>Date of Birth:
+                    <input type="date" id="dob" name="dob">
+                </p>
+                <p>Address:<br>
+                    <textarea id="address" name="address" rows="5" cols="20"></textarea>
+                </p>
+                <input type="submit" value="Submit">
+            </fieldset>
+        </form>
+    </body>
+</html>
