@@ -1,0 +1,24 @@
+/* id_selector */
+#myElement {
+    background-color: yellow;
+    font-size: 20px;
+}
+
+/* Class Selector */
+.common {
+    color: blue;
+    border: 2px solid black;
+}
+
+/* Grouping Selector */
+table {
+    border: 4px solid blue;
+}
+
+th,
+td {
+    background-color: green;
+    border: 4px solid blue;
+    color: white;
+    font-size: 20px;
+}
