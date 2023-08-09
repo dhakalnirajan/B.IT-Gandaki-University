@@ -1,0 +1,28 @@
+div {
+    border: 2px solid black;
+    width: 700px;
+    padding: 0px 20px;
+}
+
+h1 {
+    color: Blue;
+    padding: 20px 60px;
+}
+
+.color {
+    font-size: 18px;
+    color: green;
+}
+
+.background {
+    background-color: yellow;
+    padding: 10px;
+}
+
+button {
+    color: white;
+    background-color: #209b20;
+    padding: 10px 8px;
+    border-radius: 10px;
+    margin: 20px 20px;
+}
