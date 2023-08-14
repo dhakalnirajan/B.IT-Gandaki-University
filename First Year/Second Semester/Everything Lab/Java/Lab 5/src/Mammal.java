@@ -17,6 +17,7 @@ class Dog extends Animal {
 class Cat extends Dog {
 
   public void makeSound() {
+    super.makeSound();
     System.out.println("Cat Sound: Meow");
   }
 }
@@ -28,7 +29,6 @@ class Mammal {
     Dog d = new Dog();
     Cat c = new Cat();
     a.makeSound();
-    d.makeSound();
     c.makeSound();
   }
 }
