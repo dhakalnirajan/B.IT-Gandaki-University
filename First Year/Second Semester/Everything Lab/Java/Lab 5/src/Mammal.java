@@ -2,6 +2,10 @@
 
 class Animal {
 
+  String Happy;
+  Animal(String Happy){
+    this.Happy = Happy;
+  }
   public void makeSound() {
     System.out.println("Animal Sound");
   }
@@ -10,6 +14,7 @@ class Animal {
 class Dog extends Animal {
 
   public void makeSound() {
+    super.makeSound();
     System.out.println("Dog Sound: Bark");
   }
 }
@@ -17,6 +22,7 @@ class Dog extends Animal {
 class Cat extends Dog {
 
   public void makeSound() {
+    super.makeSound();
     System.out.println("Cat Sound: Meow");
   }
 }
