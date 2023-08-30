@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.error {
+    color: red;
+}
+</style>
+</head>
+<body>
+
+<form id="myForm" onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <span class="error" id="nameError"></span><br><br>
+
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone">
+    <span class="error" id="phoneError"></span><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <span class="error" id="emailError"></span><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <span class="error" id="passwordError"></span><br><br>
+
+    <label for="rePassword">Re-enter Password:</label>
+    <input type="password" id="rePassword" name="rePassword">
+    <span class="error" id="rePasswordError"></span><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+function validateForm() {
+    name = document.getElementById('name').value;
+    phone = document.getElementById('phone').value;
+    email = document.getElementById('email').value;
+    password = document.getElementById('password').value;
+    rePassword = document.getElementById('rePassword').value;
+
+    nameError = document.getElementById('nameError');
+    phoneError = document.getElementById('phoneError');
+    emailError = document.getElementById('emailError');
+    passwordError = document.getElementById('passwordError');
+    rePasswordError = document.getElementById('rePasswordError');
+
+    phonePattern = /^\d{10}$/;
+    emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+    // phone pattern
+        // ^: Asserts the start of the string.
+        // \d: Matches any digit (0-9).
+        // {10}: Specifies that exactly 10 digits are expected.
+        // $: Asserts the end of the string.
+
+    //email pattern
+        // ^: Asserts the start of the string.
+        // [a-zA-Z0-9._-]+: Matches one or more alphanumeric characters, periods, underscores, or hyphens.
+        // @: Matches the "@" symbol.
+        // [a-zA-Z0-9.-]+: Matches one or more alphanumeric characters, periods, or hyphens (for the domain name).
+        // \.: Matches a literal period (dot).
+        // [a-zA-Z]{2,4}: Matches 2 to 4 alphabetic characters (for the top-level domain, like ".com" or ".org").
+        // $: Asserts the end of the string.
+
+    //password pattern
+        // ^: The password should start at the beginning of the string.
+        // (?=.*\d): The password must contain at least one digit.
+        // (?=.*[a-z]): The password must contain at least one lowercase letter.
+        // (?=.*[A-Z]): The password must contain at least one uppercase letter.
+        // .{6,}: The password must be at least 6 characters long.
+        // $: The password should end at the end of the string.
+
+    if (!name) {
+        nameError.textContent = 'Please enter your name.';
+    } else {
+        nameError.textContent = '';
+    }
+
+    if (!phone) {
+        phoneError.textContent = 'Please enter your phone number.';
+    } else if (!phonePattern.test(phone)) {
+        phoneError.textContent = 'Please enter a valid 10-digit phone number.';
+    } else {
+        phoneError.textContent = '';
+    }
+
+    if (!email) {
+        emailError.textContent = 'Please enter your email address.';
+    } else if (!emailPattern.test(email)) {
+        emailError.textContent = 'Please enter a valid email address.';
+    } else {
+        emailError.textContent = '';
+    }
+
+    if (!password) {
+        passwordError.textContent = 'Please enter a password.';
+    } else if (!passwordPattern.test(password)) {
+        passwordError.textContent = 'Password must have at least one uppercase letter, one lowercase letter, one digit, and be at least 6 characters long.';
+    } else {
+        passwordError.textContent = '';
+    }
+
+    if (!rePassword) {
+        rePasswordError.textContent = 'Please re-enter your password.';
+    } else if (password !== rePassword) {
+        rePasswordError.textContent = 'Passwords do not match.';
+    } else {
+        rePasswordError.textContent = '';
+    }
+
+    return !(nameError.textContent || phoneError.textContent || emailError.textContent || passwordError.textContent || rePasswordError.textContent);
+}
+</script>
+
+</body>
+</html>
