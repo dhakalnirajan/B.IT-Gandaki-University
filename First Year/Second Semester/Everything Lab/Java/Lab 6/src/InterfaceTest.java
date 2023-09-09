@@ -6,23 +6,25 @@ Now, Using the main class InterfaceTest , access the methods and variables from 
 
 // Create an interface named Shape
 interface Shape {
-  double calculateVolume();
+  double calculateVolume(); // Method for calculating volume
 }
 
-// Derive a class Cuboid that implements the Shape interface
+// Derive a class Cuboid which implements the Shape interface
 class Cuboid implements Shape {
 
-  private double length;
-  private double width;
-  private double height;
+  // Data members for length, width, and height of the cuboid
+  double length;
+  double width;
+  double height;
 
+  // Constructor to initialize the dimensions of the cuboid
   public Cuboid(double length, double width, double height) {
     this.length = length;
     this.width = width;
     this.height = height;
   }
 
-  @Override
+  // Implement the calculateVolume method from the Shape interface
   public double calculateVolume() {
     return length * width * height;
   }
@@ -31,30 +33,34 @@ class Cuboid implements Shape {
 // Derive a class Cube from the Shape interface
 class Cube implements Shape {
 
-  private double side;
+  // Data member for the side length of the cube
+  double sideLength;
 
-  public Cube(double side) {
-    this.side = side;
+  // Constructor to initialize the side length of the cube
+  public Cube(double sideLength) {
+    this.sideLength = sideLength;
   }
 
-  @Override
+  // Implement the calculateVolume method from the Shape interface
   public double calculateVolume() {
-    return side * side * side;
+    return sideLength * sideLength * sideLength;
   }
 }
 
-// Main class InterfaceTest to access methods and variables
+// Main class InterfaceTest
 public class InterfaceTest {
 
   public static void main(String[] args) {
-    // Create a Cuboid
-    Cuboid cuboid = new Cuboid(5.0, 3.0, 2.0);
-    double cuboidVolume = cuboid.calculateVolume();
-    System.out.println("Volume of Cuboid: " + cuboidVolume);
+    // Create a Cuboid object
+    Cuboid cuboid = new Cuboid(5.0, 4.0, 3.0);
 
-    // Create a Cube
-    Cube cube = new Cube(4.0);
-    double cubeVolume = cube.calculateVolume();
-    System.out.println("Volume of Cube: " + cubeVolume);
+    // Calculate and display the volume of the cuboid
+    System.out.println("Volume of Cuboid: " + cuboid.calculateVolume());
+
+    // Create a Cube object
+    Cube cube = new Cube(3.0);
+
+    // Calculate and display the volume of the cube
+    System.out.println("Volume of Cube: " + cube.calculateVolume());
   }
 }
