@@ -1,60 +1,60 @@
 /*
-WAP to create an interface named Shape with its data members and methods for
-calculating volume. Also, derive a class cuboid which implements the Shape and
-calculate the volume of the cuboid. Also, derive a class cube from the class Shape and
-method for calculating the volume. Now, Using the main class InterfaceTest , access the
-methods and variables from it for displaying the volume of cube and cuboid.
-
+WAP to create an interface named Shape with its data members and methods for calculating volume. Also, derive a class cuboid
+which implements the Shape and calculate the volume of the cuboid. Also, derive a class cube from the class Shape and method for calculating the volume.
+Now, Using the main class InterfaceTest , access the methods and variables from it for displaying the volume of cube and cuboid.
 */
 
-class Shape {
+// Create an interface named Shape
+interface Shape {
+  double calculateVolume();
+}
 
-  float length, breadth, height;
-  float volume;
+// Derive a class Cuboid that implements the Shape interface
+class Cuboid implements Shape {
 
-  void volume() {
-    volume = length * breadth * height;
+  private double length;
+  private double width;
+  private double height;
+
+  public Cuboid(double length, double width, double height) {
+    this.length = length;
+    this.width = width;
+    this.height = height;
+  }
+
+  @Override
+  public double calculateVolume() {
+    return length * width * height;
   }
 }
 
-class Cuboid extends Shape {
+// Derive a class Cube from the Shape interface
+class Cube implements Shape {
 
-  float length, breadth, height, volume;
+  private double side;
 
-  void volume() {
-    volume = length * breadth * height;
+  public Cube(double side) {
+    this.side = side;
+  }
+
+  @Override
+  public double calculateVolume() {
+    return side * side * side;
   }
 }
 
-class Cube extends Shape {
-
-  float length, volume;
-
-  void volume() {
-    volume = length * length * length;
-  }
-}
-
-class InterfaceTest {
+// Main class InterfaceTest to access methods and variables
+public class InterfaceTest {
 
   public static void main(String[] args) {
-    Shape s1 = new Shape();
-    s1.length = 10;
-    s1.breadth = 20;
-    s1.height = 30;
-    s1.volume();
-    System.out.println("The volume of the cuboid is: " + s1.volume);
+    // Create a Cuboid
+    Cuboid cuboid = new Cuboid(5.0, 3.0, 2.0);
+    double cuboidVolume = cuboid.calculateVolume();
+    System.out.println("Volume of Cuboid: " + cuboidVolume);
 
-    Cuboid c1 = new Cuboid();
-    c1.length = 10;
-    c1.breadth = 20;
-    c1.height = 30;
-    c1.volume();
-    System.out.println("The volume of the cuboid is: " + c1.volume);
-
-    Cube c2 = new Cube();
-    c2.length = 10;
-    c2.volume();
-    System.out.println("The volume of the cube is: " + c2.volume);
+    // Create a Cube
+    Cube cube = new Cube(4.0);
+    double cubeVolume = cube.calculateVolume();
+    System.out.println("Volume of Cube: " + cubeVolume);
   }
 }
