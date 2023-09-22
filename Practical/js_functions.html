@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JavaScript Functions</title>
+    </head>
+    <body>
+        <h1>JavaScript Functions</h1>
+
+        <p>Calla a function which perform a calculation and returns the result.</p>
+
+        <p id="demo"></p>
+
+        <script>
+            function myFunction(p1, p2){
+                result = p1 * p2;
+                document.getElementById("demo").innerHTML = result;
+            }
+
+            myFunction(4, 3);
+        </script>
+
+        <!-- WAP in JavaScript to find the area of circle using function:
+        i. With return type, no parameters
+        ii. With return type, with parameters
+        iii. without return type, with parameters
+        iv. without return type, without parameters -->
+
+        <p>Area of Circle using with/without return type and parameters</p>
+        <p id="area1">Area of Circle with return type and parameter is: </p>
+        <p id="area2">Area of Circle with Return type and no parameters is:</p>
+        <p id="area3">Area of Circle without Return type and No Parameters is:
+        </p>
+        <p id="area4">Area of Circle without Return type and parameters is:</p>
+        <script>
+            var pi = 3.1415;
+
+            
+            function returnParameter(r) {
+                return area1 = pi * r * r;
+            }
+
+            a = returnParameter(7);
+            document.getElementById("area1").innerHTML = a;
+
+            function returnNoParameter() {
+                let r = 10;
+                return area2 = pi * r * r;
+            }
+
+            b = returnNoParameter();
+            document.getElementById("area2").innerHTML = b;
+
+            function noReturnNoPara() {
+                r = 7;
+                area3 = pi * r * r;
+                document.getElementById("area3").innerHTML = area3;
+            }
+
+            noReturnNoPara();
+
+            function noReturnYesPara(r) {
+                area4 = pi * r * r;
+                document.getElementById("area4").innerHTML = area4;
+            }
+
+            noReturnYesPara(20);
+        </script>
+
+    </body>
+</html>

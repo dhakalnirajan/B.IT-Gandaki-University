@@ -1,0 +1,23 @@
+<!-- WAP in HTML and JS to change the font color to red of the following element when user click this element.
+    <p id="demo">Hello</p>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Onclick Event Listener</title>
+    </head>
+    <body>
+        <p id="demo" onclick="changeColor(this)" style="font-size: 60px;">Hello</p>
+
+        <script>
+        function changeColor(obj){
+            obj.style.color = "red";
+        }
+
+        <!-- Another way -->
+    </script>
+    </body>
+</html>

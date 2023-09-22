@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/form.css">
+        <title> Form Validation </title>
+    </head>
+    <body>
+
+        <div class="form-box">
+            <h1>Student Form Validation</h1>
+            <form action="form_validation.php" method="POST" class="form"
+                onsubmit="return validateForm()">
+
+                <br>
+                <label for="name" id="label"> Name: </label>
+                <input type="text" name="name" id="name">
+                <span class="error" id="nameError"></span>
+                <br>
+                <label for="email" id="label"> Email: </label>
+                <input type="email" name="email" id="email">
+                <span class="error" id="emailError"></span>
+                <br>
+                <label for="phone" id="label"> Phone: </label>
+                <input type="tel" name="phone" id="phone">
+                <span class="error" id="phoneError"></span>
+                <br>
+                <label for="password" id="label"> Password: </label>
+                <input type="password" name="password" id="password">
+                <span class="error" id="passwordError"></span>
+                <br>
+                <label for="password_confirmation" id="label"> Confirm Password:
+                </label>
+                <input type="password" name="password_confirmation"
+                    id="password_confirmation">
+                <span class="error" id="rePasswordError"></span>
+                <br>
+                <input type="submit" value="Submit" id="submit">
+            </form>
+        </div>
+
+        <script>
+            // regex for email:
+            emailPattern = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,8}$/
+            phonePattern = /^\d{10}$/
+            passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/
+
+            name.document.getElementB
+        </script>
+    </body>
+</html>

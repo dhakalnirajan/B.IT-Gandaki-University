@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Date and Time</title>
+    </head>
+    <body>
+        <h2>My First JavaScript</h2>
+
+        <!-- Onclick is a attribute -->
+        <button type="button"
+            onclick="document.getElementById('demo').innerHTML = Date()">
+            Click me to display Date and Time.</button>
+
+        <button type="button"
+            onclick="document.getElementById('demo').style.color='red'">Click
+            Me.</button>
+
+        <button type="button"
+            onclick="document.getElementById('demo').innerHTML = 'Hoorayy!! Text changed.'">
+            Click me to change the content.</button>
+
+        <p id="demo">This is the content to be refreshed.</p>
+
+        <input type="button" value="Click Me" onclick="this.value='Ooops!!'" />
+
+    </body>
+</html>

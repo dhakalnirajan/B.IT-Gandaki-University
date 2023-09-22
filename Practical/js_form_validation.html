@@ -1,0 +1,178 @@
+<!-- WAP in HTML, CSS and JS to validate Form Using JS -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JS Form Validation</title>
+
+        <style>
+            .error{
+                color: red;
+                font-size: 18px;
+            }
+
+            form{
+                margin: 40px 10px;
+                padding: 20px;
+                background-color: #f1f1f1;
+                border-radius: 10px;
+                width: 1000px;
+            }
+
+            label{
+                display: block;
+                margin-bottom: 10px;
+                font-size: large;
+            }
+
+            input{
+                width: 600px;
+                height: 40px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                font-size: 18px;
+            }
+
+            input:focus{
+                border: 1px solid #4fce62;
+                background-color: rgb(245, 244, 229);
+                outline: 1px solid #99edf0;
+                padding-left: 10px;
+            }
+
+            button{
+                background-color: #35d14c;
+                border: 1px dotted black;
+                border-radius: 10px;
+                padding: 8px 40px;
+                color: white;
+                font-size: 18px;
+                overflow: unset;
+            }
+
+            button:hover{
+                background-color: #5dd46f;
+                cursor: pointer;
+            }
+
+            button:active{
+                background-color: #1e792c;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="validate.php" method="GET" id="my_form"
+            onsubmit="return validateForm()">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required><br>
+            <span class="error" id="nameError"></span><br><br>
+
+            <label for="phone">Phone:</label>
+            <input type="number" name="phone" id="phone" required><br>
+            <span class="error" id="phoneError"></span><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required><br>
+            <span class="error" id="emailError"></span><br><br>
+
+            <label for="Password">Password</label>
+            <input type="password" name="password" id="pass" required><br>
+            <span class="error" id="passwordError"></span><br><br>
+
+            <label for="re_password">Confirm Password</label>
+            <input type="password" name="rePassword" id="rePassword" required><br>
+            <span class="error" id="rePasswordError"></span><br><br>
+
+            <button type="submit"> Submit </button>
+        </form>
+
+        <script>
+                function validateForm() {
+                    name = document.getElementById('name').value;
+                    phone = document.getElementById('phone').value;
+                    email = document.getElementById('email').value;
+                    password = document.getElementById('pass').value;
+                    rePassword = document.getElementById('rePassword').value;
+
+                    nameError = document.getElementById('nameError');
+                    phoneError = document.getElementById('phoneError');
+                    emailError = document.getElementById('emailError');
+                    passwordError = document.getElementById('passwordError');
+                    rePasswordError = document.getElementById('rePasswordError');
+
+                    // Regex (Regular Expression) for Pattern Validation
+                    phonePattern = /^\d{10}$/;
+                    emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                    passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+                    // Phone pattern
+                    /*
+                    ^: Asserts the start of the string.
+                    \d: Matches any digit from 0-9.
+                    +: Causes the resulting RE to match 1 or more repetitions of the preceding RE.
+                    {10}: Specifies that exactly 10 digits are expected.
+                    $: Asserts the end of the string.
+
+                    // Email pattern
+
+                    ^: Asserts the start of the string.
+                    [a-zA-Z0-9._-]+: Matches any character from a to z, A to Z, 0 to 9, dot(.), underscore(_), and hyphen(-).
+                    @: Matches the @ character.
+                    [a-zA-Z0-9.-]+: Matches any character from a to z, A to Z, 0 to 9, dot(.), and hyphen(-).
+                    \. : Matches the dot(.).
+                    [a-zA-Z]{2,4}: Matches any character from a to z, A to z, 2 to 4 alphanumeric characters (for the top-level domain like ".com" or ".org")
+                    $: Asserts the end of the string
+
+                    // passwordPattern
+
+                    ^: Asserts the start of the string.
+                    \d: Matches any digit (0 - 9).
+                    @: Matches the "@" symbol.
+                    [a-zA-Z0-9.-]
+                    */
+                }
+
+                if(!name){
+                    nameError.textContent = "Please enter your name.";
+                }else{
+                    nameError.textContent = '';
+                }
+
+                if(!phone){
+                    phoneError.textContent = "Please enter your phone number";
+                } elseif (!phonePattern.test(phone)){
+                    phoneError.textContent = "Please enter a valid 10-digit phone number.";
+                } else{
+                    phoneError.textContent = '';
+                }
+
+                if(!email){
+                    emailError.textContent = "Please enter your email address.";
+                } elseif(!emailPattern.test(email)){
+                    emailError.textContent = "Please enter a valid email address."
+                } else{
+                    emailError.textContent = '';
+                }
+
+                if(!password){
+                    passwordError.textContent = "Please enter a password.";
+                } elseif(!passwordPattern.test(password)){
+                    passwordError.textContent = "Please enter a valid password."
+                } else{
+                    passwordError.textContent = '';
+                }
+
+                if(!rePassword){
+                    rePasswordError.textContent = "Please confirm your password.";
+                } elseif(password !== rePassword){
+                    rePasswordError.textContent = "Passwords do not match."
+                } else{
+                    rePasswordError.textContent = '';
+                }
+
+                return !(nameError.textContent || phoneError.textContent || emailError.textContent || passwordError.textContent || rePasswordError.textContent);
+            </script>
+    </body>
+</html>
