@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Lab 7 | Sum of first 100 positive numbers </title>
+
+        <style>
+            h2{
+                font-size: 40px;
+                margin: 30px;
+                text-align: center;
+                color: blue;
+            }
+
+            p{
+                margin: 40px;
+                font-size: 30px;
+                text-align: center;
+                color:red;
+            }
+
+            button{
+                margin: 40px;
+                padding: 10px 40px;
+                border-radius: 10px;
+                background-color: #209b20;
+                color: white;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2> Sum of First hundred positive numbers. </h2>
+
+        <p>The sum of first hundred positive numbers is: </p>
+        <p id="sum"></p>
+
+        <button type="button" onclick="sum()"> Value </button>
+
+        <script>
+            function sum(){
+                var sum = 0;
+
+                for(var I = 1; I <= 100; I++){
+                    sum += I;
+                }
+
+                document.getElementById("sum").innerHTML = sum;
+            }
+        </script>
+    </body>
+</html>

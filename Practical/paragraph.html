@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lab 7 | Paragraph</title>
+    </head>
+    <body>
+        <p id="para">
+            Located in the lap of the Fishtail and Annapurna Mountains and
+            situated in the valley of the lakes, Gandaki University (GU) is
+            located in the beautiful city of Pokhara, a metropolitan area
+            quickly becoming the education hub of the south-east Asia. Gandaki
+            University was established in 2019 to provide world class education
+            in keeping with the most recent international txammrends in
+            university
+            education.
+        </p>
+
+        <p id="len-count"></p>
+        <p id="word-count"></p>
+        <p id="uppercase"></p>
+        <p id="lowercase"></p>
+        <p id="replace"></p>
+
+        <script>
+            x = document.getElementById("para");
+
+            // a.
+            a = x.innerHTML.length;
+            document.getElementById("len-count").innerHTML = "Total number of characters: " + a;
+
+            // b.
+            b = x.innerText.split(" ").length;
+            document.getElementById("word-count").innerHTML = "Total number of words: " + b;
+
+            // c.
+            c = x.innerText.toUpperCase();
+            document.getElementById("uppercase").innerHTML = c;
+
+            // d.
+            d = x.innerText.toLowerCase();
+            document.getElementById("lowercase").innerHTML = d;
+
+            // e.
+            e = x.innerText.replace("Fishtail", "Machhapuchchhre");
+            document.getElementById("replace").innerHTML = e;
+        </script>
+    </body>
+</html>
