@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to bottom, #461e64, #2f0a33, #1a061a);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #6400b8;
+    text-align: center;
+    padding: 30px;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.calculator-container {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.calculator-container input {
+    width: 100%;
+    max-width: 300px;
+    height: 40px;
+    border: 2px solid #cc87f1;
+    border-radius: 5px;
+    background-color: rgb(104, 68, 100);
+    color: #e0bbf5;
+    padding-left: 15px;
+    font-size: 1.2rem;
+}
+
+.calculator-container button {
+    background-color: #1a961d;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.result {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.factorial-examples {
+    background: linear-gradient(to bottom, #2788c0, #297cb4, #0c1d44);
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.error {
+    color: #FF5733;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.history {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    color: rgb(104, 68, 100);
+}
+
+.history h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.history ul {
+    list-style: none;
+    padding: 0;
+}
+
+.history li {
+    margin-bottom: 10px;
+}
+
+/* Custom CSS for center alignment */
+.center-text {
+    text-align: center;
+}
+
+/* Styling for <h2> element */
+h2.custom-h2 {
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.custom-h2 {
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.custom-h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Styling for <h3> element */
+h3.custom-h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Updated gradient for Factorial examples */
+.factorial-examples {
+    background: linear-gradient(to bottom, #1e3a8a, #0e1f48);
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+/* Larger example cards with hover effect */
+.example-card {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.example-card:hover {
+    background-color: rgba(37, 54, 124, 0.863);
+    transform: scale(2px 2px 2px);
+}
+
+}
+
+.example-card.expanded {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.math-description {
+    display: none;
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: left;
+}
+
+.text-color {
+    color: #222222;
+}
+
+.font-p {
+    font-size: 14px;
+}
+
+.font-h3 {
+    font-size: 22px;
+}
+
+.size {
+    font-size: 15px;
+    max-width: 20px;
+    max-width: 30px;
+}
+
+/* Styles for screens up to 767px (e.g., mobile devices) */
+@media (max-width: 767px) {
+    .calculator-container {
+        padding: 15px;
+    }
+
+    .calculator-container input {
+        max-width: 100%;
+    }
+
+    /* Style buttons for mobile devices */
+    .calculator-container button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* Styles for screens between 768px and 991px (e.g., tablets) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .calculator-container {
+        padding: 20px;
+    }
+
+    .calculator-container input {
+        max-width: 100%;
+    }
+
+    /* Style buttons for tablets */
+    .calculator-container button {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+
+/* Styles for screens between 992px and 1199px (e.g., laptops) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .calculator-container {
+        padding: 25px;
+    }
+
+    .calculator-container input {
+        max-width: 100%;
+    }
+
+    /* Style buttons for laptops */
+    .calculator-container button {
+        width: auto;
+        /* Reset width to default */
+        margin-top: 20px;
+    }
+}
+
+/* Styles for screens 1200px and larger (e.g., larger PC screens) */
+@media (min-width: 1200px) {
+    .calculator-container {
+        padding: 30px;
+    }
+
+    .calculator-container input {
+        max-width: 300px;
+    }
+
+    /* Style buttons for larger PC screens */
+    .calculator-container button {
+        width: auto;
+        /* Reset width to default */
+        margin-top: 30px;
+    }
+}

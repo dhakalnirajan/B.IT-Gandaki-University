@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Factorial Calculator</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+            body{
+                font-family: 'Montserrat', sans-serif;
+                background-color: rgba(25,10,25,0.98);
+                color: #dfd2fb;
+                margin: 0px;
+                padding: 0px;
+                overflow-x: hidden;
+                height: 100vh;
+            }
+
+            .head{
+                font-size: 55px;
+                justify-content: center;
+                display: flex;
+                padding: 20px 0px;
+                margin-top:40px ;
+                color: #dfd2fb;
+                border-radius: 10px;
+                font-weight: 600;
+            }
+
+            .input{
+                display: flex;
+                justify-content: center;
+                padding: 50px 0px;
+                color: #e1dcee;
+                background-color:rgba(53, 46, 53, 0.22);
+                border-radius: 10px;
+                margin:10px 0px;
+            }
+
+            .input input{
+                width: 300px;
+                height: 30px;
+                border: 0px;
+                outline: none;
+                border-bottom: 2px solid #cc87f1;
+                border-right: 2px solid #cc87f1;
+                border-radius: 5px;
+                background-color: rgb(13, 9, 13);
+                color: #e0bbf5;
+                margin-left: 10px;
+                padding-left:15px;
+                font-size: 21px;
+            }
+
+            button{
+                margin: 40px 10px;
+                padding: 10px 30px;
+                border-radius: 20px;
+                background-color: rgb(26, 159, 82);
+                color: white;
+                font-family: 'Montserrat', sans-serif;
+                border-color: rgb(12, 68, 36);
+                font-weight: 500;
+                letter-spacing: 1px;
+            }
+
+            button:hover {
+                background-color: rgb(52, 191, 104);
+                border-color: rgb(22, 98, 52);
+            }
+
+            button:active {
+                background-color: rgb(0, 128, 64);
+                border-color: rgb(0, 64, 32);
+            }
+
+            button:focus {
+                outline: none; /* Remove default focus outline */
+                box-shadow: 0 0 5px rgb(26, 159, 82);
+            }
+
+            button:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            #result{
+                margin: 30px 30px 0px 0px;
+                font-size: 55px;
+                text-align: center;
+                font-weight: 500;
+                color: #c1c1c1;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Heading -->
+        <div class="head">
+            Welcome To Factorial Calculator
+        </div>
+
+        <!-- Input -->
+        <div class="input">
+            <p>Enter the number to find its factorial:</p>
+            <input type="number" id="num" placeholder="Enter here">
+        </div>
+
+        <button value="Calculate" onclick="calculateFactorial()">Calculate</button>
+
+        <!-- Clear Button -->
+        <button value="Clear" onclick="clearResult()">Clear</button>
+
+        <!-- Result -->
+        <p id="result"></p>
+        <br><br>
+
+        <script>
+                // Recursive function to calculate factorial
+                function fact(num) {
+                    if (num == 0) {
+                        return 1;
+                    } else {
+                        return num * fact(num - 1);
+                    }
+                }
+        
+                // Function to calculate factorial and display result
+                function calculateFactorial() {
+                    var num = document.getElementById("num").value;
+                    var f = fact(num);
+                    document.getElementById("result").innerHTML = "The factorial of " + num + " is : " + f;
+                }
+        
+                // Function to clear result and input value
+                function clearResult() {
+                    document.getElementById("num").value = "";
+                    document.getElementById("result").innerHTML = "";
+                }
+            </script>
+    </body>
+</html>

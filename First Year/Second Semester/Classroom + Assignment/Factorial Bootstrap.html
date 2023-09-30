@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Math Calculations</title>
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://latex.now.sh/prism/prism.css">
+
+        <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+        <link rel="stylesheet" href="fact-bootstrap.css">
+
+    </head>
+    <body>
+        <!-- Header Section -->
+        <div class="header">
+            Math Calculations
+        </div>
+
+        <!-- Descriptive Content Section -->
+        <div class="container mt-4 factorial-examples">
+            <h2 class="custom-h2 center-text">Understanding Factorials,
+                Permutations, and Combinations</h2>
+
+            <!-- Factorial Explanation -->
+
+            <h3 class="custom-h3">Factorials</h3>
+            <p>
+                In mathematics, a factorial of a non-negative integer,
+                denoted as <em>n!</em>, is the product of all positive
+                integers from 1 to <em>n</em>. It is defined as:
+            </p>
+            <div class="latex size">
+                \[n! = 1 \cdot 2 \cdot 3 \cdot \ldots \cdot (n-1) \cdot n\]
+            </div>
+            <p>
+                For example, \(5! = 1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 =
+                120\).
+            </p>
+
+            <!-- Permutation Explanation -->
+
+            <h3 class="custom-h3">Permutations</h3>
+            <p>
+                Permutations represent the number of ways to arrange <em>r</em>
+                items out of a set of <em>n</em> distinct items, where order
+                matters. The formula for permutations is given by:
+            </p>
+            <div class="latex">
+                \[^nP_r = \frac{n!}{(n-r)!}\]
+            </div>
+            <p>
+                This formula calculates how many different arrangements can
+                be made by selecting <em>r</em> items from <em>n</em>.
+            </p>
+
+            <!-- Combination Explanation -->
+
+            <h3 class="custom-h3">Combinations</h3>
+            <p>
+                Combinations represent the number of ways to choose <em>r</em>
+                items out of a set of <em>n</em> distinct items, where order
+                doesn't matter. The formula for combinations is given by:
+            </p>
+            <div class="latex">
+                \[^nC_r = \frac{n!}{r!(n-r)!}\]
+            </div>
+            <p>
+                Combinations calculate how many different selections can be
+                made by choosing <em>r</em> items from <em>n</em> without
+                considering the order.
+            </p>
+
+        </div>
+
+        <!-- Examples Section with updated gradient -->
+        <div class="container factorial-examples">
+            <h2 class="custom-h2 center-text">Factorial Examples</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Larger example card with hover effect and click effect -->
+                    <div class="example-card" onclick="toggleDescription(this)">
+                        <h3
+                            class="text-xl font-semibold mb-2">Factorial
+                            of 0</h3>
+                        <p class="text-lg">0! = 1</p>
+                        <p class="text-gray-300 mt-2 ">
+                            The factorial of 0 is defined as 1.
+                        </p>
+                        <!-- Mathematical description -->
+                        <div class="math-description">
+                            <h3
+                                class="text-xl font-semibold mb-2 text-color font-h3">Mathematical
+                                Description</h3>
+                            <p class="text-xl text-color font-p">
+                                The factorial of 0, denoted as \(0!\), is
+                                defined as the product of all positive integers
+                                less than or equal to 0, which is 1.
+                            </p>
+                            <div class="latex text-color size">
+                                \[0! = 1\]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Repeat the same structure for other example cards -->
+
+                <div class="col-md-4">
+                    <!-- Larger example card with hover effect and click effect -->
+                    <div class="example-card" onclick="toggleDescription(this)">
+                        <h3 class="text-xl font-semibold mb-2">Factorial of 5</h3>
+                        <p class="text-lg">5! = 120</p>
+                        <p class="text-gray-300 mt-2">
+                            The factorial of 5 is calculated as 5 × 4 × 3 × 2 ×
+                            1, which is 120.
+                        </p>
+                        <!-- Mathematical description -->
+                        <div class="math-description text-color">
+                            <h3 class="text-xl font-semibold mb-2">Mathematical
+                                Description</h3>
+                            <p>
+                                The factorial of 5, denoted as \(5!\), is
+                                calculated as the product of all positive
+                                integers from 1 to 5.
+                            </p>
+                            <div class="latex">
+                                \[5! = 5 \times 4 \times 3 \times 2 \times 1 =
+                                120\]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <!-- Larger example card with hover effect and click effect -->
+                    <div class="example-card" onclick="toggleDescription(this)">
+                        <h3 class="text-xl font-semibold mb-2">Factorial of 10</h3>
+                        <p class="text-lg">10! = 3,628,800</p>
+                        <p class="text-gray-300 mt-2">
+                            The factorial of 10 is calculated as the product of
+                            all positive integers from 1 to 10.
+                        </p>
+                        <!-- Mathematical description -->
+                        <div class="math-description text-color">
+                            <h3
+                                class="text-xl font-semibold mb-2 text-color font-h3">Mathematical
+                                Description</h3>
+                            <p>
+                                The factorial of 10, denoted as \(10!\), is
+                                calculated as the product of all positive
+                                integers from 1 to 10.
+                            </p>
+                            <!-- Set max-width for LaTeX content -->
+                            <div class="latex text-color size"
+                                style="max-width: %;">
+                                \[10! = 10 \times 9 \times 8 \times 7 \times 6
+                                \times 5 \times 4 \times 3 \times 2 \times 1 =
+                                3,628,800\]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Repeat the same structure for other example cards -->
+
+            </div>
+
+            <!-- Factorial Calculator Section -->
+            <div class="container calculator-container">
+                <h2 class="mt-4 custom-h2 center-text">Factorial Calculator</h2>
+                <p class="text-xl text-gray-300 mb-2">This is a Factorial
+                    Calculator. It calculates the factorial of all the numbers.
+                    The
+                    Web Program has its limitations because it cannot calculate
+                    after 175 as the program becomes too heavy. It displays the
+                    result to reach infinity.</p>
+                <label for="num" class="text-xl text-gray-300 mb-2">Enter a
+                    number:</label>
+                <input type="number" id="num" placeholder="Enter a number"
+                    class="form-control mb-4">
+                <button value="Calculate" onclick="calculateFactorial()"
+                    class="btn btn-primary">Calculate</button>
+                <button class="btn btn-danger clear-button"
+                    data-section="factorial">Clear</button>
+                <p id="factorialResult" class="result"></p>
+                <p id="factorialError" class="error"></p>
+            </div>
+
+            <!-- Factorial Range Calculator Section -->
+            <div class="container calculator-container mt-4">
+                <h2 class="custom-h2 center-text">Factorial Range Calculator</h2>
+                <br>
+                <p class="text-xl text-gray-300 center-text mb-2">This is a
+                    Factorial Range Calculator. It calculates the factorial of
+                    all
+                    the numbers from 1 to a given number. The Web Program has
+                    its
+                    limitations because it cannot calculate after 175 as the
+                    program
+                    becomes too heavy. It displays the result to reach infinity.</p>
+                <label for="start" class="text-xl text-gray-300 mb-2">Start:</label>
+                <input type="number" id="start" placeholder="Start"
+                    class="form-control mb-2">
+                <label for="end" class="text-xl text-gray-300 mb-2">End:</label>
+                <input type="number" id="end" placeholder="End"
+                    class="form-control mb-4">
+                <button id="rangeBtn" class="btn btn-info"
+                    onclick="calculateFactorialRange()">Calculate Factorial
+                    Range</button>
+                <button class="btn btn-danger clear-button"
+                    data-section="factorialRange">Clear</button>
+                <p id="factorialRangeResult" class="result"></p>
+                <p id="factorialRangeError" class="error"></p>
+            </div>
+
+            <!-- Permutation Calculator Section -->
+            <div class="container calculator-container mt-4">
+                <h2 class="mt-4 custom-h2 center-text">Permutation Calculator</h2>
+                <br>
+                <p class="text-xl text-gray-300 center-text mb-2">This is a
+                    Permutation Calculator. It calculates the permutations of a
+                    certain selection from a given set.</p>
+                <label for="permutationsNum" class="text-xl text-gray-300 mb-2">Number
+                    of possible items:</label>
+                <input type="number" id="permutationsNum"
+                    placeholder="Enter the number of possible items"
+                    class="form-control mb-4">
+                <label for="permutationsChosen"
+                    class="text-xl text-gray-300 mb-2">Number
+                    of items to choose:</label>
+                <input type="number" id="permutationsChosen"
+                    placeholder="Enter the number of items to choose"
+                    class="form-control mb-4">
+                <button id="permutationsBtn" class="btn btn-primary"
+                    onclick="calculatePermutations()">Calculate Permutations</button>
+                <button class="btn btn-danger clear-button"
+                    data-section="permutations">Clear</button>
+                <p id="permutationsResult" class="result"></p>
+                <p id="permutationsError" class="error"></p>
+            </div>
+
+            <!-- Combination Calculator Section -->
+            <div class="container calculator-container mt-4">
+                <h2 class="mt-4 custom-h2 center-text">Combination Calculator</h2>
+                <label for="combinationsNum" class="text-xl text-gray-300 mb-2">Number
+                    of possible items:</label>
+                <input type="number" id="combinationsNum"
+                    placeholder="Enter the number of possible items"
+                    class="form-control mb-4">
+                <label for="combinationsChosen"
+                    class="text-xl text-gray-300 mb-2">Number
+                    of items to choose:</label>
+                <input type="number" id="combinationsChosen"
+                    placeholder="Enter the number of items to choose"
+                    class="form-control mb-4">
+                <button id="combinationsBtn" class="btn btn-primary"
+                    onclick="calculateCombinations()">Calculate Combinations</button>
+                <button class="btn btn-danger clear-button"
+                    data-section="combinations">Clear</button>
+                <p id="combinationsResult" class="result"></p>
+                <p id="combinationsError" class="error"></p>
+            </div>
+
+            <!-- History Section -->
+            <div class="container history">
+                <h2 class="custom-h2">Calculation History</h2>
+                <ul id="calculationHistory"></ul>
+                <button id="clearHistoryBtn" class="btn btn-danger">Clear
+                    History</button>
+            </div>
+
+            <br>
+            <br>
+
+            <!-- Footer Section -->
+            <footer class="bg-purple-900 p-4 text-center">
+                <p class="text-sm text-gray-300">© 2023 Nirajan Dhakal</p>
+            </footer>
+
+            <!-- Include Bootstrap JS -->
+            <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+
+            <br>
+
+            <script>
+    // Recursive function to calculate factorial
+    function fact(num) {
+        if (num == 0) {
+            return 1;
+        } else {
+            return num * fact(num - 1);
+        }
+    }
+
+    // Function to calculate and display results for Factorial Calculator
+    function calculateFactorial() {
+        const inputValue = parseInt(document.getElementById("num").value);
+        const resultElement = document.getElementById("factorialResult");
+        const errorElement = document.getElementById("factorialError");
+
+        if (!isNaN(inputValue) && inputValue >= 0) {
+            const result = fact(inputValue);
+            resultElement.innerHTML = `Factorial of ${inputValue} = ${result}`;
+            errorElement.innerHTML = "";
+            addToHistory(`Factorial of ${inputValue} calculated.`);
+        } else {
+            resultElement.innerHTML = "";
+            errorElement.innerHTML = "Please enter a valid non-negative number.";
+        }
+    }
+
+    // Function to calculate and display results for Factorial Range Calculator
+    function calculateFactorialRange() {
+        const start = parseInt(document.getElementById("start").value);
+        const end = parseInt(document.getElementById("end").value);
+        const resultElement = document.getElementById("factorialRangeResult");
+        const errorElement = document.getElementById("factorialRangeError");
+
+        if (!isNaN(start) && !isNaN(end) && start >= 0 && end >= start) {
+            let result = "";
+            for (let i = start; i <= end; i++) {
+                const factorial = fact(i);
+                result += `Factorial of ${i} = ${factorial}<br>`;
+            }
+            resultElement.innerHTML = result;
+            errorElement.innerHTML = "";
+            addToHistory(`Factorial range calculated from ${start} to ${end}`);
+        } else {
+            resultElement.innerHTML = "";
+            errorElement.innerHTML = "Please enter valid start and end values.";
+        }
+    }
+
+// Function to calculate permutations
+function calculatePermutationsForNum(n, r) {
+    if (n < r) return 0;
+    return fact(n) / fact(n - r);
+}
+
+// Function to calculate combinations
+function calculateCombinationsForNum(n, r) {
+    if (n < r) return 0;
+    return fact(n) / (fact(r) * fact(n - r));
+}
+
+
+    // Function to calculate permutations
+    function calculatePermutations() {
+        const num = parseInt(document.getElementById("permutationsNum").value);
+        const chosen = parseInt(document.getElementById("permutationsChosen").value);
+        const resultElement = document.getElementById("permutationsResult");
+        const errorElement = document.getElementById("permutationsError");
+
+        if (!isNaN(num) && !isNaN(chosen) && num >= 0 && chosen >= 0) {
+            const result = calculatePermutationsForNum(num, chosen);
+            resultElement.innerHTML = `Permutations: ${result}`;
+            errorElement.innerHTML = "";
+            addToHistory(`Permutations of ${chosen} items from ${num} calculated.`);
+        } else {
+            resultElement.innerHTML = "";
+            errorElement.innerHTML = "Please enter valid non-negative numbers.";
+        }
+    }
+
+    // Function to calculate combinations
+    function calculateCombinations() {
+        const num = parseInt(document.getElementById("combinationsNum").value);
+        const chosen = parseInt(document.getElementById("combinationsChosen").value);
+        const resultElement = document.getElementById("combinationsResult");
+        const errorElement = document.getElementById("combinationsError");
+
+        if (!isNaN(num) && !isNaN(chosen) && num >= 0 && chosen >= 0) {
+            const result = calculateCombinationsForNum(num, chosen);
+            resultElement.innerHTML = `Combinations: ${result}`;
+            errorElement.innerHTML = "";
+            addToHistory(`Combinations of ${chosen} items from ${num} calculated.`);
+        } else {
+            resultElement.innerHTML = "";
+            errorElement.innerHTML = "Please enter valid non-negative numbers.";
+        }
+    }
+
+// Function to clear input fields and results for a specific section
+function clearFields(section) {
+    // Variables to store input field IDs and result IDs
+    let inputFieldIds = [];
+    let resultIds = [];
+
+    // Define input field IDs and result IDs for each section
+    if (section === 'factorial') {
+        inputFieldIds = ['num'];
+        resultIds = ['factorialResult', 'factorialError'];
+    } else if (section === 'factorialRange') {
+        inputFieldIds = ['start', 'end'];
+        resultIds = ['factorialRangeResult', 'factorialRangeError'];
+    } else if (section === 'permutations') {
+        inputFieldIds = ['permutationsNum', 'permutationsChosen'];
+        resultIds = ['permutationsResult', 'permutationsError'];
+    } else if (section === 'combinations') {
+        inputFieldIds = ['combinationsNum', 'combinationsChosen'];
+        resultIds = ['combinationsResult', 'combinationsError'];
+    }
+
+    // Clear input fields
+    for (const inputFieldId of inputFieldIds) {
+        const inputField = document.getElementById(inputFieldId);
+        if (inputField) {
+            inputField.value = '';
+        }
+    }
+
+    // Clear result elements and error messages
+    for (const resultId of resultIds) {
+        const resultElement = document.getElementById(resultId);
+        if (resultElement) {
+            resultElement.innerHTML = '';
+        }
+    }
+}
+
+// Event handling for Clear buttons
+document.addEventListener('click', function (event) {
+    if (event.target && event.target.classList.contains('clear-button')) {
+        const section = event.target.getAttribute('data-section');
+        clearFields(section);
+    }
+});
+
+
+
+
+    // Function to add calculations to history and save in a cookie
+    function addToHistory(calculation) {
+        const historyList = document.getElementById("calculationHistory");
+        const listItem = document.createElement("li");
+        listItem.appendChild(document.createTextNode(calculation));
+        historyList.appendChild(listItem);
+
+        // Save the calculation history in a cookie
+        const history = getCalculationHistoryFromCookie();
+        history.push(calculation);
+        setCalculationHistoryCookie(history);
+    }
+
+    // Function to retrieve calculation history from a cookie
+    function getCalculationHistoryFromCookie() {
+        const historyCookie = getCookie("calculationHistory");
+        return historyCookie ? JSON.parse(historyCookie) : [];
+    }
+
+    // Function to set calculation history in a cookie
+    function setCalculationHistoryCookie(history) {
+        const historyString = JSON.stringify(history);
+        setCookie("calculationHistory", historyString, 30); // Cookie expires in 30 days
+    }
+
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    }
+
+    // Function to get a cookie by name
+    function getCookie(name) {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                return cookie.substring(name.length + 1);
+            }
+        }
+        return null;
+    }
+
+    // Function to load and display calculation history from a cookie
+    function loadCalculationHistory() {
+        const history = getCalculationHistoryFromCookie();
+        const historyList = document.getElementById("calculationHistory");
+        historyList.innerHTML = ""; // Clear the current history list
+
+        for (const calculation of history) {
+            const listItem = document.createElement("li");
+            listItem.appendChild(document.createTextNode(calculation));
+            historyList.appendChild(listItem);
+        }
+    }
+
+    // Function to clear the calculation history and remove the history cookie
+    function clearHistory() {
+        // Clear the calculation history displayed on the page
+        const historyList = document.getElementById("calculationHistory");
+        historyList.innerHTML = "";
+
+        // Remove the calculation history cookie
+        setCalculationHistoryCookie([]);
+    }
+
+    // Add an event listener to a "Clear History" button
+    const clearHistoryButton = document.getElementById("clearHistoryBtn");
+    if (clearHistoryButton) {
+        clearHistoryButton.addEventListener("click", clearHistory);
+    }
+
+    // Function to toggle the display of mathematical description
+    function toggleDescription(card) {
+        const mathDescription = card.querySelector(".math-description");
+        card.classList.toggle("expanded");
+        mathDescription.style.display = mathDescription.style.display === "block" ? "none" : "block";
+    }
+
+    // Load and display calculation history when the page loads
+    window.onload = loadCalculationHistory;
+</script>
+        </body>
+    </html>
