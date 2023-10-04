@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Java Questions | Gandaki University | Board Exam</title>
+        <link rel="shortcut icon"
+            href="https://cdn-icons-png.flaticon.com/512/226/226777.png"
+            type="image/x-icon">
+
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+            rel="stylesheet">
+        <!-- Include Prism.js for syntax highlighting with the desired theme -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+
+        <!-- Include Font Awesome CSS -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        <!-- Custom CSS -->
+        <style>
+        /* Common Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FF0000, #FFA500, #FFFF00, #008000, #0000FF, #4B0082, #9400D3, #800080);
+            background-size: 300% 300%;
+            animation: gradient 20s ease infinite;
+            color: white;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            margin-top: 2rem;
+        }
+
+        /* Background Gradient for Cards */
+        .card {
+            border-radius: 10px;
+            border: 0px none;
+            background: linear-gradient(45deg, #370202, #3a1d08, #4d4100, #003800, #00003c, #22003b, #2b003d, #4e004e);
+            background-size: 300% 300%;
+            animation: gradient 20s ease infinite;
+        }
+
+        /* Gradient background for card body */
+        .card-body {
+            border-radius: 10px;
+        }
+
+        /* Style the buttons within the card */
+        .card .btn-primary {
+            background: linear-gradient(135deg, #FF0000, #FFA500, #FFFF00, #008000, #0000FF, #4B0082, #9400D3, #800080);
+            background-size: 300% 300%;
+            animation: gradient 20s ease infinite;
+            border: none;
+            color: white;
+            transition: background 0.5s;
+        }
+
+        /* Style the buttons on hover */
+        .card .btn-primary:hover {
+            background: linear-gradient(135deg, #FF0000, #FFA500, #FFFF00, #008000, #0000FF, #4B0082, #9400D3, #800080);
+            background-size: 300% 300%;
+            animation: gradient 20s ease infinite;
+        }
+
+        .code-container {
+            border-radius: 10px;
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        ol {
+            color: black;
+        }
+
+        .custom-link {
+            color: rgb(0, 0, 0);
+            transition: color 0.3s ease;
+        }
+
+        .custom-link:hover {
+            color: #ef2864;
+            transition: color 0.3s ease;
+        }
+
+        /* Style the button with a gradient background */
+        .btn-primary {
+            background: linear-gradient(135deg, #FF0000, #FFA500, #FFFF00, #008000, #0000FF, #4B0082, #9400D3, #800080);
+            background-size: 300% 300%;
+            animation: gradient 20s ease infinite;
+            border: none;
+            color: white;
+            transition: background 0.5s;
+        }
+
+        /* Style the button on hover */
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #FF0000, #FFA500, #FFFF00, #008000, #0000FF, #4B0082, #9400D3, #800080);
+            background-size: 300% 300%;
+            animation: gradient 20s ease infinite;
+        }
+
+        /* Add whitespace (padding) to elements with the "snip" ID */
+        #snip {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        /* Define styles for Android devices */
+        @media (max-width: 768px) {
+            /* Add responsive styles for Androids here */
+        }
+
+        /* Define styles for iPhones */
+        @media (max-width: 414px) {
+            /* Add responsive styles for iPhones here */
+        }
+
+        /* Define styles for Tablets */
+        @media (max-width: 1024px) {
+            /* Add responsive styles for Tablets here */
+        }
+
+        /* Define styles for Laptops */
+        @media (min-width: 1025px) and (max-width: 1366px) {
+            /* Add responsive styles for Laptops here */
+        }
+
+        /* Define styles for Monitors */
+        @media (min-width: 1367px) and (max-width: 1920px) {
+            /* Add responsive styles for Monitors here */
+        }
+
+        /* Define styles for TVs */
+        @media (min-width: 1921px) {
+            /* Add responsive styles for TVs here */
+        }
+
+    </style>
+    </head>
+    <body>
+        <!-- Bootstrap Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Java Questions</a>
+                <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#very-short-answers">Very
+                                Short Answers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#short-answers">Short
+                                Answers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#long-answers">Long
+                                Answers</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Begins Here -->
+        <div class="container mt-4">
+            <div class="content">
+                <h1 class="jumbotron text-center custom-link">Java Questions For
+                    Final Exam</h1>
+
+                <!-- Very Short Answer Questions Card -->
+                <div class="card mb-4" id="very-short-answers">
+                    <div class="card-body">
+                        <h4 class="card-title">Very Short Answer Questions (2
+                            Marks)</h4>
+                        <div class="mb-3">
+                            <a class="btn btn-primary" href="#short-answers">Jump
+                                to Short Answers</a>
+                            <a class="btn btn-primary" href="#long-answers">Jump
+                                to Long Answers</a>
+                        </div>
+                        <ol type="a" class="list-group">
+                            <li class="list-group-item">What is Object-Oriented
+                                Programming?</li>
+                            <li class="list-group-item">What is Polymorphism?</li>
+                            <li class="list-group-item">Does Java support
+                                multiple inheritance?</li>
+                            <li class="list-group-item">Explain the purpose of
+                                Bytecode.</li>
+                            <li class="list-group-item">How is JVM different
+                                from JRE?</li>
+                            <li class="list-group-item">What are the different
+                                data types in Java?</li>
+                            <li class="list-group-item">How do you differentiate
+                                method and constructor?</li>
+                            <li class="list-group-item">What is the difference
+                                between exception and error?</li>
+                            <li class="list-group-item">What is Event Delegation
+                                Model?</li>
+                            <li class="list-group-item">Write the basic
+                                principle of MVC pattern.</li>
+                            <li class="list-group-item">Write an example program
+                                to display a simple Frame.</li>
+                            <li class="list-group-item">What does <code
+                                    class="language-java" id="snip">static</code>
+                                and <code class="language-java" id="snip">final</code>
+                                mean?</li>
+                            <li class="list-group-item">Describe grid layout
+                                management in Java.</li>
+                            <li class="list-group-item">Write about stream
+                                classes in Java.</li>
+                            <li class="list-group-item">Why Java is called
+                                platform independent language?</li>
+                            <li class="list-group-item">How can you define
+                                access modifiers in Java?</li>
+                            <li class="list-group-item">Write a simple program
+                                illustrating grid layout.</li>
+                            <li class="list-group-item">What is entry-controlled
+                                loop and exit-controlled loop?</li>
+                            <li class="list-group-item">Define abstract class
+                                with suitable example.</li>
+                            <li class="list-group-item">What are different
+                                bitwise operators in Java?</li>
+                            <li class="list-group-item">Differentiate abstract
+                                class and abstract method.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Short Answer Questions Card -->
+                <div class="card mb-4" id="short-answers">
+                    <div class="card-body">
+                        <h4 class="card-title">Short Answer Questions (5 Marks)</h4>
+                        <div class="mb-3">
+                            <a class="btn btn-primary"
+                                href="#very-short-answers">Jump to Very Short
+                                Answers</a>
+                            <a class="btn btn-primary" href="#long-answers">Jump
+                                to Long Answers</a>
+                        </div>
+                        <ol type="a" class="list-group">
+                            <!-- Code block with Prism.js syntax highlighting -->
+                            <li class="list-group-item">Following program
+                                contains 5 errors. Identify the errors, and
+                                write the correct program fixing the errors.
+                                <div class="code-container">
+                                    <pre><code class="language-java" style="width: 20%;">
+                            public class HelloStudents {
+                                public static void main(String[] args) {
+                                    System.out.println("Hello students");
+                                }
+                            }
+                        </code></pre>
+                                </div>
+                            </li>
+                            <li class="list-group-item">What are the types of
+                                constructors? Write a Java program to
+                                demonstrate Polymorphism via method overriding
+                                with the following classes as follows: <br><br>
+                                <code class="language-java" id="snip">Polygon</code>
+                                (Main class), <code class="language-java"
+                                    id="snip">Rectangle</code>
+                                derived from base class and <code
+                                    class="language-java" id="snip">OverridingClass</code>
+                                (test class with main method). Write a method
+                                <code class="language-java" id="snip">perimeter()</code>
+                                in Polygon class and
+                                override that method in the derived class. <br>
+                                <br>
+                            </li>
+                            <li class="list-group-item">What is the difference
+                                between <code class="language-java" id="snip">final</code>
+                                and <code class="language-java" id="snip">finally</code>
+                                in Java. Write a program to illustrate
+                                ArrayOutOfBoundsException in Java.</li>
+                            <li class="list-group-item">Write a program that
+                                opens a file-reader on inputfile.txt for reading
+                                the data from a file and writing the data to
+                                another file named output.txt. Also, use
+                                exception handling as well.</li>
+                            <li class="list-group-item">Differentiate between
+                                AWT and Swing. Illustrate
+                                the outer class in event handling with suitable
+                                example.</li>
+                            <li class="list-group-item">Differentiate between
+                                C++ and Java.</li>
+                            <li class="list-group-item">Differentiate
+                                between C and Java.</li>
+                            <li class="list-group-item">Explain Event
+                                Delegation Model.</li>
+                            <li class="list-group-item">Describe the
+                                hierarchy of Java Stream Classes.</li>
+                            <li class="list-group-item">Define exception
+                                handling. Explain different ways for
+                                handling exception with suitable program.</li>
+                            <li class="list-group-item">Create an abstract
+                                class <code class="language-java" id="snip">Bank</code>
+                                with an abstract method <code
+                                    class="language-java" id="snip">getBalance</code>
+                                &nbsp; . &nbsp; <code class="language-java"
+                                    id="snip">BankA</code>
+                                &nbsp; and <code class="language-java"
+                                    id="snip">BankB</code>
+                                &nbsp; are subclasses of class <code
+                                    class="language-java" id="snip">Bank</code>
+                                &nbsp;, each having a method named &nbsp; <code
+                                    class="language-java" id="snip">getBalance</code>
+                                &nbsp; with a parameter of balance. Consider
+                                BankA contains implementation details and
+                                Rs. 10,000 gets deposited in BankA. But
+                                BankB doesn't contain implementation. Extend
+                                class &nbsp; <code class="language-java"
+                                    id="snip">BankC</code> &nbsp; from class
+                                BankB with the same method and deposit Rs.
+                                20,000. Call this method with arguments by
+                                creating an object of the classes from main
+                                class.
+                            </li>
+                            <li class="list-group-item">Write down the output of
+                                the following program:
+                                <!-- Code block with Prism.js syntax highlighting -->
+                                <div class="code-container">
+                                    <pre><code class="language-java" style="width: 20%;">
+                                        public class ForLoopExam {
+                                            public static void main(String[] args) {
+                                                for(int i = 1; i <= 5; i++){
+                                                    for(int j = 1; j <= i-1; j++){
+                                                        System.out.println(j + "")
+                                                    }
+                                                    System.out.println()
+                                                }
+                                            }
+                                        }
+                                    </code></pre>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item">Write a program that
+                                asks user to enter his/her name, address and
+                                college name and store those data into a file
+                                called &nbsp; &nbsp; <code class="language-java"
+                                    id="snip">"student.txt" </code>
+                                &nbsp;. Then copy the contents of the
+                                file into another file called &nbsp;
+                                <code class="language-java" id="snip">"data.txt"
+                                </code> &nbsp; on the
+                                console.
+                            </li>
+
+                            <li class="list-group-item">What do you mean by
+                                scope and lifetime of a variable. Write about
+                                different types of access modifiers in Java.</li>
+                            <li class="list-group-item">Create a class <code
+                                    class="languge-java" id="snip">Box</code>
+                                with instance variables <code>length</code>,
+                                <code>breadth</code> and <code>height</code>.
+                                Add one method <code class="languge-java"
+                                    id="snip">getVolume()</code> &nbsp; to
+                                compute the volume of the box. Use suitable
+                                constructor to initialize values of instance
+                                variables. Create a subclass <code>BoxWeight</code>
+                                that extends the class Box and add one variable
+                                <code>weight</code>. Add two methods &nbsp;
+                                <code
+                                    class="language-java" id="snip">setWeight()</code>
+                                &nbsp; and &nbsp; <code
+                                    class="language-java" id="snip">getWeight()</code>
+                                &nbsp; that sets and displays the weight of the
+                                box to this class. Use suitable constructor.
+                                Your class should uses <code
+                                    class="languge-java" id="snip">super</code>
+                                to call the super class constructor. Then create
+                                a class <code class="languge-java" id="snip">DemoBox</code>
+                                with main method that creates two objects of
+                                BoxWeight class and displays volumes and weights
+                                of both boxes.
+                            </li>
+                            <li class="list-group-item">What do you mean by
+                                package? What are the advantages of using
+                                packages? Write a program to demonstrate the use
+                                of packages.</li>
+                            <li class="list-group-item">Write a program in Java
+                                that asks user to enter integer number into
+                                an array of size 10 and display the sum of all
+                                numbers that are divisible by 2.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Long Answer Questions Card -->
+                <div class="card mb-4" id="long-answers">
+                    <div class="card-body">
+                        <h4 class="card-title">Long Answer Questions (7.5 Marks)</h4>
+                        <div class="mb-3">
+                            <a class="btn btn-primary"
+                                href="#very-short-answers">Jump to Very Short
+                                Answers</a>
+                            <a class="btn btn-primary" href="#short-answers">Jump
+                                to Short Answers</a>
+                        </div>
+                        <ol type="a" class="list-group">
+                            <li class="list-group-item">Explain the concept
+                                of Object-Oriented Programming and its
+                                advantages in software development.</li>
+                            <li class="list-group-item">Discuss the
+                                differences between method overloading and
+                                method overriding in Java with examples.</li>
+                            <li class="list-group-item">Illustrate &nbsp; <code
+                                    class="language-java">try</code> &nbsp;
+                                &nbsp; <code
+                                    class="language-java">catch</code> &nbsp;
+                                &nbsp; <code
+                                    class="language-java">throw</code> &nbsp;
+                                and &nbsp; <code
+                                    class="language-java"> finally </code>
+                                &nbsp; construct with an example. Create an
+                                interface <code>Bank</code> &nbsp; and with the
+                                method input for getting name and salary of the
+                                five employees. Create a class <code>Employee</code>
+                                &nbsp; to implement Bank interface and display
+                                the name of the employee whose salary is greater
+                                than 20,000. Use the main class Main for
+                                accessing members.
+                            </li>
+                            <li class="list-group-item">Discuss <code
+                                    class="language-java">Component</code>
+                                &nbsp; class in Java. Create a frame with
+                                <code>buttons</code> , <code>textfields</code> ,
+                                <code>labels</code>. If "Wednesday" is
+                                clicked, display "Group A Lab" in <code>textfield1</code>
+                                , and if "Friday" is clicked, display
+                                "Group B Lab" in <code>textfield2</code> &nbsp;.
+                                Use the concept of <code>FlowLayout</code> with
+                                LEFT alignment as well.
+                            </li>
+                            <li class="list-group-item">What do you mean by
+                                Event Delegation Model? Write about adapter
+                                class and anonymous inner class in java with
+                                suitable examples.</li>
+                            <li class="list-group-item">Write a program in Java
+                                that creates a GUI which has three labels, two
+                                input fields and one output field and four
+                                buttons at the bottom aligned to the center. The
+                                labels are: "Enter First Number" and then the
+                                first textfield, "Enter Second Number" and then
+                                second textfield. The last label is "Result: "
+                                and then a box which displays a result. The four
+                                buttons are "Add", "Subtract", "Divide" and
+                                "Multiply". The buttons perform the respective
+                                task.
+                            </li>
+                            <li class="list-group-item">Write short notes on:
+                                <ol>
+                                    <li>Bitwise Operator</li>
+                                    <li>Method Overriding</li>
+                                    <li>Types of Exceptions</li>
+                                    <li>Relational Operators</li>
+                                    <li>Access Protection</li>
+                                    <li>Inheritance and its types</li>
+                                    <li>Event Handling</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Contact Information</h5>
+                        <p>Email: nirajandhakal@gmail.com</p>
+                        <p>Phone: +977 9800000000</p>
+                        <p>Address: 123 Main Street, Khaireni, Devdaha,
+                            Rupandehi, Nepal</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Follow Us</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a href="https://facebook.com"
+                                    class="text-white">
+                                    <i class="fa-brands fa-facebook fa-beat"
+                                        style="color: #316ff6;"></i> &nbsp;
+                                    Facebook
+                                </a> &nbsp; &nbsp;
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://twitter.com" class="text-white">
+                                    <i class="fa-brands fa-twitter fa-beat"
+                                        style="color: #25a7de;"></i> &nbsp;
+                                    Twitter
+                                </a> &nbsp; &nbsp;
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://linkedin.com"
+                                    class="text-white">
+                                    <i class="fa-brands fa-linkedin fa-beat"
+                                        style="color:#0077b5;"></i> &nbsp;
+                                    LinkedIn
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Newsletter</h5>
+                        <p>Subscribe to our newsletter for updates:</p>
+                        <form class="form-inline">
+                            <div class="input-group">
+                                <input type="email" class="form-control"
+                                    placeholder="Your email"
+                                    aria-label="Your email"
+                                    aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary"
+                                        type="button"
+                                        id="button-addon2">Subscribe</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 text-center">
+                        &copy; 2023 Nirajan Dhakal | All Rights Reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Include Bootstrap JS and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Include Prism.js for syntax highlighting -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+        <!-- Include Perfect Scrollbar library -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
+
+        <script>
+            // Function to initialize Perfect Scrollbar
+            function initPerfectScrollbar(containerSelector) {
+                const container = document.querySelector(containerSelector);
+                const ps = new PerfectScrollbar(container);
+            }
+
+            // Apply Perfect Scrollbar to each card container
+            initPerfectScrollbar('.content');
+
+            // Add interactivity to the cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.classList.add('shadow-lg');
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.classList.remove('shadow-lg');
+                });
+            });
+        </script>
+
+        <script>
+/**
+ * Returns a random color from the list of available colors.
+ * @returns {string} A random color.
+ */
+function getRandomColor() {
+    const colors = ["Orange", "Cyan", "DodgerBlue", "Blue", "Purple", "Magenta", "Maroon", "Navy", "Lime", "Fuchsia", "Orchid", "MidnightBlue"];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+}
+
+            // Apply animated gradient to all cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.style.animation = 'gradient 10s ease infinite';
+            });
+
+            const snipElements = document.querySelectorAll("#snip");
+            snipElements.forEach(element => {
+                const randomColor = getRandomColor();
+                element.style.color = randomColor;
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                // Initialize Perfect Scrollbar
+                $('.container').each(function () {
+                    const perfectscroll = new PerfectScrollbar(this);
+                });
+            });
+        </script>
+    </body>
+</html>
