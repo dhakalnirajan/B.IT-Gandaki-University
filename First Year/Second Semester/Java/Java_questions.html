@@ -422,40 +422,30 @@
                                 to Short Answers</a>
                         </div>
                         <ol type="a" class="list-group">
-                            <li class="list-group-item">Explain the concept
-                                of Object-Oriented Programming and its
-                                advantages in software development.</li>
-                            <li class="list-group-item">Discuss the
-                                differences between method overloading and
-                                method overriding in Java with examples.</li>
-                            <li class="list-group-item">Illustrate &nbsp; <code
-                                    class="language-java">try</code> &nbsp;
-                                &nbsp; <code
-                                    class="language-java">catch</code> &nbsp;
-                                &nbsp; <code
-                                    class="language-java">throw</code> &nbsp;
-                                and &nbsp; <code
-                                    class="language-java"> finally </code>
-                                &nbsp; construct with an example. Create an
-                                interface <code>Bank</code> &nbsp; and with the
+                            <li class="list-group-item">Explain the concept of
+                                Object-Oriented Programming and its advantages
+                                in software development.</li>
+                            <li class="list-group-item">Discuss the differences
+                                between method overloading and method overriding
+                                in Java with examples.</li>
+                            <li class="list-group-item">Illustrate <code>try</code>,
+                                <code>catch</code>, <code>throw</code>, and
+                                <code>finally</code> constructs with an example.
+                                Create an interface <code>Bank</code> with the
                                 method input for getting name and salary of the
                                 five employees. Create a class <code>Employee</code>
-                                &nbsp; to implement Bank interface and display
-                                the name of the employee whose salary is greater
-                                than 20,000. Use the main class Main for
-                                accessing members.
-                            </li>
-                            <li class="list-group-item">Discuss <code
-                                    class="language-java">Component</code>
-                                &nbsp; class in Java. Create a frame with
-                                <code>buttons</code> , <code>textfields</code> ,
-                                <code>labels</code>. If "Wednesday" is
-                                clicked, display "Group A Lab" in <code>textfield1</code>
-                                , and if "Friday" is clicked, display
-                                "Group B Lab" in <code>textfield2</code> &nbsp;.
+                                to implement Bank interface and display the name
+                                of the employee whose salary is greater than
+                                20,000. Use the main class Main for accessing
+                                members.</li>
+                            <li class="list-group-item">Discuss <code>Component</code>
+                                class in Java. Create a frame with <code>buttons</code>,
+                                <code>textfields</code>, <code>labels</code>. If
+                                "Wednesday" is clicked, display "Group A Lab" in
+                                <code>textfield1</code>, and if "Friday" is
+                                clicked, display "Group B Lab" in <code>textfield2</code>.
                                 Use the concept of <code>FlowLayout</code> with
-                                LEFT alignment as well.
-                            </li>
+                                LEFT alignment as well.</li>
                             <li class="list-group-item">What do you mean by
                                 Event Delegation Model? Write about adapter
                                 class and anonymous inner class in java with
@@ -470,8 +460,7 @@
                                 and then a box which displays a result. The four
                                 buttons are "Add", "Subtract", "Divide" and
                                 "Multiply". The buttons perform the respective
-                                task.
-                            </li>
+                                task.</li>
                             <li class="list-group-item">Write short notes on:
                                 <ol>
                                     <li>Bitwise Operator</li>
@@ -483,9 +472,123 @@
                                     <li>Event Handling</li>
                                 </ol>
                             </li>
+                            <!-- New Question and Answer -->
+                            <li class="list-group-item">How to Create, Modify,
+                                Read, Write and Delete File in Java. <br><br>
+
+                                <strong> Answer: </strong> <br><br>
+                                <p>
+                                    In Java, you can perform various file
+                                    operations like creating, modifying,
+                                    reading, writing, and deleting files using
+                                    classes from the `java.io` package. Below, I'll
+                                    provide examples for each of these
+                                    operations:
+                                </p>
+                                <p>
+                                    1. <strong>Creating a File</strong>: To
+                                    create a new file, you can use the `File`
+                                    class and the `createNewFile()` method.
+                                    <pre><code class="language-java">
+                                        import java.io.File;
+                                        import java.io.IOException;
+
+                                        public class CreateFileExample {
+                                            public static void main(String[] args) {
+                                                try {
+                                                    File file = new File("example.txt");
+                                                    boolean created = file.createNewFile();
+                                                    if (created) {
+                                                        System.out.println("File created successfully");
+                                                    } else {
+                                                        System.out.println("File already exists");
+                                                    }
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }
+                                    </code></pre>
+
+                                </p>
+                                <p>
+                                    2. <strong>Modifying a File</strong>: To
+                                    modify the content of an existing file, you
+                                    can use `FileWriter` or `BufferedWriter`
+                                    classes for writing.
+                                    <pre><code class="language-java">
+                                        import java.io.FileWriter;
+                                        import java.io.IOException;
+
+                                        public class ModifyFileExample {
+                                            public static void main(String[] args) {
+                                                try {
+                                                    FileWriter writer = new FileWriter("example.txt");
+                                                    writer.write("This is some new content for the file.");
+                                                    writer.close();
+                                                    System.out.println("File modified successfully");
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }
+                                    </code></pre>
+                                </p>
+                                <p>
+                                    3. <strong>Reading a File</strong>: To read
+                                    the content of a file, you can use
+                                    `FileReader` or `BufferedReader` classes.
+                                    <pre><code class="language-java">
+                                        import java.io.BufferedReader;
+                                        import java.io.FileReader;
+                                        import java.io.IOException;
+
+                                        public class ReadFileExample {
+                                            public static void main(String[] args) {
+                                                try {
+                                                    BufferedReader reader = new BufferedReader(new FileReader("example.txt"));
+                                                    String line;
+                                                    while ((line = reader.readLine()) != null) {
+                                                        System.out.println(line);
+                                                    }
+                                                    reader.close();
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }
+
+                                    </code></pre>
+
+                                </p>
+                                <p>
+                                    4. <strong>Writing to a File</strong>: To
+                                    write data to a file, you can use
+                                    `FileWriter` or `BufferedWriter` classes,
+                                    similar to modifying a file.
+                                </p>
+                                <p>
+                                    5. <strong>Deleting a File</strong>: To
+                                    delete a file, you can use the `delete()`
+                                    method of the `File` class.<pre><code class="language-java">
+                                            import java.io.File;
+
+                                            public class DeleteFileExample {
+                                                public static void main(String[] args) {
+                                                    File file = new File("example.txt");
+                                                    if (file.delete()) {
+                                                        System.out.println("File deleted successfully");
+                                                    } else {
+                                                        System.out.println("Failed to delete the file");
+                                                    }
+                                                }
+                                            }</code></pre>
+                                </p>
+                            </li>
                         </ol>
                     </div>
                 </div>
+
             </div>
         </div>
 
