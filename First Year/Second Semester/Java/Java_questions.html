@@ -472,7 +472,6 @@
                                     <li>Event Handling</li>
                                 </ol>
                             </li>
-                            <!-- New Question and Answer -->
                             <li class="list-group-item">How to Create, Modify,
                                 Read, Write and Delete File in Java. <br><br>
 
@@ -585,95 +584,270 @@
                                             }</code></pre>
                                 </p>
                             </li>
-                        </ol>
-                    </div>
-                </div>
+                            <br>
+                            <li class="list-group-item">Answer For Event
+                                Handling in Java <br><br>
+                                <strong>Answer:</strong> <br><br>
+                                <p>
+                                    Event handling in Java involves dealing with
+                                    various user-generated events such as button
+                                    clicks, mouse movements, and keyboard input.
+                                    Java provides a rich set of classes and
+                                    mechanisms to handle events efficiently.
+                                    Below are descriptions and example programs
+                                    for each of the concepts related to event
+                                    handling in Java:
+                                </p>
+                                <ol>
+                                    <li><strong>Event Concepts and Classes:</strong>
+                                        Events are occurrences or actions that
+                                        happen during program execution, such as
+                                        user input or system notifications. In
+                                        Java, events are represented as objects
+                                        that encapsulate information about the
+                                        event. Common event classes in Java
+                                        include <code id="snip">ActionEvent</code>,
+                                        <code id="snip">MouseEvent</code>,
+                                        <code id="snip">KeyEvent</code>, etc.,
+                                        which correspond to
+                                        actions like button clicks, mouse
+                                        actions, and keyboard input.
+                                        <pre><code class="language-java">
+            import java.awt.*;
+            import java.awt.event.*;
+            
+            public class ButtonClickEventDemo {
+                public static void main(String[] args) {
+                    Frame frame = new Frame("Event Handling Example");
+                    Button button = new Button("Click Me");
+            
+                    button.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            System.out.println("Button Clicked!");
+                        }
+                    });
+            
+                    frame.add(button);
+                    frame.setSize(300, 100);
+                    frame.setVisible(true);
+                }
+            }
+                                            </code></pre>
+                                    </li>
+                                    <li><strong>Event Hierarchy and Delegation
+                                            Model:</strong> Java's event
+                                        handling is based on the delegation
+                                        model. In this model, event sources
+                                        (e.g., buttons) delegate the
+                                        responsibility of handling events to
+                                        event listeners. Event classes form a
+                                        hierarchy, with more specific events
+                                        extending from more general ones. The
+                                        listener interface typically contains
+                                        methods for handling these events.
+                                        <pre><code class="language-java">
+            import java.awt.*;
+            import java.awt.event.*;
+            
+            public class MouseEventDemo {
+                public static void main(String[] args) {
+                    Frame frame = new Frame("Mouse Event Example");
+            
+                    frame.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            System.out.println("Mouse Clicked at (" + e.getX() + ", " + e.getY() + ")");
+                        }
+                    });
+            
+                    frame.setSize(300, 200);
+                    frame.setVisible(true);
+                }
+            }
+                                            </code></pre>
+                                    </li>
+                                    <li><strong>Event Listener and Event
+                                            Handling:</strong> Event listeners
+                                        are interfaces that provide callback
+                                        methods for handling specific types of
+                                        events. In the previous examples, we
+                                        implemented listeners like
+                                        ActionListener and MouseListener to
+                                        handle events. Event handling involves
+                                        registering these listeners with event
+                                        sources and defining the actions to be
+                                        taken when an event occurs.
+                                        <li>
+                                            <li><strong>Adapter Classes:</strong>
+                                                Adapter classes in Java provide
+                                                default implementations of
+                                                listener interfaces, allowing
+                                                you to implement only the
+                                                methods you need. They simplify
+                                                event handling by reducing the
+                                                number of required methods in
+                                                your code.
+                                                <pre>
+                                                    <code class="language-java">
+            import java.awt.*;
+            import java.awt.event.*;
 
-            </div>
-        </div>
+            public class MouseAdapterDemo {
+                public static void main(String[] args) {
+                    Frame frame = new Frame("Mouse Adapter Example");
 
-        <!-- Footer -->
-        <footer class="bg-dark text-white py-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h5>Contact Information</h5>
-                        <p>Email: nirajandhakal@gmail.com</p>
-                        <p>Phone: +977 9800000000</p>
-                        <p>Address: 123 Main Street, Khaireni, Devdaha,
-                            Rupandehi, Nepal</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Follow Us</h5>
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a href="https://facebook.com"
-                                    class="text-white">
-                                    <i class="fa-brands fa-facebook fa-beat"
-                                        style="color: #316ff6;"></i> &nbsp;
-                                    Facebook
-                                </a> &nbsp; &nbsp;
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://twitter.com" class="text-white">
-                                    <i class="fa-brands fa-twitter fa-beat"
-                                        style="color: #25a7de;"></i> &nbsp;
-                                    Twitter
-                                </a> &nbsp; &nbsp;
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://linkedin.com"
-                                    class="text-white">
-                                    <i class="fa-brands fa-linkedin fa-beat"
-                                        style="color:#0077b5;"></i> &nbsp;
-                                    LinkedIn
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Newsletter</h5>
-                        <p>Subscribe to our newsletter for updates:</p>
-                        <form class="form-inline">
-                            <div class="input-group">
-                                <input type="email" class="form-control"
-                                    placeholder="Your email"
-                                    aria-label="Your email"
-                                    aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary"
-                                        type="button"
-                                        id="button-addon2">Subscribe</button>
-                                </div>
+                    frame.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            System.out.println("Mouse Clicked at (" + e.getX() + ", " + e.getY() + ")");
+                        }
+                    });
+
+                    frame.setSize(300, 200);
+                    frame.setVisible(true);
+                }
+            }
+        </code>
+                                                </pre>
+                                            </li>
+                                            <li><strong>Inner Classes and
+                                                    Anonymous
+                                                    Classes:</strong> Inner
+                                                classes are classes defined
+                                                within another class. They are
+                                                commonly used in event handling
+                                                to encapsulate listener
+                                                implementations. Anonymous
+                                                classes are a type of inner
+                                                class that are defined and
+                                                instantiated on the fly, making
+                                                them useful for concise event
+                                                handling.
+                                                <pre><code class="language-java">
+                import java.awt.*;
+                import java.awt.event.*;
+
+                public class AnonymousInnerClassDemo {
+                    public static void main(String[] args) {
+                        Frame frame = new Frame("Anonymous Inner Class Example");
+                        Button button = new Button("Click Me");
+
+                        button.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                System.out.println("Button Clicked!");
+                            }
+                        });
+
+                        frame.add(button);
+                        frame.setSize(300, 100);
+                        frame.setVisible(true);
+                    }
+                }
+
+                                                </code></pre>
+                                                These concepts and examples
+                                                provide a foundation for
+                                                understanding and working with
+                                                event handling in Java, allowing
+                                                you to create interactive GUI
+                                                applications.
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ol>
                             </div>
-                        </form>
+                        </div>
+
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-12 text-center">
-                        &copy; 2023 Nirajan Dhakal | All Rights Reserved
+
+                <!-- Footer -->
+                <footer class="bg-dark text-white py-4">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Contact Information</h5>
+                                <p>Email: nirajandhakal@gmail.com</p>
+                                <p>Phone: +977 9800000000</p>
+                                <p>Address: 123 Main Street, Khaireni, Devdaha,
+                                    Rupandehi, Nepal</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h5>Follow Us</h5>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <a href="https://facebook.com"
+                                            class="text-white">
+                                            <i
+                                                class="fa-brands fa-facebook fa-beat"
+                                                style="color: #316ff6;"></i>
+                                            &nbsp;
+                                            Facebook
+                                        </a> &nbsp; &nbsp;
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="https://twitter.com"
+                                            class="text-white">
+                                            <i
+                                                class="fa-brands fa-twitter fa-beat"
+                                                style="color: #25a7de;"></i>
+                                            &nbsp;
+                                            Twitter
+                                        </a> &nbsp; &nbsp;
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="https://linkedin.com"
+                                            class="text-white">
+                                            <i
+                                                class="fa-brands fa-linkedin fa-beat"
+                                                style="color:#0077b5;"></i>
+                                            &nbsp;
+                                            LinkedIn
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h5>Newsletter</h5>
+                                <p>Subscribe to our newsletter for updates:</p>
+                                <form class="form-inline">
+                                    <div class="input-group">
+                                        <input type="email" class="form-control"
+                                            placeholder="Your email"
+                                            aria-label="Your email"
+                                            aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary"
+                                                type="button"
+                                                id="button-addon2">Subscribe</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12 text-center">
+                                &copy; 2023 Nirajan Dhakal | All Rights Reserved
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </footer>
+                </footer>
 
-        <!-- Include Bootstrap JS and jQuery -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <!-- Include Prism.js for syntax highlighting -->
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+                <!-- Include Bootstrap JS and jQuery -->
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                <script
+                    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+                <script
+                    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <!-- Include Prism.js for syntax highlighting -->
+                <script
+                    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+                <script
+                    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
 
-        <!-- Include Perfect Scrollbar library -->
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
+                <!-- Include Perfect Scrollbar library -->
+                <script
+                    src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
 
-        <script>
+                <script>
             // Function to initialize Perfect Scrollbar
             function initPerfectScrollbar(containerSelector) {
                 const container = document.querySelector(containerSelector);
@@ -696,7 +870,7 @@
             });
         </script>
 
-        <script>
+                <script>
 /**
  * Returns a random color from the list of available colors.
  * @returns {string} A random color.
@@ -720,7 +894,7 @@ function getRandomColor() {
             });
         </script>
 
-        <script>
+                <script>
             $(document).ready(function () {
                 // Initialize Perfect Scrollbar
                 $('.container').each(function () {
@@ -728,5 +902,5 @@ function getRandomColor() {
                 });
             });
         </script>
-    </body>
-</html>
+            </body>
+        </html>
