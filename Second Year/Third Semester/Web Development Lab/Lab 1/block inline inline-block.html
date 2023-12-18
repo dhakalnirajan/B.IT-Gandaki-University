@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Display: Block Inline and Inline-Block</title>
+
+        <style>
+
+            body{
+                background-color: #000000;
+                color: #ffffff;
+            }
+            .container{
+                display: flex;
+                font-family: "Montserrat", sans-serif;
+                align-items: center;
+                width: 200%;
+            }
+
+            main h1{
+                text-align: center;
+                font-family: "Montserrat", sans-serif;
+                font-style: italic;
+            }
+
+            .inline{
+                margin: 10px;
+                border: #ffffff 1px solid;
+                padding: 10px;
+                padding-bottom: 50px;
+                display: inline;
+                width: 20%;
+            }
+
+            .inline span{
+                display: inline;
+                border: #ffffff 2px solid;
+                padding: 10px;
+                margin: 10px;
+                background-color: #dddddd;
+                color: #000;
+            }
+
+            .block{
+                margin: 10px;
+                border: #ffffff 1px solid;
+                display: block;
+                padding: 10px;
+                width: 20%;
+            }
+
+            .block div{
+                background-color: #dddddd;
+                color: black;
+                margin: 10px;
+                padding: 10px;
+            }
+
+            .inline-block{
+                margin: 10px;
+                border: #ffffff 1px solid;
+                display: inline-block;
+                padding: 30px 10px;
+                width: 20%;
+            }
+
+            .inline-block div{
+                background-color: #dddddd;
+                color: black;
+                display: inline-block;
+                padding: 20px;
+                margin: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>Display: Block Inline and Inline-Block</h1>
+
+            <div class="container">
+                <!-- Apply CSS to make it look like inline Elements -->
+                <div class="inline">
+                    <h2 style="text-align: center;">Inline Elements (Spans)</h2>
+                    <br>
+                    <span>Span 1</span>
+                    <span>Span 2</span>
+                    <span>Span 3</span>
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- Apply CSS to make it look like block Elements -->
+                <div class="block">
+                    <h2 style="text-align: center;">Block Elements (Divs)</h2>
+                    <div>Div 1</div>
+                    <div>Div 2</div>
+                    <div>Div 3</div>
+                </div>
+            </div>
+            <div class="container">
+                <!-- Apply CSS to make it look like inline-block Elements in same line. -->
+                <div class="inline-block">
+                    <h2 style="text-align: center;">Inline-Block Elements (Divs)</h2>
+                    <div class="elem">Inline-Block 1</div>
+                    <div class="elem">Inline-Block 2</div>
+                    <div class="elem">Inline-Block 3</div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

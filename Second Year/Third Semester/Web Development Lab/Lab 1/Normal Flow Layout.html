@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Normal Flow Layout Example</title>
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .container{
+                width: 80%;
+                margin: 0 auto;
+                border: 1px solid #474c4e;
+                padding: 20px;
+                overflow: hidden;
+                margin-top: 10px;
+                border-radius: 10px;
+            }
+
+            header, nav, main, footer{
+                margin-bottom: 20px;
+            }
+
+            nav ul {
+                list-style: none;
+                color: black;
+            }
+
+            nav ul li{
+                display: inline-block;
+                margin-right: 20px;
+            }
+
+            header, footer{
+                padding: 10px;
+                text-align: center;
+            }
+
+            header{
+                background-color: #efefef ;
+                margin-top: 10px;
+                color: rgb(0, 0, 0);
+            }
+
+            footer{
+                margin-top: 30px;
+                background-color: #efefef;
+                color:rgb(0, 0, 0);
+                position: sticky;
+            }
+
+            nav ul li{
+                display: inline;
+                margin-right: 5px;
+                padding: 0;
+            }
+
+            aside{
+                width: 50%;
+            }
+
+            aside p{
+                margin-top: 10px;
+            }
+
+            article{
+                padding: 10px;
+                width: 100%;
+            }
+
+            article .title{
+                font-size: 31px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Normal Flow Layout Example</h1>
+            </header>
+
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <main>
+                <article>
+                    <aside>
+                        <h3 class="title">Article Title</h3>
+                        <p>This is a sample text. Lorem ipsum dolor, sit amet
+                            consectetur adipisicing elit.</p>
+                    </aside>
+                </article>
+            </main>
+
+            <footer>
+                <p>&copy; Normal Flow Layout Management Example</p>
+            </footer>
+        </div>
+    </body>
+</html>
