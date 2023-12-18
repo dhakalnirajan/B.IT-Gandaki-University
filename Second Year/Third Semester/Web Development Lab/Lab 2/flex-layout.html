@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Flex Layout Example</title>
+        <style>
+
+            .a {
+                display: flex;
+                flex-direction: column;
+                border-radius: 10px;
+                border: 1px solid #000000;
+            }
+
+            .b a{
+                margin: 5px 10px;
+            }
+
+            .c{
+                margin-left: 10px;
+            }
+
+            .c > h2{
+                margin-bottom: 10px;
+                margin-left: 10px;
+            }
+
+            h1{
+                text-align: center;
+            }
+
+            .a > div{
+                margin: 10px 10px;
+            }
+
+            .d > div{
+                margin-left: 20px;
+            }
+
+            .d > p{
+                margin-left: 10px;
+            }
+
+            footer{
+                margin-top: 10px;
+                margin-bottom: 10px;
+                margin-left: 10px;
+                margin-right: 10px;
+                text-align: center;
+            }
+
+            footer,
+            h1 {
+                background-color: #efefef;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="a">
+            <div class="f">
+                <h1>Normal Flow Layout Example - Flex Layout</h1>
+            </div>
+            <div class="b">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="c">
+                <h2>Article Title</h2>
+            </div>
+            <div class="d">
+                <p>
+                    This is a simple article text. Lorem ipsum dolor sit
+                    amet,consectetur adispiscing elit.
+                </p>
+                <div class="d"></div>
+            </div>
+            <footer>&#169; 2023 Normal Flow Layout Example</footer>
+            <div class="e"></div>
+        </div>
+    </body>
+</html>
