@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Questions</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <!-- Prism CSS for code highlighting -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+            rel="stylesheet">
+
+        <style>
+        ol {
+            font-size: 18px;
+            color: red;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol>
+                        <li>Each program from:
+                            <ul>
+                                <li>Table</li>
+                                <pre><code class="language-markup">
+                            <h1>Sample Table</h1>
+                            <table style="border: 1px solid #222; padding: 8px; text-align: left; width: 100%;">
+                                Table content here
+                            </table>
+                        </code></pre>
+                                <li>List</li>
+                                <pre><code class="language-markup">
+                            Example HTML code for a list
+                            <ul>
+                                <li>Item 1</li>
+                                <li>Item 2</li>
+                                <li>Item 3</li>
+                            </ul>
+                        </code></pre>
+                                <li>Form</li>
+                                <pre><code class="language-markup">
+                            Example HTML code for a form
+                            <form>
+                                Form elements here
+                            </form>
+                        </code></pre>
+                            </ul>
+                        </li>
+                        <li>Different text formatting elements with usage &
+                            example</li>
+                        <pre><code class="language-markup">
+                    <!-- Example HTML code for text formatting -->
+                    <strong>Bold Text</strong>
+                    <em>Italic Text</em>
+                    <u>Underlined Text</u>
+                </code></pre>
+                        <li>Types of CSS Formation.</li>
+                        <pre><code class="language-css">
+                    /* Example CSS code for CSS Formation */
+                    .class-name {
+                        property: value;
+                    }
+                </code></pre>
+                        <li>CSS Selectors</li>
+                        <pre><code class="language-css">
+                    /* Example CSS code for CSS Selectors */
+                    .selector {
+                        property: value;
+                    }
+                </code></pre>
+                        <li>CSS Responsive Web Design</li>
+                        <pre><code class="language-css">
+                    /* Example CSS code for Responsive Web Design */
+                    @media screen and (max-width: 600px) {
+                        /* CSS for mobile devices */
+                    }
+                </code></pre>
+                        <li>Pseudoclass, Pseudoelement, CSS Box-model</li>
+                        <pre><code class="language-css">
+                    /* Example CSS code for Pseudoclass, Pseudoelement, and Box-model */
+                    .element:hover {
+                        /* CSS for hover effect */
+                    }
+                </code></pre>
+                        <li>What are identifiers? List the rules for naming
+                            identifiers.</li>
+                        <pre><code class="language-markup">
+                    <h5>Explanation of identifiers and rules</h5>
+                    <p>An identifier is a name given to a variable, function, or other element in your code.
+                    Rules for naming identifiers:</p>
+                    <p>1. It must start with a letter, underscore (_) or dollar sign ($).
+                    2. Subsequent characters can also be digits (0-9).
+                    3. Identifiers are case-sensitive.
+                    4. Reserved words (like "function" or "for") cannot be used as identifiers.</p>
+                </code></pre>
+                        <li>What is a variable? List the rules for naming
+                            variables.</li>
+                        <pre><code class="language-markdown">
+                    // Explanation of variables and rules
+                    A variable is a storage location in your code that holds data.
+                    Rules for naming variables are similar to those for identifiers.
+                </code></pre>
+                        <li>Explain different ways to declare a variable.</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code for declaring variables
+                    var x = 5; // Using "var"
+                    let y = 10; // Using "let"
+                    const z = 15; // Using "const"
+                </code></pre>
+                        <li>Write differences between declaring a variable using
+                            let and var with suitable examples.</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code highlighting differences between "let" and "var"
+                    function example() {
+                        if (true) {
+                            var a = 1; // "var" is function-scoped
+                            let b = 2; // "let" is block-scoped
+                        }
+                        console.log(a); // Outputs 1
+                        console.log(b); // ReferenceError: b is not defined
+                    }
+                    example();
+                </code></pre>
+                        <li>Write down the differences between let, var, and
+                            const</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code highlighting differences between "let", "var", and "const"
+                    let x = 5; // Block-scoped variable, can be reassigned
+                    var y = 10; // Function-scoped variable, can be reassigned
+                    const z = 15; // Block-scoped constant, cannot be reassigned
+                </code></pre>
+                        <li>Explain different looping statements in JavaScript.</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code explaining different looping statements
+                    for (let i = 0; i < 5; i++) {
+                        // "for" loop
+                    }
+                    while (condition) {
+                        // "while" loop
+                    }
+                    do {
+                        // "do while" loop
+                    } while (condition);
+                </code></pre>
+                        <li>Explain different conditional statements in
+                            JavaScript.</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code explaining different conditional statements
+                    if (condition) {
+                        // "if" statement
+                    } else if (anotherCondition) {
+                        // "else if" statement
+                    } else {
+                        // "else" statement
+                    }
+                    switch (value) {
+                        case 1:
+                            // Code for case 1
+                            break;
+                        case 2:
+                            // Code for case 2
+                            break;
+                        default:
+                            // Code for default case
+                    }
+                </code></pre>
+                        <li>Different ways to display output in JS.</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code for displaying output
+                    console.log("Hello, World!"); // Using console.log
+                    alert("Hello, World!"); // Using alert
+                    document.write("Hello, World!"); // Using document.write
+                </code></pre>
+                        <li>Consider the array of numbers [2, 8, 10, 12, 15].
+                            Find the sum of all the elements of this array
+                            using:</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code to find the sum of array elements
+                    let arr = [2, 8, 10, 12, 15];
+
+                    // Using a for loop
+                    let sum = 0;
+                    for (let i = 0; i < arr.length; i++) {
+                        sum += arr[i];
+                    }
+                    console.log("Sum:", sum);
+                </code></pre>
+                        <li>for in loop</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code using a for...in loop
+                    let obj = { a: 1, b: 2, c: 3 };
+                    for (let key in obj) {
+                        console.log(key, obj[key]);
+                    }
+                </code></pre>
+                        <li>for of loop</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code using a for...of loop
+                    let iterable = [10, 20, 30];
+                    for (let value of iterable) {
+                        console.log(value);
+                    }
+                </code></pre>
+                        <li>while loop</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code using a while loop
+                    let i = 0;
+                    while (i < 5) {
+                        console.log(i);
+                        i++;
+                    }
+                </code></pre>
+                        <li>do while loop</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code using a do...while loop
+                    let j = 0;
+                    do {
+                        console.log(j);
+                        j++;
+                    } while (j < 5);
+                </code></pre>
+                        <li>What is DOM? Construct HTML DOM tree for the given
+                            HTML.</li>
+                        <pre><code class="language-markup">
+                    <h5>Explanation of DOM and HTML DOM tree construction</h5>
+                    <p>The Document Object Model (DOM) is a programming interface for web documents.
+                    It represents the page so that programs can change the document structure, style, and content.
+                    Example HTML DOM tree construction (In Copy).</p>
+                </code></pre>
+                        <li>What do you mean by events in Programming? Explain
+                            the following mouse events with example code.</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code explaining mouse events
+                    element.addEventListener("mouseup", function(event) {
+                        // Code for mouseup event
+                    });
+
+                    element.addEventListener("mousedown", function(event) {
+                        // Code for mousedown event
+                    });
+
+                    element.addEventListener("mouseover", function(event) {
+                        // Code for mouseover event
+                    });
+
+                    element.addEventListener("mouseout", function(event) {
+                        // Code for mouseout event
+                    });
+
+                    element.addEventListener("click", function(event) {
+                        // Code for click event
+                    });
+                </code></pre>
+                        <li>What is an event? How is an event handled in JS?</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code explaining event handling
+                    element.addEventListener("click", function(event) {
+                        // Event handling code here
+                    });
+                </code></pre>
+                        <li>What do you mean by event bubbling and capturing?
+                            Illustrate with Example Code.</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code illustrating event bubbling and capturing
+                    // Event bubbling
+                    element.addEventListener("click", function(event) {
+                        // Code for outer element click event
+                    });
+
+                    // Event capturing
+                    element.addEventListener("click", function(event) {
+                        // Code for inner element click event
+                    }, true);
+                </code></pre>
+                        <li>JS Form Validation</li>
+                        <pre><code class="language-javascript">
+                    // Example JavaScript code for form validation
+                    function validateForm() {
+                        // Validation logic here
+                    }
+                </code></pre>
+                        <li>What is a superglobal?</li>
+                        <pre><code class="language-php">
+Superglobals in PHP are special predefined variables that are always accessible, regardless of scope.
+They are available in all scopes of a script.
+Some common PHP superglobals include:
+$_GET - An associative array containing data sent to the script via URL parameters.
+$_POST - An associative array containing data sent to the script via HTTP POST method.
+$_SESSION - An associative array containing session variables.
+$_COOKIE - An associative array containing all cookies sent by the client's browser.
+$_SERVER - An associative array containing information about the server environment.
+$_GLOBALS - An associative array containing all global variables.
+</code></pre>
+
+                        <li>Accessing values from PHP</li>
+                        <pre><code class="language-php">
+To access values in PHP, you can use various superglobal arrays.
+For example, to access a value sent via the GET method:
+$value = $_GET['parameter_name'];
+
+To access a value sent via the POST method:
+$value = $_POST['field_name'];
+
+To access a session variable:
+session_start();
+$value = $_SESSION['variable_name'];
+
+To access a cookie value:
+$value = $_COOKIE['cookie_name'];
+</code></pre>
+
+                        <li>Write down a sample PHP program to set a cookie
+                            "favcolor" to "red" and "favanimal" to "cow".</li>
+                        <pre><code class="language-php">
+Example PHP code to set cookies
+setcookie("favcolor", "red", time() + 3600, "/");
+setcookie("favanimal", "cow", time() + 3600, "/");
+The above code sets two cookies: "favcolor" and "favanimal" with values "red" and "cow" respectively,
+and they will be valid for one hour ("/" specifies that the cookies are available across the entire domain).
+</code></pre>
+
+                        <li>What is a session, and how does it work to identify
+                            the user?</li>
+                        <pre><code class="language-php">
+A session in PHP is a way to store and retrieve user data across multiple pages.
+Sessions are commonly used to identify and authenticate users as they navigate through a website.
+When a session is started, PHP assigns a unique session ID to the user, which is typically stored as a cookie on the user's device.
+The session ID is used to associate the user with their data on the server.
+
+Here's how it works:
+1. When a user visits a page, PHP checks if a session already exists based on the session ID stored in the cookie.
+2. If a session exists, PHP retrieves the user's data from the server.
+3. If no session exists, PHP creates a new session and assigns a unique session ID.
+4. User data can be stored in the session variables ($_SESSION) and is accessible across multiple pages.
+5. Sessions are automatically managed by PHP and can be used to track user activity and store user-specific information.
+
+Example of starting a session:
+session_start();
+
+Storing data in a session variable:
+$_SESSION['user_id'] = 123;
+
+Retrieving data from a session variable:
+$userId = $_SESSION['user_id'];
+</code></pre>
+
+                        <li>How do you set a session variable and access its
+                            value, modify it, and delete it?</li>
+                        <pre><code class="language-php">
+Setting a session variable:
+session_start();
+$_SESSION['username'] = 'john';
+
+Accessing the session variable's value:
+$username = $_SESSION['username'];
+
+Modifying the session variable's value:
+$_SESSION['username'] = 'jane';
+
+Deleting a session variable:
+unset($_SESSION['username']);
+
+ Ending a session (logging out):
+session_destroy();
+</code></pre>
+
+                        <li>What is a domain name? Explain the domain
+                            registration process.</li>
+                        <pre><code class="language-markup">
+A domain name is a human-readable address that is used to access websites on the internet.
+It provides a way to identify and locate websites without needing to remember their IP addresses.
+The domain registration process involves the following steps:
+1. Choose a Domain Name: Select a unique and meaningful domain name for your website.
+2. Check Domain Availability: Use a domain registrar's website to check if your chosen domain name is available.
+3. Register the Domain: If the domain is available, you can register it through a domain registrar.
+4. Provide Contact Information: During registration, you'll need to provide contact information, including your name and address.
+5. Choose Registration Period: Select the duration for which you want to register the domain (e.g., 1 year, 2 years).
+6. Payment: Pay the registration fee to secure the domain.
+7. Domain Ownership: Once registered and paid for, you own the domain for the selected period.
+8. Renewal: Domains need to be renewed periodically to maintain ownership.
+</code></pre>
+
+                        <li>What is Web Hosting? Explain Types of Web Hosting.</li>
+                        <pre><code class="language-markup">
+Web hosting is a service that allows individuals and organizations to make their websites accessible on the internet.
+Types of Web Hosting:
+1. Shared Hosting: Multiple websites share resources on the same server. It's cost-effective but has limited resources.
+2. VPS (Virtual Private Server) Hosting: A virtual server with dedicated resources, offering more control and scalability.
+3. Dedicated Server Hosting: A physical server dedicated to a single client, providing maximum control and performance.
+4. Cloud Hosting: Websites are hosted on a network of virtual servers, offering scalability and reliability.
+5. Reseller Hosting: Individuals or companies purchase hosting plans and resell them to others.
+6. Managed WordPress Hosting: Hosting optimized for WordPress, offering speed and security.
+7. Colocation Hosting: Clients place their own servers in a data center and use the data center's resources.
+</code></pre>
+
+                        <li>Explain the Web Hosting Process.</li>
+                        <pre><code class="language-markup">
+The web hosting process involves the following steps:
+1. Choose a Web Hosting Provider: Select a web hosting company based on your needs and budget.
+2. Choose a Hosting Plan: Decide on the type of hosting plan (e.g., shared, VPS, dedicated) that suits your requirements.
+3. Domain Configuration: Connect your domain name to the hosting provider's server by updating DNS records.
+4. Website Deployment: Upload your website files and databases to the hosting server using FTP or other methods.
+5. Website Maintenance: Regularly update and maintain your website to ensure it runs smoothly.
+6. Monitoring: Monitor the performance, security, and uptime of your website.
+7. Support: Rely on your hosting provider's support for technical assistance and issue resolution.
+8. Scaling: If your website grows, consider upgrading to a higher hosting plan for more resources.
+</code></pre>
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prism JavaScript for code highlighting -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-javascript.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-css-extras.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-css.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-http.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-markup.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-php-extras.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-php.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    </body>
+</html>
