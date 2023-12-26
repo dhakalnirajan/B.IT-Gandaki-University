@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Example</title>
+</head>
+<body>
+
+<h1>AJAX Example | Fetch Header Information and Last Modified Information</h1>
+<button id="loadHeaderBtn">Load Header</button>
+<div id="headerInfo"></div>
+
+<script>
+document.getElementById("loadHeaderBtn").addEventListener("click", function() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                var headers = xhr.getAllResponseHeaders();
+                document.getElementById("headerInfo").innerText = headers;
+            } else {
+                document.getElementById("headerInfo").innerText = "Error fetching headers.";
+            }
+        }
+    };
+
+    xhr.open("HEAD", "ajax_info.txt", true);
+    xhr.send();
+});
+</script>
+
+</body>
+</html>

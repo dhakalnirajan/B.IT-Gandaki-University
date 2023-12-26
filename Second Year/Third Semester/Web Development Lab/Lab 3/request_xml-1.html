@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Example</title>
+</head>
+<body>
+
+<h1>AJAX Example</h1>
+<button id="loadNoteBtn">Load Note</button>
+<div id="noteContent"></div>
+
+<script>
+document.getElementById("loadNoteBtn").addEventListener("click", function() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                var xmlDoc = xhr.responseXML;
+                var noteContent = "";
+
+                var to = xmlDoc.getElementsByTagName("to")[0].textContent;
+                var from = xmlDoc.getElementsByTagName("from")[0].textContent;
+                var heading = xmlDoc.getElementsByTagName("heading")[0].textContent;
+                var body = xmlDoc.getElementsByTagName("body")[0].textContent;
+
+                noteContent += "<strong>To:</strong> " + to + "<br>";
+                noteContent += "<strong>From:</strong> " + from + "<br>";
+                noteContent += "<strong>Heading:</strong> " + heading + "<br>";
+                noteContent += "<strong>Body:</strong> " + body;
+
+                document.getElementById("noteContent").innerHTML = noteContent;
+            } else {
+                document.getElementById("noteContent").innerText = "Error fetching note.";
+            }
+        }
+    };
+
+    xhr.open("GET", "note.xml", true);
+    xhr.send();
+});
+</script>
+
+</body>
+</html>

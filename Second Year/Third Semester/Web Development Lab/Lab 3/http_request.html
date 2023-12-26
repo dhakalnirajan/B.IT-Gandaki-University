@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Example</title>
+</head>
+<body>
+
+<h1>AJAX Example</h1>
+<button id="loadDataBtn">Load Data</button>
+<div id="ajaxContent"></div>
+
+<script>
+document.getElementById("loadDataBtn").addEventListener("click", function() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var responseText = xhr.responseText;
+            document.getElementById("ajaxContent").innerHTML = responseText;
+        }
+    };
+
+    xhr.open("GET", "ajax_info.txt", true);
+    xhr.send();
+});
+</script>
+
+</body>
+</html>
