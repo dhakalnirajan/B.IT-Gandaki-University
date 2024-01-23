@@ -1,0 +1,13 @@
+<!-- books.xml -->
+<library>
+<book>
+<title>Introduction to XML</title>
+<author>John Doe</author>
+<price>29.99</price>
+</book>
+<book>
+<title>Web Development Basics</title>
+<author>Jane Smith</author>
+<price>24.95</price>
+</book>
+</library>
