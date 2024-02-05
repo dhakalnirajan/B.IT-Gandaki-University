@@ -35,6 +35,9 @@ font-size: 24px;
 <li>List item 2</li>
 <li>List item 3</li>
 </ul>
+
+<button id="addListItemBtn">Add List Item</button>
+
 <div class="parent">
 <p>Child 1</p>
 <p>Child 2</p>
@@ -77,6 +80,11 @@ font-size: 24px;
 <textarea name="comments">Enter your comments here</textarea>
 <button type="submit">Submit</button>
 </form>
+
+<br> <br><br><br><br>
+
+<button id="replaceContentBtn">Replace Content</button>
+
 <!-- Include jQuery -->
 <script src="./jquery-3.6.4.min.js"></script><!-- Add your jQuery script here -->
 <script>
@@ -126,6 +134,19 @@ font-size: 24px;
 
     $("#fadeoutbtn").on("click", function() {
         $("#content").fadeOut(1000);
+    });
+
+    // task 8
+    var count = 3;
+    $("#addListItemBtn").on("click", function() {
+        count++;
+        let listItem = "<li>" + "List Item " + count + "</li>";
+        $("#myList").append(listItem);      
+    });
+
+    $("#replaceContentBtn").on("click", function() {
+        let replacementElement = "<p>Replaced Text</p>";
+        $("#content").empty().append(replacementElement);
     });
 
 </script>
