@@ -85,25 +85,32 @@
                 try {
                     const resultElement = document.getElementById("result");
                     resultElement.innerText = "Loading XML Data.....";
-                    const url = "./books.xml"; // Update path according to your setup
-                    const xmlDoc = await fetchData(url);
+                    const timeoutId = setTimeout(async function () {
+                        const url = "./books.xml"; // Update path according to your setup
+                        const xmlDoc = await fetchData(url);
             
-                    const library = xmlDoc.getElementsByTagName('library')[0];
-                    const books = library.getElementsByTagName('book');
+                        const library = xmlDoc.getElementsByTagName('library')[0];
+                        const books = library.getElementsByTagName('book');
             
-                    let outputHTML = "";
-                    for (let i = 0; i < books.length; ++i) {
-                        const book = books[i];
+                        let outputHTML = "";
+                        for (let i = 0; i < books.length; ++i) {
+                            const book = books[i];
             
-                        const title = book.getElementsByTagName('title')[0].childNodes[0].nodeValue;
-                        const author = book.getElementsByTagName('author')[0].childNodes[0].nodeValue;
-                        const year = book.getElementsByTagName('year')[0].childNodes[0].nodeValue;
-                        const priceCurrency = book.getElementsByTagName('price')[0].getAttribute('currency');
-                        const priceValue = book.getElementsByTagName('price')[0].childNodes[0].nodeValue;
+                            const title = book.getElementsByTagName('title')[0].childNodes[0].nodeValue;
+                            const author = book.getElementsByTagName('author')[0].childNodes[0].nodeValue;
+                            const year = book.getElementsByTagName('year')[0].childNodes[0].nodeValue;
+                            const priceCurrency = book.getElementsByTagName('price')[0].getAttribute('currency');
+                            const priceValue = book.getElementsByTagName('price')[0].childNodes[0].nodeValue;
             
-                        outputHTML += `<li><strong style='color: #e2017e;'>${title}</strong>, By ${author}, (${year}) - ${priceCurrency}${priceValue}</li>`;
-                    }
-                    resultElement.innerHTML = `<ul>${outputHTML}</ul>`;
+                            outputHTML += `<li><strong style='color: #e2017e;'>${title}</strong>, By ${author}, (${year}) - ${priceCurrency}${priceValue}</li>`;
+                        }
+                        resultElement.innerHTML = `<ul>${outputHTML}</ul>`;
+                    }, 2000); // Delay for 2 seconds
+
+                    // Clear the timeout after 2 seconds
+                    setTimeout(() => {
+                        clearTimeout(timeoutId);
+                    }, 2000);
                 } catch (error) {
                     console.log(error);
                     document.getElementById("result").innerText = "Error: " + error.message;
