@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+   <book category="science">
+      <title>How Did It All Begin?</title>
+      <author>Nirajan Dhakal</author>
+      <year>2025</year>
+      <price currency="$">15.99</price>
+   </book>
+   <book category="fiction">
+      <title>God Is Dead. God Remains Dead. And We Have Killed Him</title>
+      <author>Friedrich Nietzsche</author>
+      <year>1882</year>
+      <price currency="$">19.99</price>
+   </book>
+   <book category="science">
+      <title>The Theory of Everything</title>
+      <author>Stephen Hawking</author>
+      <year>2002</year>
+      <price currency="$">29.99</price>
+   </book>
+   <book category="fiction">
+      <title>1984</title>
+      <author>George Orwell</author>
+      <year>1949</year>
+      <price currency="$">9.99</price>
+   </book>
+   <book category="fiction">
+      <title>Animal Farm</title>
+      <author>George Orwell</author>
+      <year>1945</year>
+      <price currency="$">9.99</price>
+   </book>
+   <book category="science">
+      <title>The Grand Design</title>
+      <author>Stephen Hawking</author>
+      <year>2010</year>
+      <price currency="$">39.99</price>
+   </book>
+</library>

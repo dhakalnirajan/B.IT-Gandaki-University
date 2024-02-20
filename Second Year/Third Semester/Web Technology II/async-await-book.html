@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>XML Fetch Example</title>
+    </head>
+    <style>
+    body {
+        font-family: 'Poppins',sans-serif;
+        max-width: 800px;
+        margin: auto;
+        padding: 2em;
+    }
+
+    h1 {
+        padding: 10px 10px;
+        color: #ff527e;
+        background-color: rgb(43, 5, 64);
+        border-radius: 15px 15px 47px 47px;
+        text-align: center;
+    }
+
+    button {
+        background-color: dodgerblue;
+        border: none;
+        color: white;
+        padding: 1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 15px;
+        border-radius:50px 50px 15px 15px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    button:hover {
+        background-color: rgb(31, 119, 180);
+    }
+
+    div#result {
+        border: solid 1px rgb(244, 135, 135);
+        padding: 1em;
+        height: 200px;
+        overflow: scroll;
+        margin-top: 1em;
+        border-radius: 5px 5px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        line-height: 1.5;
+        margin-bottom: 0.5rem;
+    }
+</style>
+    <body>
+
+        <h1>XML Fetch Example</h1>
+
+        <div id="result"></div>
+
+        <!-- Add a button to trigger XML fetch -->
+        <button onclick="fetchDataAndDisplay()">Load Books From XML
+            File</button>
+
+        <script>
+            async function fetchData(url) {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const xmlString = await response.text();
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlString, "application/xml");
+                return xmlDoc;
+            }
+            
+            async function fetchDataAndDisplay() {
+                try {
+                    const resultElement = document.getElementById("result");
+                    resultElement.innerText = "Loading XML Data.....";
+                    const url = "./books.xml"; // Update path according to your setup
+                    const xmlDoc = await fetchData(url);
+            
+                    const library = xmlDoc.getElementsByTagName('library')[0];
+                    const books = library.getElementsByTagName('book');
+            
+                    let outputHTML = "";
+                    for (let i = 0; i < books.length; ++i) {
+                        const book = books[i];
+            
+                        const title = book.getElementsByTagName('title')[0].childNodes[0].nodeValue;
+                        const author = book.getElementsByTagName('author')[0].childNodes[0].nodeValue;
+                        const year = book.getElementsByTagName('year')[0].childNodes[0].nodeValue;
+                        const priceCurrency = book.getElementsByTagName('price')[0].getAttribute('currency');
+                        const priceValue = book.getElementsByTagName('price')[0].childNodes[0].nodeValue;
+            
+                        outputHTML += `<li><strong style='color: #e2017e;'>${title}</strong>, By ${author}, (${year}) - ${priceCurrency}${priceValue}</li>`;
+                    }
+                    resultElement.innerHTML = `<ul>${outputHTML}</ul>`;
+                } catch (error) {
+                    console.log(error);
+                    document.getElementById("result").innerText = "Error: " + error.message;
+                }
+            }
+</script>
+    </body>
+</html>
