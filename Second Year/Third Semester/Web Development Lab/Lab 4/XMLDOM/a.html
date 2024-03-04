@@ -1,11 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script src="script.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>XML DOM Manipulation</title>
+        <style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  textarea {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>XML DOM Manipulation</h2>
+            <textarea id="xmlData" readonly></textarea>
+            <button onclick="addStudent()">Add Student</button>
+            <button onclick="modifyGrade()">Modify Grade</button>
+            <button onclick="removeStudent()">Remove Student</button>
+            <textarea id="modifiedXmlData" readonly></textarea>
+        </div>
+
+        <script>
+    // Function to load XML data from file using XHTTPRequest
+    function loadXMLData(callback) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                callback(this.responseXML);
+            }
+        };
+        xhttp.open("GET", "data.xml", true);
+        xhttp.send();
+    }
+
+    // Function to display original XML data
+    function displayOriginalXML(xmlData) {
+        document.getElementById("xmlData").value = new XMLSerializer().serializeToString(xmlData);
+    }
+
+    // Function to display modified XML data
+    function displayModifiedXML(modifiedXmlData) {
+        document.getElementById("modifiedXmlData").value = modifiedXmlData;
+    }
+
+    // Function to add a new student
+    function addStudent() {
+        loadXMLData(function(xmlData) {
+            var newStudent = xmlData.createElement("student");
+            newStudent.setAttribute("id", "3");
+            var name = xmlData.createElement("name");
+            name.appendChild(xmlData.createTextNode("Alice Johnson"));
+            var age = xmlData.createElement("age");
+            age.appendChild(xmlData.createTextNode("21"));
+            var grade = xmlData.createElement("grade");
+            grade.appendChild(xmlData.createTextNode("88"));
+            newStudent.appendChild(name);
+            newStudent.appendChild(age);
+            newStudent.appendChild(grade);
+            xmlData.getElementsByTagName("students")[0].appendChild(newStudent);
+            displayModifiedXML(new XMLSerializer().serializeToString(xmlData));
+        });
+    }
+
+    // Function to modify the grade of a student
+    function modifyGrade() {
+        loadXMLData(function(xmlData) {
+            var students = xmlData.getElementsByTagName("student");
+            for (var i = 0; i < students.length; i++) {
+                var id = students[i].getAttribute("id");
+                if (id === "2") {
+                    var grade = students[i].getElementsByTagName("grade")[0];
+                    grade.textContent = "95";
+                    break;
+                }
+            }
+            displayModifiedXML(new XMLSerializer().serializeToString(xmlData));
+        });
+    }
+
+    // Function to remove a student
+    function removeStudent() {
+        loadXMLData(function(xmlData) {
+            var students = xmlData.getElementsByTagName("student");
+            for (var i = 0; i < students.length; i++) {
+                var id = students[i].getAttribute("id");
+                if (id === "1") {
+                    students[i].parentNode.removeChild(students[i]);
+                    break;
+                }
+            }
+            displayModifiedXML(new XMLSerializer().serializeToString(xmlData));
+        });
+    }
+
+    // Initial display of original XML data
+    loadXMLData(displayOriginalXML);
+</script>
+    </body>
 </html>
