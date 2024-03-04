@@ -1,154 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>jQuery Selector Lab</title>
-<style>
-/* Add your CSS styles here */
-.highlight {
-background-color: yellow;
-}
-.external-link {
-color: red;
-}
-.list-item {
-font-weight: bold;
-}
-.parent > * {
-background-color: lightblue;
-}
-.content p:first-child {
-font-size: 18px;
-}
-.content p:last-child {
-font-size: 24px;
-}
-/* Add more styles as needed */
-</style>
-</head>
-<body>
-<div id="header">This is the header</div>
-<p class="highlight">This is a highlighted paragraph. Click me!</p>
-<ul id="myList">
-<li>List item 1</li>
-<li>List item 2</li>
-<li>List item 3</li>
-</ul>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>jQuery Selector Lab</title>
+        <style>
+        /* Add your CSS styles here */
+        .highlight {
+            background-color: yellow;
+        }
+        .external-link {
+            color: red;
+        }
+        .list-item {
+            font-weight: bold;
+        }
+        .parent > * {
+            background-color: lightblue;
+        }
+        .content p:first-child {
+            font-size: 18px;
+        }
+        .content p:last-child {
+            font-size: 24px;
+        }
+        /* Add more styles as needed */
+    </style>
+    </head>
+    <body>
+        <div id="header">This is the header</div>
+        <p class="highlight">This is a highlighted paragraph. Click me!</p>
+        <ul id="myList">
+            <li>List item 1</li>
+            <li>List item 2</li>
+            <li>List item 3</li>
+        </ul>
 
-<button id="addListItemBtn">Add List Item</button>
+        <button id="addListItemBtn">Add List Item</button>
 
-<div class="parent">
-<p>Child 1</p>
-<p>Child 2</p>
-<p>Child 3</p>
-</div>
+        <div class="parent">
+            <p>Child 1</p>
+            <p>Child 2</p>
+            <p>Child 3</p>
+        </div>
 
-<button id="togglecontent">Toggle Content</button>
+        <button id="togglecontent">Toggle Content</button>
 
-<div id="content">
-<p>First paragraph</p>
-<p>Second paragraph</p>
-<p>Third paragraph</p>
-</div>
+        <div id="content">
+            <p>First paragraph</p>
+            <p>Second paragraph</p>
+            <p>Third paragraph</p>
+        </div>
 
-<button id="fadeinbtn ">Fade In Content</button>
-<button id="fadeoutbtn">Fade Out Content</button>
+        <button id="fadeinbtn">Fade In Content</button>
+        <button id="fadeoutbtn">Fade Out Content</button>
 
-<table>
-<tr>
-<td>Row 1</td>
-</tr>
-<tr>
-<td>Row 2</td>
-</tr>
-<tr>
-<td>Row 3</td>
-</tr>
-</table>
-<button id="hideButton">Hide Items</button>
-<form>
-<input type="text" name="username" value="JohnDoe">
-<input type="text" name="email" value="john@example.com">
-<input type="checkbox" name="subscribe" checked>
-<input type="checkbox" name="agree">
-<select id="countryList">
-<option value="usa">USA</option>
-<option value="canada">Canada</option>
-<option value="uk">UK</option>
-</select>
-<textarea name="comments">Enter your comments here</textarea>
-<button type="submit">Submit</button>
-</form>
+        <table>
+            <tr>
+                <td>Row 1</td>
+            </tr>
+            <tr>
+                <td>Row 2</td>
+            </tr>
+            <tr>
+                <td>Row 3</td>
+            </tr>
+        </table>
+        <button id="hideButton">Hide Items</button>
+        <form>
+            <input type="text" name="username" value="JohnDoe">
+            <input type="text" name="email" value="john@example.com">
+            <input type="checkbox" name="subscribe" checked>
+            <input type="checkbox" name="agree">
+            <select id="countryList">
+                <option value="usa">USA</option>
+                <option value="canada">Canada</option>
+                <option value="uk">UK</option>
+            </select>
+            <textarea name="comments">Enter your comments here</textarea>
+            <button type="submit">Submit</button>
+        </form>
 
-<br> <br><br><br><br>
+        <br> <br><br><br><br>
 
-<button id="replaceContentBtn">Replace Content</button>
+        <button id="replaceContentBtn">Replace Content</button>
 
-<!-- Include jQuery -->
-<script src="./jquery-3.6.4.min.js"></script><!-- Add your jQuery script here -->
-<script>
-	// task1
-    $(document).ready(function () {
-        $("p").css("color", "green");
-    });
+        <!-- Include jQuery -->
+        <script
+            src="./jquery-3.6.4.min.js"></script><!-- Add your jQuery script here -->
+        <script>
+        $(document).ready(function () {
+            // task1
+            $("p").css("color", "green");
 
-    //task 2
-    $(document).ready(function () {
-        $(".highlight").on("click", function() {
+            // task2
+            $(".highlight").on("click", function() {
                 $(this).toggleClass("highlight");
+            });
+
+            // task3
+            var headingText = $("#header").text();
+            alert(headingText);
+
+            // task4
+            $('.highlight').on('click', function() {
+                $(this).css('color', 'blue');
+            });
+
+            // task5
+            $("form").on("submit", function(event) {
+                event.preventDefault();
+                alert("Form submitted!");
+            });
+
+            // task6
+            $('#togglecontent').on('click', function() {
+                $('#content').slideToggle();
+            });
+
+            // task7
+            $("#fadeinbtn").on("click", function() {
+                $("#content").fadeIn(1000);
+            });
+
+            $("#fadeoutbtn").on("click", function() {
+                $("#content").fadeOut(1000);
+            });
+
+            // task8
+            var count = 3;
+            $("#addListItemBtn").on("click", function() {
+                count++;
+                let listItem = "<li>" + "List Item " + count + "</li>";
+                $("#myList").append(listItem);      
+            });
+
+            $("#replaceContentBtn").on("click", function() {
+                let replacementElement = "<p>Replaced Text</p>";
+                $("#content").empty().append(replacementElement);
+            });
         });
-    });
-
-    //task 3
-    var headingText = $("#header").text();
-    alert(headingText);
-
-    //task 4
-    $('.highlight').on('click', function() {
-        $(this).css('color', 'blue');
-    });
-
-    //task 5
-    $("form").on("submit", function(event) {
-        event.preventDefault();
-        alert("Form submitted!");
-    });
-
-    //task 6
-
-    // <button id="togglecontent">Toggle Content</button>
-
-    $('#togglecontent').on('click', function() {
-        $('#content').slideToggle();
-    });
-
-    //task 7
-
-    // <button id="fadeinbtn">Fade In Content</button>
-    // <button id="fadeoutbtn">Fade Out Content</button>
-
-    $("#fadeinbtn").on("click", function() {
-        $("#content").fadeIn(1000);
-    });
-
-    $("#fadeoutbtn").on("click", function() {
-        $("#content").fadeOut(1000);
-    });
-
-    // task 8
-    var count = 3;
-    $("#addListItemBtn").on("click", function() {
-        count++;
-        let listItem = "<li>" + "List Item " + count + "</li>";
-        $("#myList").append(listItem);      
-    });
-
-    $("#replaceContentBtn").on("click", function() {
-        let replacementElement = "<p>Replaced Text</p>";
-        $("#content").empty().append(replacementElement);
-    });
-
-</script>
-</body>
+    </script>
+    </body>
 </html>
