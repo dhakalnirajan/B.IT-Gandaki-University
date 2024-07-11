@@ -13,37 +13,21 @@ struct fileTable {
     struct block *sb;
 } ft[30];
 
-// Function to free the linked list of blocks
-void freeBlocks(struct block *head) {
-    struct block *current = head;
-    while (current != NULL) {
-        struct block *temp = current;
-        current = current->next;
-        free(temp);
-    }
-}
-
 int main() {
     int n, i, j;
     char s[20];
     struct block *temp;
-
     printf("Enter the number of files: ");
     scanf("%d", &n);
 
     for (i = 0; i < n; i++) {
         printf("\nEnter the file name %d: ", i + 1);
-        scanf("%19s", ft[i].name);  // Limit input size to prevent buffer overflow
+        scanf("%s", ft[i].name);
         printf("\nEnter the number of blocks for file %d: ", i + 1);
         scanf("%d", &ft[i].nob);
         ft[i].sb = NULL;
-
         for (j = 0; j < ft[i].nob; j++) {
             temp = (struct block *)malloc(sizeof(struct block));
-            if (temp == NULL) {
-                fprintf(stderr, "Memory allocation failed.\n");
-                exit(1);
-            }
             printf("\nEnter the block number %d for file %d: ", j + 1, i + 1);
             scanf("%d", &temp->bno);
             temp->next = ft[i].sb;
@@ -52,29 +36,24 @@ int main() {
     }
 
     printf("\nEnter the file name to be searched: ");
-    scanf("%19s", s);  // Limit input size to prevent buffer overflow
+    scanf("%s", s);
 
     for (i = 0; i < n; i++) {
         if (strcmp(s, ft[i].name) == 0) {
-            printf("\nFILE NAME\tNUMBER OF BLOCKS\tBLOCKS OCCUPIED\n");
-            printf("%s\t\t%d\t\t", ft[i].name, ft[i].nob);
+            printf("\nFILE NAME\tNUMBER OF BLOCKS\tBLOCKS OCCUPIED");
+            printf("\n%s\t\t\t%d\t\t", ft[i].name, ft[i].nob);
+            
             temp = ft[i].sb;
             while (temp != NULL) {
                 printf("%d ", temp->bno);
                 temp = temp->next;
             }
-            printf("\n");
             break;
         }
     }
 
     if (i == n) {
-        printf("\nFile not found.\n");
-    }
-
-    // Free allocated memory for blocks in each file
-    for (i = 0; i < n; i++) {
-        freeBlocks(ft[i].sb);
+        printf("\nFile not found.");
     }
 
     return 0;
