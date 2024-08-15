@@ -105,3 +105,44 @@ int main(){
 		printf("\n");
 	}
 }
+
+
+
+
+/*
+
+OUTPUT
+
+Enter no. of process: 5
+Enter no. of resources: 3
+
+Enter details of P0:
+Enter allocation: 0 1 0
+Enter max: 3 5 3
+
+Enter details of P1:
+Enter allocation: 2 0 0
+Enter max: 3 0 2
+
+Enter details of P2:
+Enter allocation: 3 0 2
+Enter max: 9 0 2
+
+Enter details of P3:
+Enter allocation: 2 1 1
+Enter max: 2 2 2
+
+Enter details of P4:
+Enter allocation: 0 0 2
+Enter max: 4 3 3
+
+Enter available Resources:  3 3 2
+
+Enter new Request details:
+
+Enter Pid
+
+Enter request for resources: 1 0 2
+
+
+*/
