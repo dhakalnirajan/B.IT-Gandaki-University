@@ -1,54 +1,113 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 
-int main() {
-    int a;
-    char msg[16], key[16]; // Increased size by 1 to accommodate null terminator
+#define MAX_LENGTH 16
+int i;
 
-    printf("\n Enter the message with less than length 16: \t");
-    fgets(msg, sizeof(msg), stdin); // Use fgets for safer input
-    msg[strcspn(msg, "\n")] = 0;   // Remove trailing newline from fgets
-
-    printf("\n Enter the Key: \t");
-    fgets(key, sizeof(key), stdin); // Use fgets for safer input
-    key[strcspn(key, "\n")] = 0;   // Remove trailing newline from fgets
-
-    int msgLen = strlen(msg), keyLen = strlen(key), i, j;
-
-    for (a = 0; msg[a] != '\0'; a++) {
-        msg[a] = toupper(msg[a]);
+// Function to convert a string to uppercase
+void toUpperCase(char *str) {
+    for (i = 0; str[i]; i++) {
+        str[i] = toupper(str[i]);
     }
+}
 
-    char newKey[msgLen + 1], encryptedMsg[msgLen + 1], decryptedMsg[msgLen + 1]; // Increased size by 1 for null terminator
+// Function to generate the key of the same length as the message
+void generateKey(char *message, char *key, char *generatedKey) {
+    int messageLen = strlen(message);
+    int keyLen = strlen(key);
 
-    // generating new key
-    for (i = 0, j = 0; i < msgLen; ++i, ++j) {
-        if (j == keyLen) {
-            j = 0;
+    /*
+     * This loop iterates through each character of the message.
+     * For each character, it takes a corresponding character from the key.
+     * The key is repeated using the modulo operator (%) if it's shorter than the message,
+     * ensuring a key character for every message character.
+     */
+    for (i = 0; i < messageLen; i++) {
+        generatedKey[i] = key[i % keyLen];
+    }
+    generatedKey[messageLen] = '\0'; // Null-terminate the generated key.
+}
+
+// Function to encrypt the message using Vigenere Cipher
+void encrypt(char *message, char *key, char *encryptedMessage) {
+    int messageLen = strlen(message);
+    
+    for (i = 0; i < messageLen; i++) {
+        if (isalpha(message[i])) {
+            char base = 'A';
+            /*
+             * The Vigenere encryption for an uppercase letter involves:
+             * 1. Converting the message letter to a 0-25 range (A=0, B=1, ..., Z=25) by subtracting 'A'.
+             * 2. Converting the corresponding key letter to a 0-25 range similarly.
+             * 3. Adding these two values.
+             * 4. Taking the modulo 26 of the sum to wrap around the alphabet if necessary.
+             * 5. Adding 'A' back to convert the 0-25 result to an uppercase character.
+             */
+            encryptedMessage[i] = (message[i] - base + key[i] - base) % 26 + base;
+        } else {
+            encryptedMessage[i] = message[i]; // Non-alphabetic characters remain unchanged.
         }
-        newKey[i] = key[j];
     }
-    newKey[i] = '\0';
+    encryptedMessage[messageLen] = '\0'; // Null-terminate the encrypted message.
+}
 
-    // code for encryption
-    for (i = 0; i < msgLen; ++i) {
-        encryptedMsg[i] = ((msg[i] - 'A' + newKey[i] - 'A') % 26) + 'A';
+// Function to decrypt the message using Vigenere Cipher
+void decrypt(char *encryptedMessage, char *key, char *decryptedMessage) {
+    int encryptedLen = strlen(encryptedMessage);
+
+    for (i = 0; i < encryptedLen; i++) {
+        if (isalpha(encryptedMessage[i])) {
+            char base = 'A';
+            /*
+             * The Vigenere decryption for an uppercase letter involves:
+             * 1. Converting the ciphertext letter to a 0-25 range by subtracting 'A'.
+             * 2. Converting the corresponding key letter to a 0-25 range.
+             * 3. Subtracting the key value from the ciphertext value.
+             * 4. Adding 26 before taking the modulo 26 to ensure a positive result in case of subtraction leading to a negative value.
+             * 5. Taking the modulo 26 of the result.
+             * 6. Adding 'A' back to convert the 0-25 result to an uppercase character.
+             */
+            decryptedMessage[i] = (encryptedMessage[i] - base - (key[i] - base) + 26) % 26 + base;
+        } else {
+            decryptedMessage[i] = encryptedMessage[i]; // Non-alphabetic characters remain unchanged.
+        }
     }
-    encryptedMsg[i] = '\0';
+    decryptedMessage[encryptedLen] = '\0'; // Null-terminate the decrypted message.
+}
 
-    // code for decryption
-    for (i = 0; i < msgLen; ++i) {
-        decryptedMsg[i] = (((encryptedMsg[i] - 'A' - (newKey[i] - 'A')) + 26) % 26) + 'A';
+int main() {
+    char message[MAX_LENGTH];
+    char key[MAX_LENGTH];
+    char generatedKey[MAX_LENGTH];
+    char encryptedMessage[MAX_LENGTH];
+    char decryptedMessage[MAX_LENGTH];
+
+    printf("Enter the message (less than 16 characters): ");
+    fgets(message, sizeof(message), stdin);
+    message[strcspn(message, "\n")] = 0; // Remove trailing newline from input.
+    toUpperCase(message);                // Convert the input message to uppercase.
+
+    if (strlen(message) >= MAX_LENGTH) {
+        printf("Message length exceeds the limit.\n");
+        return 1; // Indicate an error if the message is too long.
     }
-    decryptedMsg[i] = '\0';
 
-    // code for displaying message information
-    printf("Original Message: %s\n", msg);
+    printf("Enter the key: ");
+    fgets(key, sizeof(key), stdin);
+    key[strcspn(key, "\n")] = 0;     // Remove trailing newline from key input.
+    toUpperCase(key);                 // Convert the input key to uppercase.
+
+    generateKey(message, key, generatedKey);
+    encrypt(message, generatedKey, encryptedMessage);
+    decrypt(encryptedMessage, generatedKey, decryptedMessage);
+
+    printf("\nOriginal Message: %s\n", message);
     printf("Key: %s\n", key);
-    printf("New Generated Key: %s\n", newKey);
-    printf("Encrypted Message: %s\n", encryptedMsg);
-    printf("Decrypted Message: %s\n", decryptedMsg);
+    printf("Generated Key: %s\n", generatedKey);
+    printf("Encrypted Message: %s\n", encryptedMessage);
+    printf("Decrypted Message: %s\n", decryptedMessage);
 
     return 0;
 }
