@@ -55,11 +55,31 @@
         .steps-container::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
+
+        /* Custom button styles with gradients */
+        .btn-primary {
+            background: linear-gradient(to right, #3b82f6, #2563eb); /* Blue gradient */
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(to right, #2563eb, #1d4ed8); /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+        }
+        .btn-secondary {
+            background: linear-gradient(to right, #d1d5db, #9ca3af); /* Gray gradient */
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: linear-gradient(to right, #9ca3af, #6b7280); /* Darker gray on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-100 to-indigo-200 min-h-screen flex items-center justify-center p-4 font-sans">
-    <div class="bg-white p-8 rounded-xl shadow-2xl max-w-4xl w-full flex flex-col lg:flex-row gap-8">
-        <div class="flex-1 space-y-6">
+    <div class="bg-white p-8 rounded-xl shadow-2xl max-w-4xl w-full flex flex-col lg:flex-row gap-8"
+        style="background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);"> <div class="flex-1 space-y-6">
             <h1 class="text-3xl font-extrabold text-gray-800 text-center mb-6">Water Jug Problem Solver</h1>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -78,10 +98,10 @@
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 mt-6">
-                <button id="solveBtn" class="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out transform hover:scale-105">
+                <button id="solveBtn" class="flex-1 text-white py-3 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 btn-primary">
                     Solve & Simulate
                 </button>
-                <button id="resetBtn" class="flex-1 bg-gray-300 text-gray-800 py-3 px-6 rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300 ease-in-out transform hover:scale-105">
+                <button id="resetBtn" class="flex-1 text-gray-800 py-3 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 btn-secondary">
                     Reset
                 </button>
             </div>
