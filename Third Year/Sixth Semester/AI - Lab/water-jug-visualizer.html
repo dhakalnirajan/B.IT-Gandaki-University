@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Jug Problem Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the water jugs */
+        .jug-container {
+            position: relative;
+            width: 100px;
+            height: 200px; /* Fixed height for consistent visual size */
+            border: 4px solid #4a5568; /* Darker gray border */
+            border-radius: 0.75rem; /* Rounded corners */
+            overflow: hidden;
+            background-color: #e2e8f0; /* Light gray background for empty part */
+            display: flex;
+            flex-direction: column-reverse; /* To make water fill from bottom */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15), inset 0 0 8px rgba(0, 0, 0, 0.1); /* More pronounced shadow with inner shadow */
+        }
+        .water-fill {
+            background-color: #63b3ed; /* Blue color for water */
+            width: 100%;
+            transition: height 0.5s ease-in-out; /* Smooth transition for water level */
+            /* Add a subtle gradient to the water for better visual appeal */
+            background: linear-gradient(to top, #4299e1, #63b3ed);
+        }
+        .jug-label {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            color: #2d3748; /* Dark text */
+            white-space: nowrap; /* Prevent label from wrapping */
+        }
+        .step-item.highlight {
+            background-color: #bee3f8; /* Light blue highlight for current step */
+            font-weight: bold;
+            border-left: 4px solid #3182ce; /* Blue border for highlight */
+        }
+        /* Custom scrollbar for steps */
+        .steps-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .steps-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .steps-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        .steps-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-indigo-200 min-h-screen flex items-center justify-center p-4 font-sans">
+    <div class="bg-white p-8 rounded-xl shadow-2xl max-w-4xl w-full flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 space-y-6">
+            <h1 class="text-3xl font-extrabold text-gray-800 text-center mb-6">Water Jug Problem Solver</h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="capacityA" class="block text-sm font-medium text-gray-700 mb-1">Jug A Capacity (L)</label>
+                    <input type="number" id="capacityA" value="4" min="1" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                </div>
+                <div>
+                    <label for="capacityB" class="block text-sm font-medium text-gray-700 mb-1">Jug B Capacity (L)</label>
+                    <input type="number" id="capacityB" value="3" min="1" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                </div>
+                <div>
+                    <label for="goal" class="block text-sm font-medium text-gray-700 mb-1">Goal in Jug A (L)</label>
+                    <input type="number" id="goal" value="2" min="0" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 mt-6">
+                <button id="solveBtn" class="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out transform hover:scale-105">
+                    Solve & Simulate
+                </button>
+                <button id="resetBtn" class="flex-1 bg-gray-300 text-gray-800 py-3 px-6 rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300 ease-in-out transform hover:scale-105">
+                    Reset
+                </button>
+            </div>
+
+            <div class="mt-6">
+                <label for="speedSlider" class="block text-sm font-medium text-gray-700 mb-2">Simulation Speed:</label>
+                <input type="range" id="speedSlider" min="100" max="2000" value="1000" step="100" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>Fast</span>
+                    <span>Slow</span>
+                </div>
+            </div>
+
+            <div id="message" class="mt-6 p-4 rounded-lg text-center text-lg font-semibold hidden"></div>
+        </div>
+
+        <div class="flex-1 flex flex-col items-center justify-between space-y-6">
+            <div class="flex items-end justify-center gap-10 mt-8">
+                <div class="flex flex-col items-center">
+                    <span class="jug-label">Jug A</span>
+                    <div id="jugA" class="jug-container">
+                        <div id="waterA" class="water-fill" style="height: 0%;"></div>
+                    </div>
+                    <span id="volumeA" class="mt-2 text-gray-700 text-sm">0L / 4L</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="jug-label">Jug B</span>
+                    <div id="jugB" class="jug-container">
+                        <div id="waterB" class="water-fill" style="height: 0%;"></div>
+                    </div>
+                    <span id="volumeB" class="mt-2 text-gray-700 text-sm">0L / 3L</span>
+                </div>
+            </div>
+
+            <div class="w-full max-h-80 overflow-y-auto bg-gray-50 p-4 rounded-lg shadow-inner border border-gray-200 steps-container">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 text-center">Solution Steps</h3>
+                <ul id="stepsList" class="space-y-2">
+                    </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const capacityAInput = document.getElementById('capacityA');
+        const capacityBInput = document.getElementById('capacityB');
+        const goalInput = document.getElementById('goal');
+        const solveBtn = document.getElementById('solveBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const jugAVisual = document.getElementById('jugA');
+        const jugBVisual = document.getElementById('jugB');
+        const waterA = document.getElementById('waterA');
+        const waterB = document.getElementById('waterB');
+        const volumeA = document.getElementById('volumeA');
+        const volumeB = document.getElementById('volumeB');
+        const stepsList = document.getElementById('stepsList');
+        const messageDiv = document.getElementById('message');
+        const speedSlider = document.getElementById('speedSlider');
+
+        let A_capacity, B_capacity, goal;
+        let animationDelay = 1000; // Default 1 second delay
+        let animationTimeoutId = null; // To store timeout ID for clearing
+
+        /**
+         * Updates the visual representation of the water levels in the jugs.
+         * @param {number} a - Current volume in Jug A.
+         * @param {number} b - Current volume in Jug B.
+         */
+        function updateJugVisuals(a, b) {
+            // Calculate percentage fill for each jug based on its current volume and capacity.
+            const percentA = (a / A_capacity) * 100;
+            const percentB = (b / B_capacity) * 100;
+
+            // Apply the calculated height to the water-fill elements.
+            waterA.style.height = `${percentA}%`;
+            waterB.style.height = `${percentB}%`;
+
+            // Update the text displaying current volume and total capacity.
+            volumeA.textContent = `${a}L / ${A_capacity}L`;
+            volumeB.textContent = `${b}L / ${B_capacity}L`;
+        }
+
+        /**
+         * Displays a message to the user in the message area.
+         * @param {string} msg - The message to display.
+         * @param {string} type - The type of message ('info', 'success', 'error') for styling.
+         */
+        function displayMessage(msg, type = 'info') {
+            messageDiv.textContent = msg;
+            // Remove all previous styling classes
+            messageDiv.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800', 'bg-blue-100', 'text-blue-800');
+            // Apply new styling based on message type
+            if (type === 'success') {
+                messageDiv.classList.add('bg-green-100', 'text-green-800');
+            } else if (type === 'error') {
+                messageDiv.classList.add('bg-red-100', 'text-red-800');
+            } else { // default to info
+                messageDiv.classList.add('bg-blue-100', 'text-blue-800');
+            }
+            messageDiv.classList.remove('hidden'); // Make sure message area is visible
+        }
+
+        /**
+         * Clears any displayed message from the message area.
+         */
+        function clearMessage() {
+            messageDiv.classList.add('hidden'); // Hide the message area
+            messageDiv.textContent = ''; // Clear text content
+        }
+
+        /**
+         * Generates all possible successor states from a given current state
+         * based on the water jug problem's production rules, along with a description of the rule applied.
+         * @param {number[]} state - The current state [volumeA, volumeB].
+         * @returns {Array<[number[], string]>} An array of [successorState, ruleDescription] pairs.
+         */
+        function getSuccessors(state) {
+            const [a, b] = state;
+            const successors = [];
+
+            // Rule 1: Fill Jug A (to its full capacity)
+            successors.push([[A_capacity, b], "Fill Jug A"]);
+            // Rule 2: Fill Jug B (to its full capacity)
+            successors.push([[a, B_capacity], "Fill Jug B"]);
+            // Rule 3: Empty Jug A
+            successors.push([[0, b], "Empty Jug A"]);
+            // Rule 4: Empty Jug B
+            successors.push([[a, 0], "Empty Jug B"]);
+            // Rule 5: Pour B into A
+            // Calculate how much can be poured from B to A (min of current B volume or space available in A)
+            const pourBA = Math.min(b, A_capacity - a);
+            if (pourBA > 0) { // Only add if actual pouring occurs
+                successors.push([[a + pourBA, b - pourBA], `Pour ${pourBA}L from B into A`]);
+            }
+            // Rule 6: Pour A into B
+            // Calculate how much can be poured from A to B (min of current A volume or space available in B)
+            const pourAB = Math.min(a, B_capacity - b);
+            if (pourAB > 0) { // Only add if actual pouring occurs
+                successors.push([[a - pourAB, b + pourAB], `Pour ${pourAB}L from A into B`]);
+            }
+
+            return successors;
+        }
+
+        /**
+         * Solves the Water Jug Problem using a Breadth-First Search (BFS) algorithm.
+         * @returns {Array<[number[], string]>} An array of [state, ruleDescription] pairs representing the solution path,
+         * or an empty array if no solution.
+         */
+        function solveWaterJugProblem() {
+            // Parse input capacities and goal, converting them to integers.
+            A_capacity = parseInt(capacityAInput.value);
+            B_capacity = parseInt(capacityBInput.value);
+            goal = parseInt(goalInput.value);
+
+            // Input validation checks
+            if (isNaN(A_capacity) || A_capacity <= 0 ||
+                isNaN(B_capacity) || B_capacity <= 0 ||
+                isNaN(goal) || goal < 0) {
+                displayMessage("Please enter valid positive capacities and a non-negative goal.", 'error');
+                return [];
+            }
+            // If the goal is larger than both jug capacities, it's impossible to reach.
+            if (goal > A_capacity && goal > B_capacity) {
+                displayMessage("Goal cannot exceed both jug capacities.", 'error');
+                return [];
+            }
+            // Check solvability condition: goal must be a multiple of GCD of capacities.
+            if (goal % gcd(A_capacity, B_capacity) !== 0) {
+                displayMessage("Goal is not achievable. It must be a multiple of the greatest common divisor of the capacities.", 'error');
+                return [];
+            }
+
+            clearMessage(); // Clear any previous messages
+            stepsList.innerHTML = ''; // Clear previous solution steps from the list
+
+            // Initialize BFS queue: each element is [currentState, pathToReachCurrentState]
+            // Path now stores [state, ruleDescription] pairs
+            const queue = [[[0, 0], []]]; // Start with (0,0) state and an empty path
+            const visited = new Set(); // To keep track of visited states to avoid cycles
+            let solutionSteps = []; // To store the found solution path
+
+            // BFS loop
+            while (queue.length > 0) {
+                const [[a, b], path] = queue.shift(); // Dequeue the current state and its path
+                const currentStateKey = `${a},${b}`; // Create a unique key for the current state for the visited set
+
+                // Check if the goal is reached (volume in Jug A equals the goal)
+                if (a === goal) {
+                    // Solution found. The 'path' contains [state, ruleDescription] for previous steps.
+                    // Add the final state with a 'Goal Reached' description.
+                    solutionSteps = path.concat([[[a, b], "Goal Reached!"]]);
+                    break; // Exit BFS loop
+                }
+
+                // If this state has already been visited, skip it to avoid redundant processing and infinite loops.
+                if (visited.has(currentStateKey)) {
+                    continue;
+                }
+
+                visited.add(currentStateKey); // Mark the current state as visited
+
+                // Explore successor states
+                for (const [new_state, rule_description] of getSuccessors([a, b])) {
+                    const newStateKey = `${new_state[0]},${new_state[1]}`;
+                    // If the new state has not been visited, add it to the queue with its updated path.
+                    if (!visited.has(newStateKey)) {
+                        // Push new state and its path including the rule that led to it
+                        queue.push([new_state, path.concat([[[a, b], rule_description]])]);
+                    }
+                }
+            }
+            return solutionSteps; // Return the found solution path
+        }
+
+        /**
+         * Calculates the Greatest Common Divisor (GCD) of two numbers using the Euclidean algorithm.
+         * Used to check if the water jug problem is solvable.
+         * @param {number} a - First number.
+         * @param {number} b - Second number.
+         * @returns {number} The GCD of a and b.
+         */
+        function gcd(a, b) {
+            if (b === 0) return a;
+            return gcd(b, a % b);
+        }
+
+        /**
+         * Runs the visual simulation of the water jug problem solution steps.
+         * @param {Array<[number[], string]>} steps - An array of [state, ruleDescription] pairs representing the solution path.
+         */
+        async function runSimulation(steps) {
+            // Clear any ongoing animation timeout to prevent conflicts.
+            if (animationTimeoutId) {
+                clearTimeout(animationTimeoutId);
+                animationTimeoutId = null;
+            }
+
+            // Handle case where no solution is found.
+            if (steps.length === 0) {
+                displayMessage("No solution found.", 'error');
+                updateJugVisuals(0, 0); // Reset jugs to empty
+                return;
+            }
+
+            displayMessage("Solution found! Simulating steps...", 'success');
+
+            // Loop through each step in the solution path to animate.
+            for (let i = 0; i < steps.length; i++) {
+                const [[a, b], ruleDescription] = steps[i]; // Get current volumes and rule description
+                const stepItem = document.createElement('li');
+                stepItem.className = 'step-item p-2 rounded-md bg-gray-100';
+                // Display step number, rule description, and jug volumes
+                stepItem.textContent = `Step ${i}: ${ruleDescription} -> Jug A = ${a}L, Jug B = ${b}L`;
+                stepsList.appendChild(stepItem);
+
+                // Scroll the steps list to keep the current step in view.
+                stepsList.scrollTop = stepsList.scrollHeight;
+
+                // Highlight the current step and remove highlight from others.
+                const allStepItems = stepsList.querySelectorAll('.step-item');
+                allStepItems.forEach((item, index) => {
+                    if (index === i) {
+                        item.classList.add('highlight');
+                    } else {
+                        item.classList.remove('highlight');
+                    }
+                });
+
+                updateJugVisuals(a, b); // Update the visual water levels in the jugs
+
+                // Pause for the animation delay before proceeding to the next step.
+                await new Promise(resolve => {
+                    animationTimeoutId = setTimeout(resolve, animationDelay);
+                });
+            }
+            displayMessage("Simulation complete!", 'success'); // Final message
+        }
+
+        // --- Event Listeners ---
+
+        // Event listener for the "Solve & Simulate" button
+        solveBtn.addEventListener('click', () => {
+            const solution = solveWaterJugProblem(); // Find the solution path
+            runSimulation(solution); // Run the visual simulation
+        });
+
+        // Event listener for the "Reset" button
+        resetBtn.addEventListener('click', () => {
+            // Clear any ongoing animation
+            if (animationTimeoutId) {
+                clearTimeout(animationTimeoutId);
+                animationTimeoutId = null;
+            }
+            // Reset input field values to defaults
+            capacityAInput.value = 4;
+            capacityBInput.value = 3;
+            goalInput.value = 2;
+            updateJugVisuals(0, 0); // Reset jugs to empty visuals
+            stepsList.innerHTML = ''; // Clear solution steps list
+            clearMessage(); // Clear any messages
+            // Ensure volume text reflects reset capacities
+            volumeA.textContent = `0L / ${capacityAInput.value}L`;
+            volumeB.textContent = `0L / ${capacityBInput.value}L`;
+        });
+
+        // Event listener for the speed slider
+        speedSlider.addEventListener('input', (event) => {
+            // Adjust animationDelay based on slider value.
+            // Slider min=100 (fastest), max=2000 (slowest).
+            // Invert the value so higher slider value means slower animation.
+            animationDelay = 2100 - parseInt(event.target.value);
+        });
+
+        // Initial setup when the window loads
+        window.onload = () => {
+            // Set initial capacities for the volume display text.
+            A_capacity = parseInt(capacityAInput.value);
+            B_capacity = parseInt(capacityBInput.value);
+            updateJugVisuals(0, 0); // Initialize jugs to empty on load
+        };
+
+        // Update volume text when capacity inputs change (without solving)
+        capacityAInput.addEventListener('input', () => {
+            A_capacity = parseInt(capacityAInput.value); // Update global capacity variable
+            // Update volume text to reflect new capacity, keeping current water level (if any)
+            volumeA.textContent = `${Math.round((parseFloat(waterA.style.height) / 100) * A_capacity)}L / ${A_capacity}L`;
+        });
+
+        capacityBInput.addEventListener('input', () => {
+            B_capacity = parseInt(capacityBInput.value); // Update global capacity variable
+            // Update volume text to reflect new capacity, keeping current water level (if any)
+            volumeB.textContent = `${Math.round((parseFloat(waterB.style.height) / 100) * B_capacity)}L / ${B_capacity}L`;
+        });
+    </script>
+</body>
+</html>
