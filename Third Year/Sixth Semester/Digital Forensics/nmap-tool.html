@@ -475,6 +475,52 @@
                     </div>
                 </div>
                 <p class="mt-6">For users who prefer a graphical interface, <a href="https://nmap.org/zenmap/" target="_blank" class="text-blue-600 hover:underline">Zenmap</a> is available, which provides a visual front-end to Nmap's powerful command-line capabilities.</p>
+
+                <h3 class="text-2xl font-semibold mb-4 mt-8 text-gray-800">Zenmap: The Graphical User Interface (GUI)</h3>
+                <p class="mb-4">
+                    Zenmap is the official graphical user interface (GUI) for Nmap, designed to make network scanning more accessible and visually intuitive, especially for beginners. It provides a user-friendly front-end to Nmap's powerful command-line capabilities, allowing users to run scans, visualize results, and save/compare scan outputs without needing to memorize complex commands.
+                </p>
+
+                <h4 class="font-medium text-lg text-gray-700 mb-2">Key Features of Zenmap:</h4>
+                <ul class="list-disc list-inside space-y-2 pl-4 mb-4">
+                    <li><strong>Easy Scan Execution:</strong> Provides simple input fields for target specification and a dropdown for common scan profiles.</li>
+                    <li><strong>Scan Profiles:</strong> Comes with several built-in scan profiles (e.g., "Intense scan," "Ping scan," "Quick scan") that pre-configure Nmap options, making it easy to perform various types of scans. Users can also create and save custom profiles.</li>
+                    <li><strong>Nmap Command Display:</strong> Shows the exact Nmap command being executed, helping users learn the command-line syntax.</li>
+                    <li><strong>Interactive Output:</strong> Displays the raw Nmap output in real-time.</li>
+                    <li><strong>Results Viewer:</strong> Organizes scan results into various tabs for easier interpretation:
+                        <ul class="list-circle list-inside ml-4">
+                            <li><strong>Nmap Output:</strong> The raw text output from the Nmap command.</li>
+                            <li><strong>Ports / Hosts:</strong> A detailed list of discovered hosts and their open ports, services, and versions.</li>
+                            <li><strong>Topology:</strong> A graphical representation of the network, showing hosts and their connections, which can help visualize network layout.</li>
+                            <li><strong>Host Details:</strong> Comprehensive information about a selected host, including its IP address, MAC address, detected OS, open ports, etc.</li>
+                            <li><strong>Scans:</strong> A history of all performed scans, allowing for easy re-running or comparison.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Scan Aggregation:</strong> Allows merging results from multiple Nmap scans into a single view, useful for building a comprehensive network inventory over time.</li>
+                    <li><strong>Result Comparison:</strong> Enables comparing two scan results to identify changes in network state (e.g., new hosts, closed ports).</li>
+                </ul>
+
+                <h4 class="font-medium text-lg text-gray-700 mb-2">How to Perform a Basic Scan using Zenmap (Demo):</h4>
+                <p class="mb-4">
+                    After installing Zenmap (which is typically bundled with the Nmap installer on Windows and macOS, or available via package managers on Linux), you can launch it from your applications menu.
+                </p>
+                <ol class="list-decimal list-inside space-y-3 pl-4">
+                    <li><strong>Launch Zenmap:</strong> Open the Zenmap application. You will see a main window with several input fields and tabs.</li>
+                    <li><strong>Specify Target(s):</strong> In the "Target" field, enter the IP address, hostname, or network range you wish to scan. For example, you could enter <code>scanme.nmap.org</code> or <code>192.168.1.1/24</code>.</li>
+                    <li><strong>Select a Profile:</strong> From the "Profile" dropdown menu, choose a pre-defined scan type. For a quick overview, select "Intense scan" or "Quick scan". As you select a profile, you'll notice the "Command" field below automatically updates with the corresponding Nmap command-line options.</li>
+                    <li><strong>Initiate Scan:</strong> Click the "Scan" button. Zenmap will start executing the Nmap command in the background.</li>
+                    <li><strong>Monitor Output:</strong> The "Nmap Output" tab will display the real-time progress and raw results of the scan, just as you would see in a command-line terminal.</li>
+                    <li><strong>Review Results:</strong> Once the scan is complete, explore the other tabs:
+                        <ul class="list-circle list-inside ml-4 mt-2">
+                            <li>The "Ports / Hosts" tab will give you a structured view of all discovered hosts and their open ports.</li>
+                            <li>The "Topology" tab will attempt to draw a visual map of the network, showing connections between hosts, which can be very helpful for understanding complex network layouts.</li>
+                            <li>Click on individual hosts in the "Ports / Hosts" or "Topology" tab to see detailed information in the "Host Details" tab.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p class="mt-4 mb-4">
+                    Zenmap simplifies the process of running Nmap scans and provides a visual way to interpret the results, making it an excellent choice for users who prefer a GUI or are new to network scanning.
+                </p>
             </section>
 
             <section id="conclusion" class="card">
