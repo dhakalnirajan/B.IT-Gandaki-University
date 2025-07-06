@@ -25,6 +25,9 @@ body {
     position: relative;
     box-shadow: 0 8px 20px rgba(0,0,0,0.5);
     overflow: hidden;
+    resize: horizontal;
+    min-width: 400px;
+    max-width: 100%;
 }
 
 .terminal-header {
@@ -62,6 +65,15 @@ body {
     min-height: 200px;
 }
 
+/* For better resize handle visibility */
+#resize-handle {
+    background-color: rgba(0, 255, 0, 0.1);
+    transition: background-color 0.2s;
+}
+
+#resize-handle:hover {
+    background-color: rgba(0, 255, 0, 0.3);
+}
 
 /* Command Line Styling */
 .command-line {
@@ -833,27 +845,31 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
                     <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-terminal text-purple-500 mr-2"></i>NMap Terminal
                     </h3>
-                    <div class="terminal w-3/5">
-                        <div class="terminal-header">
-                            <div class="terminal-dot red"></div>
-                            <div class="terminal-dot yellow"></div>
-                            <div class="terminal-dot green"></div>
-                            <div class="terminal-title">nirajan@ubuntu: ~</div>
-                        </div>
-                        <div class="terminal-body">
-                            <div id="interactive-terminal">
-                                <div class="command-line">
-                                    <span class="prompt">
-                                        <span class="user">nirajan</span>
-                                        <span class="host">ubuntu</span>
-                                        <span class="path">~</span>
-                                        <span class="prompt-end"></span>
-                                    </span>
-                                    <input type="text" id="nmap-command" class="bg-transparent border-none text-white w-3/4 font-mono focus:outline-none ml-2" placeholder="type 'nmap --help' for commands" autocomplete="on">
+                    <div class="relative w-3/5">  <!-- Changed container to relative -->
+                        <div class="terminal rounded-br-xl resize-x min-w-[400px] overflow-hidden">  <!-- Added resize classes -->
+                            <div class="terminal-header cursor-move" id="terminal-header">  <!-- Added cursor-move -->
+                                <div class="terminal-dot red"></div>
+                                <div class="terminal-dot yellow"></div>
+                                <div class="terminal-dot green"></div>
+                                <div class="terminal-title">nirajan@ubuntu: ~</div>
+                            </div>
+                            <div class="terminal-body" style="min-height: 300px">
+                                <div id="interactive-terminal">
+                                    <div class="command-line">
+                                        <span class="prompt">
+                                            <span class="user">nirajan</span>
+                                            <span class="host">ubuntu</span>
+                                            <span class="path">~</span>
+                                            <span class="prompt-end"></span>
+                                        </span>
+                                        <input type="text" id="nmap-command" class="bg-transparent border-none text-white w-3/4 font-mono focus:outline-none ml-2" placeholder="type 'nmap --help' for commands" autocomplete="on">
+                                    </div>
+                                    <div id="command-output" class="output mt-2"></div>
                                 </div>
-                                <div id="command-output" class="output mt-2"></div>
                             </div>
                         </div>
+                        <!-- Resize handle -->
+                        <div class="absolute right-0 top-0 bottom-0 w-2 cursor-col-resize" id="resize-handle"></div>
                     </div>
 
 <br>
@@ -1309,6 +1325,65 @@ Nmap done: 1 IP address (1 host up) scanned in ${(Math.random() * 3 + 0.5).toFix
         }
     });
 
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const terminal = document.querySelector('.terminal');
+    const handle = document.getElementById('resize-handle');
+    const header = document.getElementById('terminal-header');
+    
+    let isResizing = false;
+    let startX, startWidth;
+
+    // Mouse down event for the handle
+    handle.addEventListener('mousedown', function(e) {
+        isResizing = true;
+        startX = e.clientX;
+        startWidth = parseInt(document.defaultView.getComputedStyle(terminal).width, 10);
+        e.preventDefault();
+    });
+
+    // Mouse move event for resizing
+    document.addEventListener('mousemove', function(e) {
+        if (!isResizing) return;
+        const width = startWidth + e.clientX - startX;
+        terminal.style.width = width + 'px';
+    });
+
+    // Mouse up event to stop resizing
+    document.addEventListener('mouseup', function() {
+        isResizing = false;
+    });
+
+    // Make the header draggable for repositioning
+    let isDragging = false;
+    let startPosX, startPosY, startTerminalLeft, startTerminalTop;
+
+    header.addEventListener('mousedown', function(e) {
+        if (e.target === this) {
+            isDragging = true;
+            startPosX = e.clientX;
+            startPosY = e.clientY;
+            const terminalRect = terminal.getBoundingClientRect();
+            startTerminalLeft = terminalRect.left;
+            startTerminalTop = terminalRect.top;
+            terminal.style.position = 'absolute';
+            terminal.style.zIndex = '1000';
+            e.preventDefault();
+        }
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        const dx = e.clientX - startPosX;
+        const dy = e.clientY - startPosY;
+        terminal.style.left = (startTerminalLeft + dx) + 'px';
+        terminal.style.top = (startTerminalTop + dy) + 'px';
+    });
+
+    document.addEventListener('mouseup', function() {
+        isDragging = false;
+    });
 });
     </script>
 </body>
