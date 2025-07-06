@@ -172,21 +172,6 @@
             background-color: rgba(0, 255, 0, 0.2) !important;
             box-shadow: 0 0 10px #0f0;
         }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background-color: #0f0;
-            vertical-align: middle;
-            margin-left: 2px;
-            animation: blink 1s step-end infinite;
-        }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
@@ -539,7 +524,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
                                 <p class="text-gray-700 text-sm mb-2">Download installer from nmap.org or use Windows Package Manager:</p>
                                 <div class="terminal p-3 rounded">
                                     <div class="command-line">
-                                        <span class="prompt">$</span>
+                                        <span class="prompt">></span>
                                         <span class="command">winget install nmap.nmap</span>
                                     </div>
                                 </div>
@@ -630,17 +615,18 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
                             <div class="terminal-dot red"></div>
                             <div class="terminal-dot yellow"></div>
                             <div class="terminal-dot green"></div>
-                            <div class="terminal-title">user@ </div>
+                            <div class="terminal-title">user@nmap-simulator: ~</div>
                         </div>
                         <div class="terminal-body">
                             <div id="interactive-terminal">
                                 <div class="command-line">
+                                    <span class="prompt">
                                         <span class="user">user</span>
+                                        <span class="host">nmap-simulator</span>
+                                        <span class="path">~</span>
                                         <span class="prompt-end"></span>
-                                    <div class="relative">
-                                        <input type="text" id="nmap-command" class="bg-transparent border-none text-white w-full font-mono focus:outline-none" placeholder="type 'nmap --help' for commands" autocomplete="off">
-                                        <span id="input-cursor" class="cursor absolute top-1/2 -translate-y-1/2" style="left: 0; display: none;"></span>
-                                    </div>
+                                    </span>
+                                    <input type="text" id="nmap-command" class="bg-transparent border-none text-white w-full font-mono focus:outline-none" placeholder="type 'nmap --help' for commands" autocomplete="off">
                                 </div>
                                 <div id="command-output" class="output mt-2"></div>
                             </div>
@@ -812,33 +798,6 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
         // Interactive terminal simulation
         document.addEventListener('DOMContentLoaded', function() {
-            // Handle cursor visibility
-            const commandInput = document.getElementById('nmap-command');
-            const inputCursor = document.getElementById('input-cursor');
-            
-            commandInput.addEventListener('focus', () => {
-                inputCursor.style.display = 'inline-block';
-                positionCursor();
-            });
-            
-            commandInput.addEventListener('blur', () => {
-                inputCursor.style.display = 'none';
-            });
-            
-            commandInput.addEventListener('input', positionCursor);
-            
-            function positionCursor() {
-                const tempSpan = document.createElement('span');
-                tempSpan.textContent = commandInput.value.substring(0, commandInput.selectionStart);
-                tempSpan.style.visibility = 'hidden';
-                tempSpan.style.position = 'absolute';
-                tempSpan.style.whiteSpace = 'pre';
-                document.body.appendChild(tempSpan);
-                const width = tempSpan.offsetWidth;
-                document.body.removeChild(tempSpan);
-                inputCursor.style.left = `${width}px`;
-            }
-
             // Interactive terminal handler
             const commandInput = document.getElementById('nmap-command');
             const commandOutput = document.getElementById('command-output');
