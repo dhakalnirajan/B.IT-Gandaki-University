@@ -3,542 +3,930 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nmap: The Network Mapper - Comprehensive Guide</title>
+    <title>NMap Web Tool - Interactive Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Light blue-gray background */
-            color: #334155; /* Darker text for readability */
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
         }
-        .container {
-            max-width: 1200px;
+        .terminal {
+            background-color: #300a24;
+            color: #f8f8f2;
+            font-family: 'Ubuntu Mono', monospace;
+            border-radius: 8px;
+            padding: 0;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            overflow: hidden;
         }
-        .section-heading {
-            border-left: 6px solid #3b82f6; /* Blue border for headings */
-            padding-left: 1rem;
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 0.75rem; /* Rounded corners */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .table-container {
-            overflow-x: auto;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #ffffff;
-        }
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0; /* Light gray border */
-        }
-        th {
-            background-color: #f1f5f9; /* Lighter gray for table headers */
-            font-weight: 600;
-            color: #1e293b;
-        }
-        tr:last-child td {
-            border-bottom: none;
-        }
-        .code-block {
-            background-color: #1e293b;
-            color: #e2e8f0;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            font-family: monospace;
-        }
-        .infographic-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-            background-color: #f0f9ff; /* Light blue background for infographic items */
-            padding: 1rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        .infographic-icon {
-            flex-shrink: 0;
-            margin-right: 1rem;
-            width: 48px;
-            height: 48px;
+        .terminal-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            background-color: #bfdbfe; /* Lighter blue for icons */
-            border-radius: 50%;
+            background: linear-gradient(#3a3a3a, #2a2a2a);
+            padding: 8px 12px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
         }
-        .infographic-content h3 {
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .terminal-dot.red { background-color: #ff5f56; }
+        .terminal-dot.yellow { background-color: #ffbd2e; }
+        .terminal-dot.green { background-color: #27c93f; }
+        .terminal-title {
+            margin-left: 10px;
+            font-size: 13px;
+            color: #d0d0d0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .terminal-body {
+            padding: 15px;
+            background-color: #1e0829;
+            min-height: 200px;
+        }
+        .command-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .prompt {
+            color: #f8f8f2;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .prompt:before {
+            content: "┌──(";
+            color: #ff79c6;
+        }
+        .prompt:after {
+            content: ")";
+            color: #ff79c6;
+        }
+        .user {
+            color: #50fa7b;
+        }
+        .user:after {
+            content: "@";
+            color: #f8f8f2;
+        }
+        .host {
+            color: #8be9fd;
+        }
+        .host:after {
+            content: ")-[";
+            color: #ff79c6;
+        }
+        .path {
+            color: #bd93f9;
+        }
+        .path:after {
+            content: "]";
+            color: #ff79c6;
+        }
+        .prompt-end {
+            color: #ff79c6;
+        }
+        .prompt-end:after {
+            content: "└─$";
+            margin-left: 5px;
+        }
+        .command-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .prompt {
+            color: #0f0;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .command {
+            color: #0f0;
+        }
+        .output {
+            white-space: pre-wrap;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            color: #0f0;
+        }
+        .scan-animation {
+            animation: scan 2s infinite;
+        }
+        @keyframes scan {
+            0% { text-shadow: 0 0 5px #0f0; }
+            50% { text-shadow: 0 0 20px #0f0; }
+            100% { text-shadow: 0 0 5px #0f0; }
+        }
+        .tab-content {
+            display: none;
+            background-color: rgba(0, 15, 0, 0.2);
+            border: 1px solid #0f0;
+            margin-top: 10px;
+        }
+        .tab-content.active {
+            display: block;
+            animation: matrixFadeIn 0.5s;
+        }
+        @keyframes matrixFadeIn {
+            from { opacity: 0; text-shadow: 0 0 10px #0f0; }
+            to { opacity: 1; text-shadow: none; }
+        }
+        
+        /* Matrix theme for all text elements */
+        h1, h2, h3, h4, h5, h6, p, li, td, th, a, span {
+            color: #0f0 !important;
+            font-family: 'Courier New', monospace !important;
+            text-shadow: 0 0 3px #0f0;
+        }
+        
+        /* Improve contrast for readability */
+        .bg-white, .bg-gray-50, .bg-gray-100 {
+            background-color: rgba(0, 20, 0, 0.8) !important;
+            border-color: #0f0 !important;
+        }
+        
+        /* Header and footer styling */
+        header, footer {
+            background-color: #000 !important;
+            border-color: #0f0 !important;
+            box-shadow: 0 0 15px #0f0;
+        }
+        
+        /* Tab buttons */
+        .tab-btn {
+            background-color: #000 !important;
+            border-color: #0f0 !important;
+            color: #0f0 !important;
+        }
+        
+        .tab-btn.active {
+            background-color: rgba(0, 255, 0, 0.2) !important;
+            box-shadow: 0 0 10px #0f0;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: #0f0;
+            vertical-align: middle;
+            margin-left: 2px;
+            animation: blink 1s step-end infinite;
         }
     </style>
 </head>
-<body class="antialiased">
-    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 shadow-lg rounded-b-lg">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <h1 class="text-4xl font-bold mb-2 md:mb-0">Nmap: The Network Mapper</h1>
-            <p class="text-lg text-blue-200">Your Comprehensive Guide to Network Discovery and Security Auditing</p>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-black text-green-500 py-6 border-b border-green-500">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fas fa-network-wired text-green-500 text-3xl mr-3"></i>
+                    <h1 class="text-2xl md:text-3xl font-bold font-mono">NMap Interactive Guide</h1>
+                </div>
+                <nav class="flex space-x-1 md:space-x-4 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+                    <button onclick="showTab('intro')" class="tab-btn active bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Introduction</button>
+                    <button onclick="showTab('features')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Features</button>
+                    <button onclick="showTab('scanning')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Scanning</button>
+                    <button onclick="showTab('use-cases')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Use Cases</button>
+                    <button onclick="showTab('getting-started')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Getting Started</button>
+                    <button onclick="showTab('movies')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">NMap in Movies</button>
+                </nav>
+            </div>
         </div>
     </header>
 
-    <div class="container mx-auto p-6 flex flex-col lg:flex-row gap-8">
-        <main class="w-full">
-            <section id="introduction" class="card">
-                <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">1. Introduction to Nmap: The Network Mapper</h2>
-                <p class="mb-4">
-                    Nmap, an acronym for "Network Mapper," stands as a foundational, free, and open-source utility specifically engineered for network discovery and security auditing. Conceived by Gordon "Fyodor" Lyon in 1997, it has evolved into a remarkably powerful and versatile solution, capable of executing a wide array of network analysis tasks.
-                </p>
-                <p class="mb-4">
-                    The fundamental objective of the Nmap Project is to bolster Internet security by equipping administrators, auditors, and ethical hackers with an advanced instrument for exploring and safeguarding their networks. Nmap achieves its comprehensive insights by employing raw IP packets in innovative ways, meticulously discerning detailed information about network hosts, including their availability, the services they offer, their underlying operating systems, and their network configurations.
-                </p>
-                <p class="mb-4">
-                    The journey of Nmap commenced in September 1997 with its public release in Phrack Magazine #51. This event marked a pivotal moment in the cybersecurity landscape, introducing a robust and accessible tool for network reconnaissance to a broader audience. Since its inception, Nmap has undergone continuous development, marked by numerous updates and upgrades that have significantly expanded its capabilities far beyond rudimentary port scanning. These enhancements include sophisticated features such as operating system detection, service version identification, and the powerful Nmap Scripting Engine (NSE).
-                </p>
-                <p class="mb-4">
-                    A key factor contributing to Nmap's widespread adoption has been its exceptional portability; originally developed for Linux, it has been successfully ported to and supports a multitude of operating systems, including Microsoft Windows, macOS, FreeBSD, OpenBSD, Solaris, and many others. The project's dedication to open-source principles and community engagement is further underscored by its maintenance of an official website (nmap.org) and a GitHub mirror of its SVN repository.
-                </p>
-                <p class="mb-4">
-                    The consistent emphasis on Nmap's status as a "free and open source utility" is not merely a licensing detail but a fundamental driver of its success. This open-source nature directly fosters a "vibrant community of developers and users," which in turn provides extensive documentation, robust support, and contributes to the tool's ongoing updates and upgrades. This creates a powerful, self-reinforcing cycle: the accessibility afforded by its open-source model encourages widespread adoption, which then cultivates a large and active community. This community, in turn, contributes to the tool's robustness, feature expansion, and comprehensive documentation, ensuring its continued relevance and reliability in a rapidly evolving threat landscape.
-                </p>
-                <p class="mb-4">
-                    Furthermore, Nmap's evolution from a "simple, modest, port-scanning tool" to a "powerful scanning tool with even some exploitation capabilities" and a "comprehensive range of features" directly mirrors the increasing complexity of network infrastructures and the growing sophistication of cyber threats. This developmental progression is not coincidental; it reflects a continuous adaptation to the dynamic needs of network security. As networks expanded to encompass "hundreds of thousands of machines" and as firewalls and intrusion detection systems (IDS) became more prevalent, Nmap was compelled to develop "dozens of advanced techniques for mapping out networks filled with IP filters, firewalls, routers, and other obstacles". The integration of operating system detection, service versioning, and particularly the Nmap Scripting Engine (NSE) signifies a strategic shift from basic reconnaissance to deeper vulnerability assessment and even light exploitation.
-                </p>
-                <p>
-                    Finally, the strategic importance of the "Filtered" port state in assessing network security posture warrants particular attention. While "Open" and "Closed" states are relatively straightforward, "Filtered" signifies that "firewall or filtering rules are preventing Nmap from determining the state". This is not merely an unknown status; it actively indicates the presence of an active security control, such as a firewall or an Intrusion Detection System (IDS), that is intentionally blocking or dropping packets.
-                </p>
-            </section>
-
-            <section id="capabilities" class="card">
-                <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">2. Core Capabilities and Features</h2>
-                <p class="mb-6">Nmap's extensive utility stems from a suite of core capabilities that work in concert to provide a comprehensive understanding of network environments. These features are critical for both defensive and offensive security operations.</p>
-
-                <div class="space-y-6">
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1-3m-6.938-9h13.856c1.54 0 2.502 1.667 1.732 3L13.732 21c-.77 1.333-2.694 1.333-3.464 0L3.32 9c-.77-1.333.192-3 1.732-3z"></path></svg>
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introduction Tab -->
+        <div id="intro" class="tab-content active">
+            <div class="bg-black rounded-none border border-green-500 p-6 mb-8">
+                <h2 class="text-2xl font-bold text-green-500 mb-4 flex items-center font-mono">
+                    <i class="fas fa-info-circle text-green-500 mr-2"></i> Introduction to NMap
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-gray-700 mb-4">
+                            NMap (Network Mapper) is a free and open-source utility for network discovery and security auditing. 
+                            It was created by Gordon Lyon (also known by his pseudonym Fyodor Vaskovich) in 1997.
+                        </p>
+                        <p class="text-gray-700 mb-4">
+                            NMap is used by network administrators to:
+                        </p>
+                        <ul class="list-disc pl-6 text-gray-700 mb-4 space-y-2">
+                            <li>Discover hosts and services on a computer network</li>
+                            <li>Determine what hosts are available on the network</li>
+                            <li>Identify open ports and services</li>
+                            <li>Detect operating systems and software versions</li>
+                            <li>Find vulnerabilities in network infrastructure</li>
+                        </ul>
+                        <p class="text-gray-700">
+                            NMap runs on all major computer operating systems, and official binary packages are available for Linux, Windows, and macOS.
+                        </p>
+                    </div>
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                            <div class="terminal-title">nmap.org</div>
                         </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Host Discovery: Identifying Active Devices on a Network</h3>
-                            <p>One of Nmap's foundational capabilities is its ability to identify active hosts or devices connected to a network. This process, frequently referred to as "ping sweeps" or "network discovery," involves the transmission of various types of packets, such as ICMP echo requests (ping) or TCP/IP packets to specific ports, to ascertain which hosts are online and responsive. Host discovery serves as the crucial initial step in any network reconnaissance or security assessment, laying the groundwork for a fundamental understanding of the network's topology.</p>
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap -sV scanme.nmap.org</span>
+                        </div>
+                        <div class="output">
+Starting Nmap 7.92 ( https://nmap.org ) at 2023-06-15 10:00 UTC
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.12s latency).
+Not shown: 996 closed tcp ports (conn-refused)
+PORT     STATE    SERVICE     VERSION
+22/tcp   open     ssh         OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13
+80/tcp   open     http        Apache httpd 2.4.7
+9929/tcp open     nping-echo  Nping echo
+31337/tcp open     tcpwrapped
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
 
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Port Scanning: Understanding Port States (Open, Closed, Filtered)</h3>
-                            <p class="mb-4">Nmap's most widely recognized feature is its capacity to scan target hosts and determine the state of their ports. This functionality yields critical information regarding which services are potentially accessible on a given system. Nmap categorizes ports into three primary states:</p>
-                            <div class="table-container">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Port State</th>
-                                            <th>Description</th>
-                                            <th>Implication</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>Open</strong></td>
-                                            <td>A service is actively listening for connections on this port.</td>
-                                            <td>This indicates a potential point of entry or interaction for legitimate or malicious purposes.</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Closed</strong></td>
-                                            <td>No service is listening on the port, but the port is accessible, and Nmap received a response indicating it's closed.</td>
-                                            <td>This can still be useful for identifying potential service configurations or understanding what services are intentionally not running.</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Filtered</strong></td>
-                                            <td>A firewall, router, or other packet filtering device is preventing Nmap from determining the port's state.</td>
-                                            <td>This indicates the presence of security measures or barriers to network transparency, often necessitating more advanced scanning techniques to further probe.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+        <!-- Features Tab -->
+        <div id="features" class="tab-content">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-star text-yellow-500 mr-2"></i> Core Capabilities and Features
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-search text-blue-500 mr-2"></i> Host Discovery
+                        </h3>
+                        <p class="text-gray-700">
+                            Identify hosts on a network, even those not responding to ping requests using advanced techniques like ARP scanning.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-door-open text-green-500 mr-2"></i> Port Scanning
+                        </h3>
+                        <p class="text-gray-700">
+                            Detect open ports and services with various scan types (TCP SYN, ACK, UDP, etc.) to identify potential entry points.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-fingerprint text-purple-500 mr-2"></i> Version Detection
+                        </h3>
+                        <p class="text-gray-700">
+                            Determine service and application versions running on open ports to identify potential vulnerabilities.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-laptop-code text-red-500 mr-2"></i> OS Detection
+                        </h3>
+                        <p class="text-gray-700">
+                            Identify operating systems and device types by analyzing network stack characteristics.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-scroll text-yellow-600 mr-2"></i> Scriptable Interaction
+                        </h3>
+                        <p class="text-gray-700">
+                            Use NSE (Nmap Scripting Engine) to automate tasks like vulnerability detection, backdoor identification, and more.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-chart-line text-teal-500 mr-2"></i> Performance Optimization
+                        </h3>
+                        <p class="text-gray-700">
+                            Adjust timing, parallelism, and other parameters to optimize scans for speed or stealth.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scanning Techniques Tab -->
+        <div id="scanning" class="tab-content">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-bullseye text-purple-500 mr-2"></i> Detailed Port Scanning Techniques
+                </h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Common Scan Types</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-200">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="py-2 px-4 border-b text-left">Scan Type</th>
+                                    <th class="py-2 px-4 border-b text-left">Command</th>
+                                    <th class="py-2 px-4 border-b text-left">Description</th>
+                                    <th class="py-2 px-4 border-b text-left">Use Case</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-2 px-4 border-b">TCP SYN Scan</td>
+                                    <td class="py-2 px-4 border-b font-mono">-sS</td>
+                                    <td class="py-2 px-4 border-b">Half-open scan, doesn't complete TCP handshake</td>
+                                    <td class="py-2 px-4 border-b">Fast, stealthy scanning</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-2 px-4 border-b">TCP Connect Scan</td>
+                                    <td class="py-2 px-4 border-b font-mono">-sT</td>
+                                    <td class="py-2 px-4 border-b">Completes full TCP connection</td>
+                                    <td class="py-2 px-4 border-b">When SYN scan isn't possible</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-2 px-4 border-b">UDP Scan</td>
+                                    <td class="py-2 px-4 border-b font-mono">-sU</td>
+                                    <td class="py-2 px-4 border-b">Scans UDP ports</td>
+                                    <td class="py-2 px-4 border-b">DNS, DHCP, SNMP services</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-2 px-4 border-b">Version Detection</td>
+                                    <td class="py-2 px-4 border-b font-mono">-sV</td>
+                                    <td class="py-2 px-4 border-b">Probes services to determine version</td>
+                                    <td class="py-2 px-4 border-b">Vulnerability assessment</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-2 px-4 border-b">OS Detection</td>
+                                    <td class="py-2 px-4 border-b font-mono">-O</td>
+                                    <td class="py-2 px-4 border-b">Attempts to identify OS</td>
+                                    <td class="py-2 px-4 border-b">Network inventory</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Scan Timing Options</h3>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">-T0 (Paranoid)</h4>
+                                <p class="text-gray-700 text-sm">Very slow, avoids IDS detection</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">-T3 (Normal)</h4>
+                                <p class="text-gray-700 text-sm">Default timing, balanced speed and reliability</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">-T4 (Aggressive)</h4>
+                                <p class="text-gray-700 text-sm">Faster scan, assumes decent network</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">-T5 (Insane)</h4>
+                                <p class="text-gray-700 text-sm">Very fast, may lose accuracy</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-9m4 0l4-9m-4 9h-4m-7 1l-2-2m2 2l-2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Service and Version Detection: Identifying Running Applications and Their Versions</h3>
-                            <p>Beyond merely identifying open ports, Nmap possesses the capability to determine the specific type and version of services or applications operating on those ports. This is achieved by probing open ports with specially crafted packets and meticulously analyzing the responses, often by looking for "welcome banners" or protocol-specific data that identify the service. Acquiring knowledge of service details and their precise versions is paramount for accurately interpreting potential vulnerabilities, as outdated or unpatched software versions represent common targets for malicious actors.</p>
-                        </div>
-                    </div>
-
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1-3m-6.938-9h13.856c1.54 0 2.502 1.667 1.732 3L13.732 21c-.77 1.333-2.694 1.333-3.464 0L3.32 9c-.77-1.333.192-3 1.732-3z"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Operating System (OS) Detection: Fingerprinting Target Operating Systems</h3>
-                            <p>Nmap is equipped with the ability to detect the operating system, and frequently its specific version, running on target hosts. This process, known as "OS fingerprinting," is accomplished by analyzing subtle patterns in the IP packet responses, which exhibit distinct variations across different operating systems. OS detection provides invaluable insights into the diversity of a network's infrastructure and assists administrators in identifying potential risks associated with unsupported or outdated operating systems.</p>
-                        </div>
-                    </div>
-
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-9m4 0l4-9m-4 9h-4m-7 1l-2-2m2 2l-2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Nmap Scripting Engine (NSE): Extending Nmap's Functionality</h3>
-                            <p>The Nmap Scripting Engine (NSE) is a powerful and flexible feature that empowers users to write and execute custom scripts. These scripts automate a wide range of network scanning tasks and perform specialized security checks. NSE scripts can be leveraged for diverse purposes, including vulnerability detection, backdoor identification, vulnerability exploitation, and more advanced network discovery and information gathering. Common script categories include <code>auth</code> for authentication bypass checks, <code>vuln</code> for vulnerability scanning, and <code>brute</code> for brute force attacks. This extensibility significantly enhances Nmap's utility, extending its capabilities far beyond its fundamental scanning functions.</p>
-                        </div>
-                    </div>
-
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-2 4h4m6-14v2a2 2 0 01-2 2H8a2 2 0 01-2-2V5a2 2 0 012-2h8a2 2 0 012 2v2m-6 2H6"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Firewall and IDS Evasion Techniques: Bypassing Network Defenses</h3>
-                            <p>Nmap incorporates "dozens of advanced techniques for mapping out networks filled with IP filters, firewalls, routers, and other obstacles". This includes various methods specifically designed to evade detection by Intrusion Detection Systems (IDS) and bypass firewall rules. Techniques such as SYN scans (half-open) are inherently stealthier than full TCP connect scans, as they intentionally do not complete the TCP handshake, reducing the likelihood of being logged. Other advanced scans, including NULL, FIN, Xmas, and ACK scans, specifically exploit nuances in the TCP RFC or probe firewall rulesets to gather information without triggering alerts. The inclusion of such evasion techniques underscores Nmap's essential utility for penetration testers and security auditors who need to simulate real-world attacker behaviors and rigorously assess the effectiveness of existing security controls.</p>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Advanced Scanning Techniques</h3>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">Stealth Scanning</h4>
+                                <p class="text-gray-700 text-sm">Use -f (fragmentation) or --mtu to evade detection</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">Idle Scanning</h4>
+                                <p class="text-gray-700 text-sm">-sI zombiehost:port - Uses a third party to scan</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">Service Detection</h4>
+                                <p class="text-gray-700 text-sm">Combine -sV with --version-intensity for detailed info</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">NSE Scripting</h4>
+                                <p class="text-gray-700 text-sm">Use -sC for default scripts or --script for specific ones</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <section id="scanning-techniques" class="card">
-                <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">3. Detailed Port Scanning Techniques</h2>
-                <p class="mb-6">Nmap provides a diverse array of port scanning techniques, each possessing unique characteristics, varying levels of stealth, and specific applications, thereby enabling users to customize their approach based on the target environment and their objectives. It is important to note that typically only one primary method can be employed at a time for TCP or SCTP scans, though UDP scanning can be combined with any one of the TCP scan types. By default, Nmap performs a SYN Scan, but it intelligently falls back to a Connect Scan if the user lacks the necessary raw packet privileges.</p>
-
-                <div class="table-container mb-8">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Scan Type</th>
-                                <th>Nmap Option</th>
-                                <th>Description/Mechanism</th>
-                                <th>Primary Purpose</th>
-                                <th>Stealth Level</th>
-                                <th>Key Characteristics/Caveats</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>SYN Scan</td>
-                                <td><code>-sS</code></td>
-                                <td>Half-open TCP handshake (sends SYN, waits SYN/ACK or RST, no full connection)</td>
-                                <td>Fast, stealthy port discovery</td>
-                                <td>High</td>
-                                <td>Requires raw packet privileges; less likely to be logged.</td>
-                            </tr>
-                            <tr>
-                                <td>TCP Connect Scan</td>
-                                <td><code>-sT</code></td>
-                                <td>Full TCP connection via OS <code>connect()</code> call</td>
-                                <td>Reliable port discovery for non-privileged users</td>
-                                <td>Low</td>
-                                <td>More easily logged by target; slower than SYN scan.</td>
-                            </tr>
-                            <tr>
-                                <td>UDP Scan</td>
-                                <td><code>-sU</code></td>
-                                <td>Sends UDP packets to target ports</td>
-                                <td>Discover open UDP services (DNS, SNMP, DHCP)</td>
-                                <td>Moderate</td>
-                                <td>Generally slower; open/filtered ports often send no response, requiring timeouts.</td>
-                            </tr>
-                            <tr>
-                                <td>Null Scan</td>
-                                <td><code>-sN</code></td>
-                                <td>Sends TCP probe with no flags set</td>
-                                <td>Stealthy port discovery (exploits RFC 793)</td>
-                                <td>High</td>
-                                <td>Not reliable on all systems (e.g., Windows); can be detected by modern IDS.</td>
-                            </tr>
-                            <tr>
-                                <td>FIN Scan</td>
-                                <td><code>-sF</code></td>
-                                <td>Sends TCP probe with only FIN flag set</td>
-                                <td>Stealthy port discovery (exploits RFC 793)</td>
-                                <td>High</td>
-                                <td>Not reliable on all systems (e.g., Windows); can be detected by modern IDS.</td>
-                            </tr>
-                            <tr>
-                                <td>Xmas Scan</td>
-                                <td><code>-sX</code></td>
-                                <td>Sends TCP probe with FIN, PSH, URG flags set</td>
-                                <td>Stealthy port discovery (exploits RFC 793)</td>
-                                <td>High</td>
-                                <td>Not reliable on all systems (e.g., Windows); can be detected by modern IDS.</td>
-                            </tr>
-                            <tr>
-                                <td>TCP ACK Scan</td>
-                                <td><code>-sA</code></td>
-                                <td>Sends TCP probe with only ACK flag set</td>
-                                <td>Firewall rule mapping; determining statefulness</td>
-                                <td>N/A (not for open ports)</td>
-                                <td>Does not determine open ports; identifies filtered vs. unfiltered ports.</td>
-                            </tr>
-                            <tr>
-                                <td>TCP Window Scan</td>
-                                <td><code>-sW</code></td>
-                                <td>Similar to ACK, examines TCP Window field in RST</td>
-                                <td>Firewall rule mapping; attempts to infer open/closed</td>
-                                <td>N/A (not for open ports)</td>
-                                <td>Relies on specific OS implementation details; may not be reliable.</td>
-                            </tr>
-                            <tr>
-                                <td>Idle Scan</td>
-                                <td><code>-sI &lt;zombie host&gt;</code></td>
-                                <td>Truly blind TCP scan via IP ID sequence prediction on a "zombie"</td>
-                                <td>Highly stealthy port discovery; mapping trust relationships</td>
-                                <td>Very High</td>
-                                <td>Requires a suitable "zombie host" with predictable IP ID sequence.</td>
-                            </tr>
-                            <tr>
-                                <td>IP Protocol Scan</td>
-                                <td><code>-sO</code></td>
-                                <td>Cycles through IP protocol numbers (not ports)</td>
-                                <td>Determines supported IP protocols on target</td>
-                                <td>N/A (not for ports)</td>
-                                <td>Identifies protocols like TCP, ICMP, IGMP, etc.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Advanced and Specialized Scans</h3>
-                <ul class="list-disc list-inside space-y-3 pl-4">
-                    <li><strong>TCP Maimon Scan (<code>-sM</code>):</strong> Similar to NULL, FIN, Xmas, but sends FIN/ACK. Exploits BSD-derived systems dropping packets on open ports.</li>
-                    <li><strong>Custom TCP Scan (<code>--scanflags</code>):</strong> Allows granular control to specify arbitrary TCP flags for highly customized scans.</li>
-                    <li><strong>SCTP INIT Scan (<code>-sY</code>) & SCTP COOKIE ECHO Scan (<code>-sZ</code>):</strong> Specialized scans for SCTP (Stream Control Transmission Protocol), offering speed and stealth for INIT, and exploiting silent drop behavior for COOKIE ECHO.</li>
-                    <li><strong>FTP Bounce Scan (<code>-b &lt;FTP relay host&gt;</code>):</strong> Deprecated technique exploiting older FTP servers to scan other hosts, largely patched now.</li>
-                </ul>
-            </section>
-
-            <section id="applications" class="card">
-                <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">4. Practical Applications and Use Cases</h2>
-                <p class="mb-6">Nmap's inherent versatility positions it as an indispensable tool across a broad spectrum of cybersecurity and network administration tasks. Its applications extend significantly beyond mere scanning, providing actionable intelligence for various operational and strategic requirements.</p>
-
-                <div class="space-y-6">
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Network Inventory and Mapping</h3>
-                            <p>Nmap is exceptionally effective for establishing and maintaining an accurate and current inventory of devices connected to a network. By conducting host discovery and operating system detection, Nmap assists administrators in thoroughly understanding the composition of their network, including device types, operating systems, and associated IP and MAC addresses. This capability is invaluable for monitoring network growth, ensuring adherence to security policies, and promptly identifying unauthorized or rogue devices that may pose risks.</p>
+        <!-- Use Cases Tab -->
+        <div id="use-cases" class="tab-content">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-tasks text-green-600 mr-2"></i> Practical Applications and Use Cases
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Security Auditing</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-shield-alt text-red-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Vulnerability Assessment</h4>
+                                    <p class="text-gray-700 text-sm">Identify outdated services with known vulnerabilities using version detection.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-lock text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Firewall Testing</h4>
+                                    <p class="text-gray-700 text-sm">Verify firewall rules by scanning from different network segments.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-user-secret text-purple-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Penetration Testing</h4>
+                                    <p class="text-gray-700 text-sm">Initial reconnaissance to map attack surfaces and identify targets.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 002.944 12c.047 1.996.345 3.932.874 5.805A12.001 12.001 0 0012 21.056c1.996-.047 3.932-.345 5.805-.874A12.001 12.001 0 0021.056 12a11.955 11.955 0 01-3.04-8.618z"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Security Auditing and Vulnerability Assessment</h3>
-                            <p>A primary use case for Nmap involves conducting comprehensive security audits and vulnerability assessments. By identifying open ports, running services, and their specific versions, Nmap provides a critical overview of a network's potential attack surface. The Nmap Scripting Engine (NSE) further enhances this capability by enabling users to scan for known vulnerabilities and pinpoint specific software versions that may be susceptible to recently discovered exploits. This proactive approach empowers organizations to implement preventative measures to secure their networks against potential threats.</p>
-                        </div>
-                    </div>
-
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Penetration Testing and Reconnaissance</h3>
-                            <p>Nmap serves as a cornerstone tool for penetration testers and ethical hackers. It is frequently the initial and most critical step in the reconnaissance phase of a penetration test. The tool assists in identifying potential entry points, meticulously mapping network topology, and gathering vital information about target systems before attempting more advanced attacks. Nmap's capacity to simulate real-world attacks and uncover system security flaws makes it indispensable for evaluating the effectiveness of existing security measures.</p>
-                        </div>
-                    </div>
-
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2A9 9 0 1112 3a9 9 0 017 7z"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Network Troubleshooting and Diagnostics</h3>
-                            <p>Beyond its security applications, Nmap also functions as a practical utility for network administrators engaged in routine troubleshooting and diagnostics. It can facilitate the verification of network connectivity, identify unexpected open ports, confirm service uptime, and diagnose issues related to firewall configurations or routing problems.</p>
-                        </div>
-                    </div>
-
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-2 4h4m6-14v2a2 2 0 01-2 2H8a2 2 0 01-2-2V5a2 2 0 012-2h8a2 2 0 012 2v2m-6 2H6"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Firewall Rule Verification</h3>
-                            <p>Nmap is commonly employed by IT specialists to validate their work during the configuration of firewalls. By performing targeted scans, administrators can confirm whether specific ports are indeed open, closed, or filtered as intended by their firewall rules, thereby ensuring that security policies are correctly implemented and enforced.</p>
-                        </div>
-                    </div>
-
-                    <div class="infographic-item">
-                        <div class="infographic-icon">
-                            <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.001 2.001 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                        </div>
-                        <div class="infographic-content">
-                            <h3 class="text-xl">Identifying "Shadow IT"</h3>
-                            <p>A unique and increasingly important application of Nmap is its utility in identifying "shadow IT"—unauthorized devices or applications connected to a network. Its robust host discovery and OS/service detection capabilities enable organizations to uncover devices that are not formally sanctioned or that may be intentionally disguised. Such unauthorized assets can pose significant security risks, and Nmap provides a means to bring them to light.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="getting-started" class="card">
-                <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">5. Getting Started with Nmap</h2>
-                <p class="mb-6">For individuals and organizations looking to leverage Nmap's capabilities, understanding its installation process and fundamental command-line usage is essential.</p>
-
-                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Supported Operating Systems and Installation</h3>
-                <p class="mb-4">Nmap is highly portable and supports an extensive range of operating systems, including Linux, Microsoft Windows, macOS, FreeBSD, OpenBSD, Solaris, IRIX, HP-UX, NetBSD, Sun OS, Amiga, and many others. This broad compatibility ensures that Nmap can be deployed in virtually any computing environment.</p>
-
-                <div class="space-y-4 mb-8">
-                    <div class="bg-blue-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-blue-700">Linux Installation:</h4>
-                        <p>On most Linux distributions, Nmap can be conveniently installed via their respective package managers (e.g., <code>apt</code>, <code>dnf</code>, <code>pacman</code>). For the latest versions or specific compilation options, it can also be compiled from source code.</p>
-                        <div class="code-block mt-2">
-                            <pre><code>sudo apt install nmap</code></pre>
-                        </div>
-                    </div>
-                    <div class="bg-blue-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-blue-700">Windows Installation:</h4>
-                        <p>For Windows users, Nmap is provided as an executable self-installer. This installer typically bundles Nmap's necessary dependencies along with the Zenmap graphical user interface (GUI). Nmap officially supports Windows 7+ and Windows Server 2008 R2+.</p>
-                        <p class="text-sm text-gray-600 mt-2">Download from: <a href="https://nmap.org/download.html" target="_blank" class="text-blue-600 hover:underline">nmap.org/download.html</a></p>
-                    </div>
-                    <div class="bg-blue-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-blue-700">macOS Installation:</h4>
-                        <p>On macOS, Nmap can be installed with ease using Homebrew or a disk image installer which includes Nmap, Zenmap, Ncat, and Ndiff. Compiling from source code is also an option.</p>
-                        <div class="code-block mt-2">
-                            <pre><code>brew install nmap</code></pre>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Network Administration</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-network-wired text-green-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Network Inventory</h4>
+                                    <p class="text-gray-700 text-sm">Discover all devices on your network and their services.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-clock text-yellow-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Monitoring</h4>
+                                    <p class="text-gray-700 text-sm">Schedule regular scans to detect unauthorized devices or services.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-cogs text-teal-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Service Management</h4>
+                                    <p class="text-gray-700 text-sm">Verify that required services are running on correct ports.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <p class="mb-6">Administrator or root privileges are generally required for system-wide installation of Nmap. To verify a successful installation, users can simply execute the command <code>nmap --version</code> in their terminal or command prompt.</p>
-
-                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Essential Nmap Commands and Basic Syntax</h3>
-                <p class="mb-4">Nmap is primarily a command-line tool, offering a rich and flexible set of options. The basic syntax generally follows: <code>nmap [Options] {target specification}</code>.</p>
-
-                <div class="space-y-4">
-                    <div class="bg-gray-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-gray-700">Basic Scan:</h4>
-                        <p>Scans common ports on a target.</p>
-                        <div class="code-block mt-2"><pre><code>nmap 192.168.1.1</code></pre></div>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-gray-700">Host Discovery (Ping Scan):</h4>
-                        <p>Identifies active hosts on a network without a full port scan.</p>
-                        <div class="code-block mt-2"><pre><code>nmap -sn 192.168.1.0/24</code></pre></div>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-gray-700">Port Scanning (Specific/Range/All):</h4>
-                        <p>Scan specific ports, a range of ports, or all ports.</p>
-                        <div class="code-block mt-2">
-                            <pre><code>nmap -p 80 192.168.1.1</code></pre>
-                            <pre><code>nmap -p 1-1000 192.168.1.1</code></pre>
-                            <pre><code>nmap -p- 192.168.1.1</code></pre>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3 flex items-center">
+                        <i class="fas fa-lightbulb text-blue-500 mr-2"></i> Real-World Scenario
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-medium text-gray-800 mb-2">1. Problem</h4>
+                            <p class="text-gray-700 text-sm">Company notices unusual network traffic from an internal IP.</p>
                         </div>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-gray-700">Service and Version Detection:</h4>
-                        <p>Detects specific services and their versions on open ports.</p>
-                        <div class="code-block mt-2"><pre><code>nmap -sV 192.168.1.1</code></pre></div>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-gray-700">Operating System Detection:</h4>
-                        <p>Attempts to determine the target's operating system.</p>
-                        <div class="code-block mt-2"><pre><code>nmap -O 192.168.1.1</code></pre></div>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-gray-700">Aggressive Scan:</h4>
-                        <p>Comprehensive scan including OS detection, version detection, script scanning, and traceroute.</p>
-                        <div class="code-block mt-2"><pre><code>nmap -A 192.168.1.1</code></pre></div>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-gray-700">Nmap Scripting Engine (NSE):</h4>
-                        <p>Executes specific NSE scripts or categories.</p>
-                        <div class="code-block mt-2"><pre><code>nmap --script vuln 192.168.1.1</code></pre></div>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-md">
-                        <h4 class="font-medium text-lg text-gray-700">Saving Output:</h4>
-                        <p>Saves scan results to a file in normal or XML format.</p>
-                        <div class="code-block mt-2">
-                            <pre><code>nmap -oN results.txt 192.168.1.1</code></pre>
-                            <pre><code>nmap -oX results.xml 192.168.1.1</code></pre>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-medium text-gray-800 mb-2">2. NMap Solution</h4>
+                            <p class="text-gray-700 text-sm">Run <code class="bg-gray-100 px-1 rounded">nmap -sV -O 192.168.1.100</code> to identify device and services.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-medium text-gray-800 mb-2">3. Outcome</h4>
+                            <p class="text-gray-700 text-sm">Discovered unauthorized IoT device with default credentials, removed from network.</p>
                         </div>
                     </div>
                 </div>
-                <p class="mt-6">For users who prefer a graphical interface, <a href="https://nmap.org/zenmap/" target="_blank" class="text-blue-600 hover:underline">Zenmap</a> is available, which provides a visual front-end to Nmap's powerful command-line capabilities.</p>
+            </div>
+        </div>
 
-                <h3 class="text-2xl font-semibold mb-4 mt-8 text-gray-800">Zenmap: The Graphical User Interface (GUI)</h3>
-                <p class="mb-4">
-                    Zenmap is the official graphical user interface (GUI) for Nmap, designed to make network scanning more accessible and visually intuitive, especially for beginners. It provides a user-friendly front-end to Nmap's powerful command-line capabilities, allowing users to run scans, visualize results, and save/compare scan outputs without needing to memorize complex commands.
-                </p>
+        <!-- Getting Started Tab -->
+        <div id="getting-started" class="tab-content">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-rocket text-red-500 mr-2"></i> Getting Started with NMap
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Installation Guide</h3>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1 flex items-center">
+                                    <i class="fab fa-windows text-blue-400 mr-2"></i> Windows
+                                </h4>
+                                <p class="text-gray-700 text-sm mb-2">Download installer from nmap.org or use Windows Package Manager:</p>
+                                <div class="terminal p-3 rounded">
+                                    <div class="command-line">
+                                        <span class="prompt">$</span>
+                                        <span class="command">winget install nmap.nmap</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1 flex items-center">
+                                    <i class="fab fa-linux text-black mr-2"></i> Linux
+                                </h4>
+                                <p class="text-gray-700 text-sm mb-2">Use your distribution's package manager:</p>
+                                <div class="terminal p-3 rounded">
+                                    <div class="command-line">
+                                        <span class="prompt">$</span>
+                                        <span class="command">sudo apt install nmap  # Debian/Ubuntu</span>
+                                    </div>
+                                    <div class="command-line mt-1">
+                                        <span class="prompt">$</span>
+                                        <span class="command">sudo dnf install nmap  # Fedora/RHEL</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1 flex items-center">
+                                    <i class="fab fa-apple text-gray-600 mr-2"></i> macOS
+                                </h4>
+                                <p class="text-gray-700 text-sm mb-2">Use Homebrew package manager:</p>
+                                <div class="terminal p-3 rounded">
+                                    <div class="command-line">
+                                        <span class="prompt">$</span>
+                                        <span class="command">brew install nmap</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Basic Commands</h3>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">Quick Scan</h4>
+                                <div class="terminal p-3 rounded">
+                                    <div class="command-line">
+                                        <span class="prompt">$</span>
+                                        <span class="command">nmap -F 192.168.1.1</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 text-sm mt-2">Fast scan of common ports (top 100)</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">Detailed Scan</h4>
+                                <div class="terminal p-3 rounded">
+                                    <div class="command-line">
+                                        <span class="prompt">$</span>
+                                        <span class="command">nmap -sV -O scanme.nmap.org</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 text-sm mt-2">Service version and OS detection</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">Network Range</h4>
+                                <div class="terminal p-3 rounded">
+                                    <div class="command-line">
+                                        <span class="prompt">$</span>
+                                        <span class="command">nmap 192.168.1.1-100</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 text-sm mt-2">Scan first 100 IPs in subnet</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-1">Save Results</h4>
+                                <div class="terminal p-3 rounded">
+                                    <div class="command-line">
+                                        <span class="prompt">$</span>
+                                        <span class="command">nmap -oN scan_results.txt 192.168.1.1</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 text-sm mt-2">Save output to text file</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <h4 class="font-medium text-lg text-gray-700 mb-2">Key Features of Zenmap:</h4>
-                <ul class="list-disc list-inside space-y-2 pl-4 mb-4">
-                    <li><strong>Easy Scan Execution:</strong> Provides simple input fields for target specification and a dropdown for common scan profiles.</li>
-                    <li><strong>Scan Profiles:</strong> Comes with several built-in scan profiles (e.g., "Intense scan," "Ping scan," "Quick scan") that pre-configure Nmap options, making it easy to perform various types of scans. Users can also create and save custom profiles.</li>
-                    <li><strong>Nmap Command Display:</strong> Shows the exact Nmap command being executed, helping users learn the command-line syntax.</li>
-                    <li><strong>Interactive Output:</strong> Displays the raw Nmap output in real-time.</li>
-                    <li><strong>Results Viewer:</strong> Organizes scan results into various tabs for easier interpretation:
-                        <ul class="list-circle list-inside ml-4">
-                            <li><strong>Nmap Output:</strong> The raw text output from the Nmap command.</li>
-                            <li><strong>Ports / Hosts:</strong> A detailed list of discovered hosts and their open ports, services, and versions.</li>
-                            <li><strong>Topology:</strong> A graphical representation of the network, showing hosts and their connections, which can help visualize network layout.</li>
-                            <li><strong>Host Details:</strong> Comprehensive information about a selected host, including its IP address, MAC address, detected OS, open ports, etc.</li>
-                            <li><strong>Scans:</strong> A history of all performed scans, allowing for easy re-running or comparison.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Scan Aggregation:</strong> Allows merging results from multiple Nmap scans into a single view, useful for building a comprehensive network inventory over time.</li>
-                    <li><strong>Result Comparison:</strong> Enables comparing two scan results to identify changes in network state (e.g., new hosts, closed ports).</li>
-                </ul>
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-terminal text-purple-500 mr-2"></i> Interactive NMap Terminal
+                    </h3>
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                            <div class="terminal-title">user@ </div>
+                        </div>
+                        <div class="terminal-body">
+                            <div id="interactive-terminal">
+                                <div class="command-line">
+                                        <span class="user">user</span>
+                                        <span class="prompt-end"></span>
+                                    <div class="relative">
+                                        <input type="text" id="nmap-command" class="bg-transparent border-none text-white w-full font-mono focus:outline-none" placeholder="type 'nmap --help' for commands" autocomplete="off">
+                                        <span id="input-cursor" class="cursor absolute top-1/2 -translate-y-1/2" style="left: 0; display: none;"></span>
+                                    </div>
+                                </div>
+                                <div id="command-output" class="output mt-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-gray-600 text-sm">
+                        <p>Try commands like: <span class="font-mono bg-gray-100 px-1 rounded">nmap -F scanme.nmap.org</span>, <span class="font-mono bg-gray-100 px-1 rounded">nmap -sV localhost</span>, or <span class="font-mono bg-gray-100 px-1 rounded">nmap --help</span></p>
+                    </div>
+                </div>
 
-                <h4 class="font-medium text-lg text-gray-700 mb-2">How to Perform a Basic Scan using Zenmap (Demo):</h4>
-                <p class="mb-4">
-                    After installing Zenmap (which is typically bundled with the Nmap installer on Windows and macOS, or available via package managers on Linux), you can launch it from your applications menu.
-                </p>
-                <ol class="list-decimal list-inside space-y-3 pl-4">
-                    <li><strong>Launch Zenmap:</strong> Open the Zenmap application. You will see a main window with several input fields and tabs.</li>
-                    <li><strong>Specify Target(s):</strong> In the "Target" field, enter the IP address, hostname, or network range you wish to scan. For example, you could enter <code>scanme.nmap.org</code> or <code>192.168.1.1/24</code>.</li>
-                    <li><strong>Select a Profile:</strong> From the "Profile" dropdown menu, choose a pre-defined scan type. For a quick overview, select "Intense scan" or "Quick scan". As you select a profile, you'll notice the "Command" field below automatically updates with the corresponding Nmap command-line options.</li>
-                    <li><strong>Initiate Scan:</strong> Click the "Scan" button. Zenmap will start executing the Nmap command in the background.</li>
-                    <li><strong>Monitor Output:</strong> The "Nmap Output" tab will display the real-time progress and raw results of the scan, just as you would see in a command-line terminal.</li>
-                    <li><strong>Review Results:</strong> Once the scan is complete, explore the other tabs:
-                        <ul class="list-circle list-inside ml-4 mt-2">
-                            <li>The "Ports / Hosts" tab will give you a structured view of all discovered hosts and their open ports.</li>
-                            <li>The "Topology" tab will attempt to draw a visual map of the network, showing connections between hosts, which can be very helpful for understanding complex network layouts.</li>
-                            <li>Click on individual hosts in the "Ports / Hosts" or "Topology" tab to see detailed information in the "Host Details" tab.</li>
-                        </ul>
-                    </li>
-                </ol>
-                <p class="mt-4 mb-4">
-                    Zenmap simplifies the process of running Nmap scans and provides a visual way to interpret the results, making it an excellent choice for users who prefer a GUI or are new to network scanning.
-                </p>
-            </section>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-green-800 mb-3 flex items-center">
+                        <i class="fas fa-graduation-cap text-green-500 mr-2"></i> Learning Resources
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <a href="https://nmap.org/book/toc.html" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                            <h4 class="font-medium text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-book text-blue-500 mr-2"></i> Official NMap Book
+                            </h4>
+                            <p class="text-gray-700 text-sm">Free online guide by NMap author</p>
+                        </a>
+                        <a href="https://nmap.org/nsedoc/" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                            <h4 class="font-medium text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-scroll text-purple-500 mr-2"></i> NSE Documentation
+                            </h4>
+                            <p class="text-gray-700 text-sm">Scripting engine reference</p>
+                        </a>
+                        <a href="https://tryhackme.com/room/furthernmap" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                            <h4 class="font-medium text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-gamepad text-red-500 mr-2"></i> TryHackMe NMap Room
+                            </h4>
+                            <p class="text-gray-700 text-sm">Interactive learning platform</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <section id="conclusion" class="card">
-                <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">6. Conclusion</h2>
-                <p class="mb-4">
-                    Nmap, the Network Mapper, stands as a cornerstone utility in the realm of network discovery and security auditing. Originating in 1997 from the vision of Gordon "Fyodor" Lyon, its evolution into a comprehensive, open-source tool reflects a continuous adaptation to the increasing complexity of network infrastructures and the sophistication of cyber threats. Its core capabilities—including host discovery, detailed port scanning, precise service and version detection, robust operating system fingerprinting, and the extensible Nmap Scripting Engine—collectively provide a profound understanding of a network's attack surface.
-                </p>
-                <p class="mb-4">
-                    The strategic impact of Nmap's open-source development cannot be overstated; it has fostered a vibrant global community that drives continuous innovation, extensive documentation, and broad adoption. This accessibility empowers a wide range of users, from network administrators to ethical hackers, to enhance Internet security proactively. The tool's diverse array of scanning techniques, from stealthy SYN scans to specialized firewall evasion methods, highlights an ongoing tactical arms race between network defenders and malicious actors, where Nmap serves as a critical instrument for both. The necessity of choosing the right scan type underscores the inherent trade-offs between speed, stealth, and accuracy, demanding a nuanced understanding of network protocols and security objectives.
-                </p>
-                <p class="mb-4">
-                    Nmap's practical applications are extensive, spanning network inventory management, rigorous security auditing, essential penetration testing reconnaissance, network troubleshooting, and even the identification of "shadow IT." This broad utility positions Nmap as a critical component of a proactive security posture, enabling organizations to identify and mitigate vulnerabilities before they can be exploited. Furthermore, its ability to serve both IT operations and security functions effectively bridges the gap between these critical departments, fostering a more integrated and resilient approach to network management.
-                </p>
-                <p>
-                    In essence, Nmap is more than just a scanning tool; it is a fundamental pillar of network intelligence, empowering security professionals and administrators worldwide to explore, understand, and secure their digital environments. Its continued development and community support ensure its enduring relevance as a vital asset in the ever-evolving landscape of cybersecurity.
-                </p>
-            </section>
-        </main>
-    </div>
+        <!-- Movies Tab -->
+        <div id="movies" class="tab-content">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-film text-purple-500 mr-2"></i> NMap in Movies and Pop Culture
+                </h2>
+                
+                <div class="mb-8">
+                    <p class="text-gray-700 mb-6">
+                        NMap has become a staple in Hollywood's portrayal of hacking and cybersecurity. While often dramatized,
+                        these appearances have contributed to NMap's recognition in popular culture.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
+                            <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-4xl">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg text-gray-800 mb-2">The Matrix Reloaded (2003)</h3>
+                                <p class="text-gray-700 text-sm">
+                                    Trinity uses NMap to scan a power plant's network before hacking into it.
+                                    The scene shows realistic command-line usage, though the speed is exaggerated.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
+                            <div class="h-48 bg-gradient-to-r from-blue-500 to-teal-500 flex items-center justify-center text-white text-4xl">
+                                <i class="fas fa-user-secret"></i>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg text-gray-800 mb-2">Live Free or Die Hard (2007)</h3>
+                                <p class="text-gray-700 text-sm">
+                                    The hacker character Matt Farrell uses NMap as part of a cyber attack on U.S. infrastructure.
+                                    The film portrays NMap as part of a sophisticated hacker's toolkit.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
+                            <div class="h-48 bg-gradient-to-r from-red-500 to-orange-500 flex items-center justify-center text-white text-4xl">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg text-gray-800 mb-2">Mr. Robot (TV Series)</h3>
+                                <p class="text-gray-700 text-sm">
+                                    The show frequently features realistic hacking scenes, with NMap appearing in several episodes.
+                                    The technical advisor ensured accurate portrayal of tools and techniques.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-3 flex items-center">
+                        <i class="fas fa-quote-left text-purple-500 mr-2"></i> Hollywood vs Reality
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-2">Movie Portrayal</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                                <li>Instantaneous results with flashy visuals</li>
+                                <li>Magically bypasses all security measures</li>
+                                <li>Used to "hack into the mainframe" in seconds</li>
+                                <li>Often shows 3D network maps being generated automatically</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-2">Real-World Usage</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                                <li>Scans take time depending on network size and options</li>
+                                <li>Just a reconnaissance tool, not an exploit</li>
+                                <li>Output is text-based unless processed by other tools</li>
+                                <li>Requires interpretation and follow-up actions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-black text-green-500 py-8 border-t border-green-500">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-xl font-bold flex items-center font-mono">
+                        <i class="fas fa-network-wired text-green-500 mr-2"></i> NMap Interactive Guide
+                    </h2>
+                    <p class="text-green-600 text-sm mt-1">Educational resource for network security professionals</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://nmap.org" target="_blank" class="text-gray-400 hover:text-green-500 transition">
+                        <i class="fas fa-globe text-xl"></i>
+                    </a>
+                    <a href="https://github.com/nmap/nmap" target="_blank" class="text-gray-400 hover:text-green-500 transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://twitter.com/nmap" target="_blank" class="text-gray-400 hover:text-green-500 transition">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-6 pt-6 text-center text-gray-500 text-sm">
+                <p>This is an educational tool only. Always get proper authorization before scanning networks.</p>
+                <p class="mt-2">© 2023 NMap Interactive Guide. NMap is a registered trademark of Gordon Lyon.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show the selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Interactive terminal simulation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle cursor visibility
+            const commandInput = document.getElementById('nmap-command');
+            const inputCursor = document.getElementById('input-cursor');
+            
+            commandInput.addEventListener('focus', () => {
+                inputCursor.style.display = 'inline-block';
+                positionCursor();
+            });
+            
+            commandInput.addEventListener('blur', () => {
+                inputCursor.style.display = 'none';
+            });
+            
+            commandInput.addEventListener('input', positionCursor);
+            
+            function positionCursor() {
+                const tempSpan = document.createElement('span');
+                tempSpan.textContent = commandInput.value.substring(0, commandInput.selectionStart);
+                tempSpan.style.visibility = 'hidden';
+                tempSpan.style.position = 'absolute';
+                tempSpan.style.whiteSpace = 'pre';
+                document.body.appendChild(tempSpan);
+                const width = tempSpan.offsetWidth;
+                document.body.removeChild(tempSpan);
+                inputCursor.style.left = `${width}px`;
+            }
+
+            // Interactive terminal handler
+            const commandInput = document.getElementById('nmap-command');
+            const commandOutput = document.getElementById('command-output');
+            
+            if (commandInput) {
+                commandInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const command = this.value.trim();
+                        this.value = '';
+                        
+                        // Add command to output
+                        const cmdLine = document.createElement('div');
+                        cmdLine.className = 'command-line';
+                        cmdLine.innerHTML = `<span class="prompt">$</span> <span class="command">${command}</span>`;
+                        commandOutput.appendChild(cmdLine);
+                        
+                        // Process command
+                        let output = '';
+                        if (command === 'nmap --help' || command === 'nmap -h') {
+                            output = `NMap 7.92\nUsage: nmap [Scan Type(s)] [Options] {target specification}\n\nTARGET SPECIFICATION:\n  Can pass hostnames, IP addresses, networks, etc.\n  Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254\n\nSCAN TECHNIQUES:\n  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans\n  -sU: UDP Scan\n  -sN/sF/sX: TCP Null, FIN, and Xmas scans\n\nPORT SPECIFICATION AND SCAN ORDER:\n  -p <port ranges>: Only scan specified ports\n  Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080\n\nSERVICE/VERSION DETECTION:\n  -sV: Probe open ports to determine service/version info\n\nOS DETECTION:\n  -O: Enable OS detection\n\nTIMING AND PERFORMANCE:\n  -T<0-5>: Set timing template (higher is faster)\n\nOUTPUT:\n  -oN/-oX/-oS/-oG <file>: Output scan in normal, XML, s|<rIpt kIddi3, and Grepable format`;
+                        } else if (command.startsWith('nmap -F') || command.startsWith('nmap ')) {
+                            const target = command.includes('scanme.nmap.org') ? 'scanme.nmap.org' : 
+                                         command.includes('localhost') ? 'localhost' : '192.168.1.1';
+                            output = `Starting Nmap 7.92 ( https://nmap.org )\nNmap scan report for ${target}\nHost is up (0.045s latency).\nNot shown: 97 closed ports\nPORT     STATE    SERVICE\n22/tcp   open     ssh\n80/tcp   open     http\n443/tcp  open     https\n\nNmap done: 1 IP address (1 host up) scanned in 1.25 seconds`;
+                        } else if (command.startsWith('nmap -sV')) {
+                            output = `Starting Nmap 7.92 ( https://nmap.org )\nNmap scan report for scanme.nmap.org (45.33.32.156)\nHost is up (0.12s latency).\nPORT     STATE    SERVICE     VERSION\n22/tcp   open     ssh         OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13\n80/tcp   open     http        Apache httpd 2.4.7\n\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\nNmap done: 1 IP address (1 host up) scanned in 6.45 seconds`;
+                        } else if (command === 'clear') {
+                            commandOutput.innerHTML = '';
+                            return;
+                        } else if (command) {
+                            output = `-bash: ${command}: command not found\nTry 'nmap --help' for available commands`;
+                        }
+                        
+                        if (output) {
+                            const outputDiv = document.createElement('div');
+                            outputDiv.className = 'output';
+                            outputDiv.textContent = output;
+                            commandOutput.appendChild(outputDiv);
+                            commandOutput.scrollTop = commandOutput.scrollHeight;
+                        }
+                    }
+                });
+            }
+
+            const commands = [
+                {cmd: "nmap -sS -T4 192.168.1.1", output: "Starting Nmap 7.92\nNmap scan report for router.local (192.168.1.1)\nHost is up (0.045s latency).\nPORT     STATE    SERVICE\n80/tcp   open     http\n443/tcp  open     https\n22/tcp   filtered ssh"},
+                {cmd: "nmap -sV -O scanme.nmap.org", output: "Starting Nmap 7.92\nNmap scan report for scanme.nmap.org (45.33.32.156)\nHost is up (0.12s latency).\nPORT     STATE    SERVICE     VERSION\n22/tcp   open     ssh         OpenSSH 6.6.1p1\n80/tcp   open     http        Apache httpd 2.4.7\nDevice type: general purpose\nRunning: Linux 3.X|4.X\nOS details: Linux 3.10 - 4.11"},
+                {cmd: "nmap -p 1-1000 -sU 192.168.1.15", output: "Starting Nmap 7.92\nNmap scan report for media-server (192.168.1.15)\nHost is up (0.078s latency).\nPORT     STATE         SERVICE\n53/udp   open          domain\n137/udp  open          netbios-ns\n138/udp  open|filtered netbios-dgm\n500/udp  open          isakmp"}
+            ];
+            
+            let currentCmd = 0;
+            const terminal = document.querySelector('.terminal');
+            
+            if (terminal) {
+                function simulateTyping() {
+                    const cmdLine = terminal.querySelector('.command-line .command');
+                    const output = terminal.querySelector('.output');
+                    
+                    // Clear previous command and output
+                    cmdLine.textContent = '';
+                    output.textContent = '';
+                    
+                    // Type the command
+                    let i = 0;
+                    const typing = setInterval(() => {
+                        cmdLine.textContent += commands[currentCmd].cmd[i];
+                        i++;
+                        if (i >= commands[currentCmd].cmd.length) {
+                            clearInterval(typing);
+                            
+                            // Show output after a delay
+                            setTimeout(() => {
+                                output.textContent = commands[currentCmd].output;
+                                
+                                // Move to next command
+                                currentCmd = (currentCmd + 1) % commands.length;
+                                
+                                // Repeat after a longer delay
+                                setTimeout(simulateTyping, 5000);
+                            }, 1000);
+                        }
+                    }, 50);
+                }
+                
+                // Start the simulation
+                setTimeout(simulateTyping, 300);
+            }
+        });
+    </script>
 </body>
 </html>
