@@ -3,175 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NMap Web Tool - Interactive Guide</title>
+    <title>NMap Tool</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            background-color: #000;
-            color: #0f0;
-            font-family: 'Courier New', monospace;
-        }
-        .terminal {
-            background-color: #300a24;
-            color: #f8f8f2;
-            font-family: 'Ubuntu Mono', monospace;
-            border-radius: 8px;
-            padding: 0;
-            position: relative;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-            overflow: hidden;
-        }
-        .terminal-header {
-            display: flex;
-            align-items: center;
-            background: linear-gradient(#3a3a3a, #2a2a2a);
-            padding: 8px 12px;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-        .terminal-dot.red { background-color: #ff5f56; }
-        .terminal-dot.yellow { background-color: #ffbd2e; }
-        .terminal-dot.green { background-color: #27c93f; }
-        .terminal-title {
-            margin-left: 10px;
-            font-size: 13px;
-            color: #d0d0d0;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            flex-grow: 1;
-            text-align: center;
-        }
-        .terminal-body {
-            padding: 15px;
-            background-color: #1e0829;
-            min-height: 200px;
-        }
-        .command-line {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .prompt {
-            color: #f8f8f2;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-        .prompt:before {
-            content: "┌──(";
-            color: #ff79c6;
-        }
-        .prompt:after {
-            content: ")";
-            color: #ff79c6;
-        }
-        .user {
-            color: #50fa7b;
-        }
-        .user:after {
-            content: "@";
-            color: #f8f8f2;
-        }
-        .host {
-            color: #8be9fd;
-        }
-        .host:after {
-            content: ")-[";
-            color: #ff79c6;
-        }
-        .path {
-            color: #bd93f9;
-        }
-        .path:after {
-            content: "]";
-            color: #ff79c6;
-        }
-        .prompt-end {
-            color: #ff79c6;
-        }
-        .prompt-end:after {
-            content: "└─$";
-            margin-left: 5px;
-        }
-        .command-line {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .prompt {
-            color: #0f0;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-        .command {
-            color: #0f0;
-        }
-        .output {
-            white-space: pre-wrap;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            color: #0f0;
-        }
-        .scan-animation {
-            animation: scan 2s infinite;
-        }
-        @keyframes scan {
-            0% { text-shadow: 0 0 5px #0f0; }
-            50% { text-shadow: 0 0 20px #0f0; }
-            100% { text-shadow: 0 0 5px #0f0; }
-        }
-        .tab-content {
-            display: none;
-            background-color: rgba(0, 15, 0, 0.2);
-            border: 1px solid #0f0;
-            margin-top: 10px;
-        }
-        .tab-content.active {
-            display: block;
-            animation: matrixFadeIn 0.5s;
-        }
-        @keyframes matrixFadeIn {
-            from { opacity: 0; text-shadow: 0 0 10px #0f0; }
-            to { opacity: 1; text-shadow: none; }
-        }
-        
-        /* Matrix theme for all text elements */
-        h1, h2, h3, h4, h5, h6, p, li, td, th, a, span {
-            color: #0f0 !important;
-            font-family: 'Courier New', monospace !important;
-            text-shadow: 0 0 3px #0f0;
-        }
-        
-        /* Improve contrast for readability */
-        .bg-white, .bg-gray-50, .bg-gray-100 {
-            background-color: rgba(0, 20, 0, 0.8) !important;
-            border-color: #0f0 !important;
-        }
-        
-        /* Header and footer styling */
-        header, footer {
-            background-color: #000 !important;
-            border-color: #0f0 !important;
-            box-shadow: 0 0 15px #0f0;
-        }
-        
-        /* Tab buttons */
-        .tab-btn {
-            background-color: #000 !important;
-            border-color: #0f0 !important;
-            color: #0f0 !important;
-        }
-        
-        .tab-btn.active {
-            background-color: rgba(0, 255, 0, 0.2) !important;
-            box-shadow: 0 0 10px #0f0;
-        }
+        /* Base Styles */
+body {
+    background-color: #000;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+}
+
+/* Terminal Styling */
+.terminal {
+    background-color: #300a24;
+    color: #f8f8f2;
+    font-family: 'Ubuntu Mono', monospace;
+    border-radius: 12px;
+    padding: 0;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(#3a3a3a, #2a2a2a);
+    padding: 8px 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.terminal-dot.red { background-color: #ff5f56; }
+.terminal-dot.yellow { background-color: #ffbd2e; }
+.terminal-dot.green { background-color: #27c93f; }
+
+.terminal-title {
+    margin-left: 10px;
+    font-size: 13px;
+    color: #d0d0d0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.terminal-body {
+    padding: 15px;
+    background-color: #1e0829;
+    min-height: 200px;
+}
+
+
+/* Command Line Styling */
+.command-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.prompt {
+    display: flex;
+    align-items: center;
+    color: #f8f8f2;
+    margin-right: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.prompt .user {
+    color: #50fa7b;
+}
+
+.prompt .user:after {
+    content: "@";
+    color: #f8f8f2;
+    margin-right: 2px;
+}
+
+.prompt .host {
+    color: #8be9fd;
+}
+
+.prompt .host:after {
+    content: ":";
+    color: #f8f8f2;
+    margin-right: 2px;
+}
+
+.prompt .path {
+    color: #bd93f9;
+}
+
+.prompt .prompt-end {
+    color: #ff79c6;
+    margin-left: 5px;
+}
+
+.prompt .prompt-end:after {
+    content: "$";
+}
+
+.command {
+    color: #0f0;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+.output {
+    white-space: pre-wrap;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: #0f0;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+/* Animations */
+.scan-animation {
+    animation: scan 2s infinite;
+}
+
+@keyframes scan {
+    0% { text-shadow: 0 0 5px #0f0; }
+    50% { text-shadow: 0 0 20px #0f0; }
+    100% { text-shadow: 0 0 5px #0f0; }
+}
+
+.tab-content {
+    display: none;
+    background-color: rgba(0, 15, 0, 0.2);
+    border: 1px solid #0f0;
+    margin-top: 10px;
+}
+
+.tab-content.active {
+    display: block;
+    animation: matrixFadeIn 0.5s;
+}
+
+@keyframes matrixFadeIn {
+    from { opacity: 0; text-shadow: 0 0 10px #0f0; }
+    to { opacity: 1; text-shadow: none; }
+}
+
+/* Matrix Theme for All Text Elements */
+h1, h2, h3, h4, h5, h6, p, li, td, th, a, span, input, button {
+    color: #0f0 !important;
+    font-family: 'Courier New', monospace !important;
+    text-shadow: 0 0 3px #0f0;
+}
+
+/* Improved Contrast for Readability */
+.bg-white, .bg-gray-50, .bg-gray-100 {
+    background-color: rgba(0, 20, 0, 0.8) !important;
+    border-color: #0f0 !important;
+}
+
+/* Header and Footer Styling */
+header, footer {
+    background-color: #000 !important;
+    border-color: #0f0 !important;
+    box-shadow: 0 0 15px #0f0;
+}
+
+/* Tab Buttons */
+.tab-btn {
+    background-color: #000 !important;
+    border-color: #0f0 !important;
+    color: #0f0 !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+.tab-btn.active {
+    background-color: rgba(0, 255, 0, 0.2) !important;
+    box-shadow: 0 0 10px #0f0;
+}
+
+/* Input Field Styling */
+input {
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    caret-color: #0f0;
+}
+
+input::placeholder {
+    color: #0a0 !important;
+    opacity: 1;
+}
+
+/* Table Styling */
+table {
+    border-color: #0f0 !important;
+}
+
+th {
+    background-color: rgba(0, 30, 0, 0.5) !important;
+}
+
+tr:hover {
+    background-color: rgba(0, 40, 0, 0.3) !important;
+}
+
+/* Link Styling */
+a {
+    text-decoration: none !important;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #0f0 !important;
+    text-shadow: 0 0 10px #0f0;
+}
+
+/* Code Blocks */
+code {
+    background-color: rgba(0, 30, 0, 0.5) !important;
+    color: #0f0 !important;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Ubuntu Mono', monospace !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .terminal-body {
+        padding: 10px;
+    }
+    
+    .command-line {
+        flex-wrap: wrap;
+    }
+    
+    .prompt {
+        margin-bottom: 5px;
+        width: 100%;
+    }
+    
+    #nmap-command {
+        width: 100%;
+        margin-left: 0;
+    }
+}
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
@@ -180,7 +260,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center mb-4 md:mb-0">
                     <i class="fas fa-network-wired text-green-500 text-3xl mr-3"></i>
-                    <h1 class="text-2xl md:text-3xl font-bold font-mono">NMap Interactive Guide</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold font-mono">NMap</h1>
                 </div>
                 <nav class="flex space-x-1 md:space-x-4 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
                     <button onclick="showTab('intro')" class="tab-btn active bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Introduction</button>
@@ -204,7 +284,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <p class="text-gray-700 mb-4">
-                            NMap (Network Mapper) is a free and open-source utility for network discovery and security auditing. 
+                            NMap&trade; (Network Mapper) is a free and open-source utility for network discovery and security auditing. 
                             It was created by Gordon Lyon (also known by his pseudonym Fyodor Vaskovich) in 1997.
                         </p>
                         <p class="text-gray-700 mb-4">
@@ -226,13 +306,13 @@
                             <div class="terminal-dot red"></div>
                             <div class="terminal-dot yellow"></div>
                             <div class="terminal-dot green"></div>
-                            <div class="terminal-title">nmap.org</div>
+                            <div class="terminal-title">nirajan@ubuntu</div>
                         </div>
-                        <div class="command-line">
+                        <div class="command-line ml-2">
                             <span class="prompt">$</span>
                             <span class="command">nmap -sV scanme.nmap.org</span>
                         </div>
-                        <div class="output">
+                        <div class="output ml-2">
 Starting Nmap 7.92 ( https://nmap.org ) at 2023-06-15 10:00 UTC
 Nmap scan report for scanme.nmap.org (45.33.32.156)
 Host is up (0.12s latency).
@@ -606,36 +686,177 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
                     </div>
                 </div>
 
+                <!-- New Practical Examples Section -->
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-terminal text-purple-500 mr-2"></i> Practical NMap Examples
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Host Discovery -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">Host Discovery</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap -sn 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Ping scan to discover live hosts without port scanning</p>
+                </div>
+                
+                <!-- Port Scanning -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">Basic Port Scan</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Scans most common ports (top 1000)</p>
+                </div>
+                
+                <!-- Specific Port Scan -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">Specific Port Scan</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap -p 80 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Scan only port 80 (HTTP)</p>
+                </div>
+                
+                <!-- Service Detection -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">Service Detection</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap -sV 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Detects service/version info on open ports</p>
+                </div>
+                
+                <!-- OS Detection -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">OS Detection</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap -O 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Attempts to identify the operating system</p>
+                </div>
+                
+                <!-- Aggressive Scan -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">Aggressive Scan</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap -A 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Enables OS detection, version detection, script scanning, and traceroute</p>
+                </div>
+                
+                <!-- UDP Scan -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">UDP Scan</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap -sU 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Scans UDP ports (often requires root privileges)</p>
+                </div>
+                
+                <!-- Stealth Scan -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">Stealth Scan (SYN)</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap -sS 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Half-open scan that doesn't complete TCP connections</p>
+                </div>
+                
+                <!-- TCP Connect Scan -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">TCP Connect Scan</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap -sT 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Completes full TCP connections (less stealthy than SYN)</p>
+                </div>
+                
+                <!-- NSE Script Scan -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">NSE Script Scan</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap --script ssl-heartbleed 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Runs specific Nmap Scripting Engine (NSE) scripts</p>
+                </div>
+                
+                <!-- Fragmentation Scan -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-medium text-gray-800 mb-1">Fragmentation Scan</h4>
+                    <div class="terminal p-3 rounded">
+                        <div class="command-line">
+                            <span class="prompt">$</span>
+                            <span class="command">nmap -f 192.168.1.103</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mt-2">Uses tiny fragmented IP packets to evade detection</p>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
                 <div class="mb-8">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-terminal text-purple-500 mr-2"></i> Interactive NMap Terminal
+                        <i class="fas fa-terminal text-purple-500 mr-2"></i>NMap Terminal
                     </h3>
-                    <div class="terminal">
+                    <div class="terminal w-3/5">
                         <div class="terminal-header">
                             <div class="terminal-dot red"></div>
                             <div class="terminal-dot yellow"></div>
                             <div class="terminal-dot green"></div>
-                            <div class="terminal-title">user@nmap-simulator: ~</div>
+                            <div class="terminal-title">nirajan@ubuntu: ~</div>
                         </div>
                         <div class="terminal-body">
                             <div id="interactive-terminal">
                                 <div class="command-line">
                                     <span class="prompt">
-                                        <span class="user">user</span>
-                                        <span class="host">nmap-simulator</span>
+                                        <span class="user">nirajan</span>
+                                        <span class="host">ubuntu</span>
                                         <span class="path">~</span>
                                         <span class="prompt-end"></span>
                                     </span>
-                                    <input type="text" id="nmap-command" class="bg-transparent border-none text-white w-full font-mono focus:outline-none" placeholder="type 'nmap --help' for commands" autocomplete="off">
+                                    <input type="text" id="nmap-command" class="bg-transparent border-none text-white w-3/4 font-mono focus:outline-none ml-2" placeholder="type 'nmap --help' for commands" autocomplete="on">
                                 </div>
                                 <div id="command-output" class="output mt-2"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4 text-gray-600 text-sm">
-                        <p>Try commands like: <span class="font-mono bg-gray-100 px-1 rounded">nmap -F scanme.nmap.org</span>, <span class="font-mono bg-gray-100 px-1 rounded">nmap -sV localhost</span>, or <span class="font-mono bg-gray-100 px-1 rounded">nmap --help</span></p>
-                    </div>
-                </div>
+
+<br>
 
                 <div class="bg-green-50 border border-green-200 rounded-lg p-6">
                     <h3 class="text-xl font-semibold text-green-800 mb-3 flex items-center">
@@ -754,9 +975,9 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
                     <h2 class="text-xl font-bold flex items-center font-mono">
-                        <i class="fas fa-network-wired text-green-500 mr-2"></i> NMap Interactive Guide
+                        <i class="fas fa-network-wired text-green-500 mr-2"></i> NMap Web Guide
                     </h2>
-                    <p class="text-green-600 text-sm mt-1">Educational resource for network security professionals</p>
+                    <p class="text-green-600 text-sm mt-1">Educational resource for network security professionals.</p>
                 </div>
                 <div class="flex space-x-4">
                     <a href="https://nmap.org" target="_blank" class="text-gray-400 hover:text-green-500 transition">
@@ -771,8 +992,15 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-6 pt-6 text-center text-gray-500 text-sm">
-                <p>This is an educational tool only. Always get proper authorization before scanning networks.</p>
-                <p class="mt-2">© 2023 NMap Interactive Guide. NMap is a registered trademark of Gordon Lyon.</p>
+                <p>This is an educational content tool guide only. Always get proper authorization and written consent before scanning networks.</p>
+
+                <br>
+
+                <p class="mt-2 text-sm text-gray-500">
+                    &copy; 2025 Nirajan Dhakal. All Rights Reserved. 
+                    <br class="md:hidden">
+                    NMap&trade; is a registered trademark of Gordon Lyon (Fyodor).
+                </p>
             </div>
         </div>
     </footer>
@@ -796,96 +1024,292 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
             event.target.classList.add('active');
         }
 
-        // Interactive terminal simulation
         document.addEventListener('DOMContentLoaded', function() {
-            // Interactive terminal handler
-            const commandInput = document.getElementById('nmap-command');
-            const commandOutput = document.getElementById('command-output');
-            
-            if (commandInput) {
-                commandInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        const command = this.value.trim();
-                        this.value = '';
-                        
-                        // Add command to output
-                        const cmdLine = document.createElement('div');
-                        cmdLine.className = 'command-line';
-                        cmdLine.innerHTML = `<span class="prompt">$</span> <span class="command">${command}</span>`;
-                        commandOutput.appendChild(cmdLine);
-                        
-                        // Process command
-                        let output = '';
-                        if (command === 'nmap --help' || command === 'nmap -h') {
-                            output = `NMap 7.92\nUsage: nmap [Scan Type(s)] [Options] {target specification}\n\nTARGET SPECIFICATION:\n  Can pass hostnames, IP addresses, networks, etc.\n  Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254\n\nSCAN TECHNIQUES:\n  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans\n  -sU: UDP Scan\n  -sN/sF/sX: TCP Null, FIN, and Xmas scans\n\nPORT SPECIFICATION AND SCAN ORDER:\n  -p <port ranges>: Only scan specified ports\n  Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080\n\nSERVICE/VERSION DETECTION:\n  -sV: Probe open ports to determine service/version info\n\nOS DETECTION:\n  -O: Enable OS detection\n\nTIMING AND PERFORMANCE:\n  -T<0-5>: Set timing template (higher is faster)\n\nOUTPUT:\n  -oN/-oX/-oS/-oG <file>: Output scan in normal, XML, s|<rIpt kIddi3, and Grepable format`;
-                        } else if (command.startsWith('nmap -F') || command.startsWith('nmap ')) {
-                            const target = command.includes('scanme.nmap.org') ? 'scanme.nmap.org' : 
-                                         command.includes('localhost') ? 'localhost' : '192.168.1.1';
-                            output = `Starting Nmap 7.92 ( https://nmap.org )\nNmap scan report for ${target}\nHost is up (0.045s latency).\nNot shown: 97 closed ports\nPORT     STATE    SERVICE\n22/tcp   open     ssh\n80/tcp   open     http\n443/tcp  open     https\n\nNmap done: 1 IP address (1 host up) scanned in 1.25 seconds`;
-                        } else if (command.startsWith('nmap -sV')) {
-                            output = `Starting Nmap 7.92 ( https://nmap.org )\nNmap scan report for scanme.nmap.org (45.33.32.156)\nHost is up (0.12s latency).\nPORT     STATE    SERVICE     VERSION\n22/tcp   open     ssh         OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13\n80/tcp   open     http        Apache httpd 2.4.7\n\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\nNmap done: 1 IP address (1 host up) scanned in 6.45 seconds`;
-                        } else if (command === 'clear') {
-                            commandOutput.innerHTML = '';
-                            return;
-                        } else if (command) {
-                            output = `-bash: ${command}: command not found\nTry 'nmap --help' for available commands`;
-                        }
-                        
-                        if (output) {
-                            const outputDiv = document.createElement('div');
-                            outputDiv.className = 'output';
-                            outputDiv.textContent = output;
-                            commandOutput.appendChild(outputDiv);
-                            commandOutput.scrollTop = commandOutput.scrollHeight;
-                        }
-                    }
-                });
-            }
+    const commandInput = document.getElementById('nmap-command');
+    const commandOutput = document.getElementById('command-output');
+    let commandHistory = [];
+    let historyIndex = -1;
 
-            const commands = [
-                {cmd: "nmap -sS -T4 192.168.1.1", output: "Starting Nmap 7.92\nNmap scan report for router.local (192.168.1.1)\nHost is up (0.045s latency).\nPORT     STATE    SERVICE\n80/tcp   open     http\n443/tcp  open     https\n22/tcp   filtered ssh"},
-                {cmd: "nmap -sV -O scanme.nmap.org", output: "Starting Nmap 7.92\nNmap scan report for scanme.nmap.org (45.33.32.156)\nHost is up (0.12s latency).\nPORT     STATE    SERVICE     VERSION\n22/tcp   open     ssh         OpenSSH 6.6.1p1\n80/tcp   open     http        Apache httpd 2.4.7\nDevice type: general purpose\nRunning: Linux 3.X|4.X\nOS details: Linux 3.10 - 4.11"},
-                {cmd: "nmap -p 1-1000 -sU 192.168.1.15", output: "Starting Nmap 7.92\nNmap scan report for media-server (192.168.1.15)\nHost is up (0.078s latency).\nPORT     STATE         SERVICE\n53/udp   open          domain\n137/udp  open          netbios-ns\n138/udp  open|filtered netbios-dgm\n500/udp  open          isakmp"}
-            ];
+    // Focus the input immediately
+    commandInput.focus();
+
+    // ANSI color codes for terminal output
+    const Colors = {
+        BLUE: '\x1b[94m',
+        CYAN: '\x1b[96m',
+        GREEN: '\x1b[92m',
+        YELLOW: '\x1b[93m',
+        RED: '\x1b[91m',
+        BOLD: '\x1b[1m',
+        UNDERLINE: '\x1b[4m',
+        RESET: '\x1b[0m'
+    };
+
+    // Helper functions for styled output
+    function printHeader(text) {
+        appendOutput(`${Colors.BLUE}${Colors.BOLD}${Colors.UNDERLINE}${text}${Colors.RESET}\n`);
+    }
+    
+    function printSection(text) {
+        appendOutput(`${Colors.CYAN}${Colors.BOLD}--- ${text} ---${Colors.RESET}\n`);
+    }
+    
+    function printSuccess(text) {
+        appendOutput(`${Colors.GREEN}${text}${Colors.RESET}\n`);
+    }
+    
+    function printWarning(text) {
+        appendOutput(`${Colors.YELLOW}${text}${Colors.RESET}\n`);
+    }
+    
+    function printError(text) {
+        appendOutput(`${Colors.RED}${Colors.BOLD}${text}${Colors.RESET}\n`);
+    }
+    
+    function printPlain(text) {
+        appendOutput(`${text}\n`);
+    }
+    
+    function appendOutput(text) {
+        const outputLine = document.createElement('div');
+        outputLine.className = 'output';
+        outputLine.textContent = text.replace(/\x1b\[\d+m/g, ''); // Remove ANSI codes for HTML display
+        commandOutput.appendChild(outputLine);
+        commandOutput.scrollTop = commandOutput.scrollHeight;
+    }
+
+    // Command processing
+    function processCommand(command) {
+        // Add to history
+        if (command.trim()) {
+            commandHistory.push(command);
+        }
+        
+        // Display the command
+        const cmdLine = document.createElement('div');
+        cmdLine.className = 'command-line';
+        cmdLine.innerHTML = `
+            <span class="prompt">
+                <span class="user">nirajan</span>
+                <span class="host">ubuntu</span>
+                <span class="path">~</span>
+                <span class="prompt-end"></span>
+            </span>
+            <span class="command">${command}</span>`;
+        commandOutput.appendChild(cmdLine);
+        
+        // Parse command
+        const args = command.trim().split(/\s+/);
+        const cmd = args[0].toLowerCase();
+        
+        if (cmd === 'decoy_scan' || cmd === './decoy_scan') {
+            simulateDecoyScanExecution(args.slice(1));
+        } else if (cmd === 'nmap' || cmd === './nmap') {
+            simulateNmapExecution(args.slice(1));
+        } else if (cmd === 'clear') {
+            commandOutput.innerHTML = '';
+        } else if (cmd === 'help' || cmd === '--help') {
+            showHelp();
+        } else if (cmd) {
+            printError(`Command not found: ${cmd}`);
+            printPlain(`Try 'help' for available commands`);
+        }
+    }
+
+    // Simulate nmap execution
+    function simulateNmapExecution(args) {
+        let output = '';
+        if (args.includes('--help') || args.includes('-h')) {
+            output = `NMap 7.92\nUsage: nmap [Scan Type(s)] [Options] {target specification}\n\nTARGET SPECIFICATION:\n  Can pass hostnames, IP addresses, networks, etc.\n  Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254\n\nSCAN TECHNIQUES:\n  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans\n  -sU: UDP Scan\n  -sN/sF/sX: TCP Null, FIN, and Xmas scans`;
+        } else {
+            const target = args.includes('scanme.nmap.org') ? 'scanme.nmap.org' : 
+                         args.includes('localhost') ? 'localhost' : '192.168.1.1';
+            output = `Starting Nmap 7.92 ( https://nmap.org ) at ${new Date().toLocaleString()}
+Nmap scan report for ${target} (${target === 'localhost' ? '127.0.0.1' : '45.33.32.156'})
+Host is up (0.0${Math.floor(Math.random() * 90) + 10}s latency).
+Not shown: ${Math.floor(Math.random() * 900) + 97} closed ports
+PORT     STATE    SERVICE
+22/tcp   open     ssh
+80/tcp   open     http
+443/tcp  ${Math.random() > 0.3 ? 'open' : 'filtered'}     https
+${args.includes('-sV') ? `
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/.
+Nmap done: 1 IP address (1 host up) scanned in ${(Math.random() * 5 + 2).toFixed(2)} seconds` : `
+Nmap done: 1 IP address (1 host up) scanned in ${(Math.random() * 3 + 0.5).toFixed(2)} seconds`}`;
+        }
+        
+        if (output) {
+            const outputDiv = document.createElement('div');
+            outputDiv.className = 'output';
+            outputDiv.textContent = output;
+            commandOutput.appendChild(outputDiv);
+            commandOutput.scrollTop = commandOutput.scrollHeight;
+        }
+    }
+
+    // Simulate the decoy_scan execution
+    function simulateDecoyScanExecution(args) {
+        // Simple argument parser
+        let targetIp = '';
+        let decoys = '';
+        let nmapOptions = [];
+        let outputFile = '';
+        let showHelp = false;
+        
+        for (let i = 0; i < args.length; i++) {
+            const arg = args[i];
             
-            let currentCmd = 0;
-            const terminal = document.querySelector('.terminal');
-            
-            if (terminal) {
-                function simulateTyping() {
-                    const cmdLine = terminal.querySelector('.command-line .command');
-                    const output = terminal.querySelector('.output');
-                    
-                    // Clear previous command and output
-                    cmdLine.textContent = '';
-                    output.textContent = '';
-                    
-                    // Type the command
-                    let i = 0;
-                    const typing = setInterval(() => {
-                        cmdLine.textContent += commands[currentCmd].cmd[i];
-                        i++;
-                        if (i >= commands[currentCmd].cmd.length) {
-                            clearInterval(typing);
-                            
-                            // Show output after a delay
-                            setTimeout(() => {
-                                output.textContent = commands[currentCmd].output;
-                                
-                                // Move to next command
-                                currentCmd = (currentCmd + 1) % commands.length;
-                                
-                                // Repeat after a longer delay
-                                setTimeout(simulateTyping, 5000);
-                            }, 1000);
-                        }
-                    }, 50);
-                }
-                
-                // Start the simulation
-                setTimeout(simulateTyping, 300);
+            if (arg === '-d' || arg === '--decoys') {
+                decoys = args[++i] || '';
+            } else if (arg === '-o' || arg === '--nmap-options') {
+                // Capture remaining args as nmap options
+                nmapOptions = args.slice(i + 1);
+                break;
+            } else if (arg === '-f' || arg === '--output-file') {
+                outputFile = args[++i] || '';
+            } else if (arg === '--help') {
+                showHelp = true;
+            } else if (!targetIp && !arg.startsWith('-')) {
+                targetIp = arg;
             }
-        });
+        }
+        
+        if (showHelp || !targetIp && !decoys) {
+            showDecoyScanHelp();
+            return;
+        }
+        
+        if (!targetIp) {
+            printError("Error: Target IP address is required");
+            return;
+        }
+        
+        if (!decoys) {
+            printError("Error: At least one decoy IP is required (use -d/--decoys)");
+            return;
+        }
+        
+        // Simulate the scan
+        printHeader("Nmap Decoy Scan Script");
+        printSection("Scan Parameters");
+        printSuccess(`Target IP: ${Colors.BOLD}${targetIp}${Colors.RESET}`);
+        printSuccess(`Decoy Inputs: ${Colors.BOLD}${decoys}${Colors.RESET}`);
+        
+        // Parse decoys (simplified version)
+        const parsedDecoys = decoys.split(',').map(d => d.trim()).filter(d => d);
+        printSuccess(`Parsed Decoy IPs: ${Colors.BOLD}${parsedDecoys.join(', ')}${Colors.RESET}`);
+        
+        if (nmapOptions.length > 0) {
+            printSuccess(`Additional Nmap Options: ${Colors.BOLD}${nmapOptions.join(' ')}${Colors.RESET}`);
+        }
+        
+        if (outputFile) {
+            printSuccess(`Output will be saved to: ${Colors.BOLD}${outputFile}${Colors.RESET}`);
+        }
+        
+        printPlain("");
+        printWarning("Note: Running Nmap with decoys typically requires root/administrator privileges");
+        printPlain("");
+        
+        printSection("Nmap Command Execution");
+        const nmapCmd = [
+            "nmap",
+            "-Pn",
+            "-sS",
+            "-D", decoys,
+            "-v",
+            ...nmapOptions,
+            targetIp
+        ].join(' ');
+        
+        printSuccess(`Executing: ${Colors.BOLD}${nmapCmd}${Colors.RESET}`);
+        printPlain("-".repeat(70));
+        
+        // Simulate nmap output
+        setTimeout(() => {
+            printSection("Nmap Standard Output");
+            printPlain(`Starting Nmap 7.92 ( https://nmap.org ) at ${new Date().toLocaleString()}`);
+            printPlain(`Nmap scan report for ${targetIp}`);
+            printPlain("Host is up (0.045s latency).");
+            printPlain("");
+            printPlain("PORT     STATE    SERVICE");
+            printPlain("22/tcp   open     ssh");
+            printPlain("80/tcp   open     http");
+            printPlain("443/tcp  filtered https");
+            printPlain("");
+            printPlain("Nmap done: 1 IP address (1 host up) scanned in 2.45 seconds");
+            
+            if (outputFile) {
+                printSection("Output File");
+                printSuccess(`Scan results saved to ${Colors.BOLD}${outputFile}${Colors.RESET}`);
+            }
+            
+            printSection("Scan Finished");
+            printSuccess("Nmap decoy scan completed.");
+            printSection("Script Execution Complete");
+            printSuccess("Thank you for using the Nmap Decoy Scan script!");
+        }, 800);
+    }
+    
+    // Show help for the decoy_scan tool
+    function showDecoyScanHelp() {
+        printHeader("Nmap Decoy Scan Script Help");
+        printPlain(`${Colors.BOLD}Usage:${Colors.RESET} decoy_scan TARGET_IP [OPTIONS]`);
+        printPlain("");
+        printPlain(`${Colors.BOLD}Required arguments:${Colors.RESET}`);
+        printPlain(`  TARGET_IP            The IP address to scan`);
+        printPlain("");
+        printPlain(`${Colors.BOLD}Decoy options:${Colors.RESET}`);
+        printPlain(`  -d, --decoys IP_LIST Comma-separated list of decoy IPs (e.g., '192.168.1.1,10.0.0.1-5,ME')`);
+        printPlain(`                        Use 'ME' to include your real IP. Ranges are inclusive.`);
+        printPlain("");
+        printPlain(`${Colors.BOLD}Other options:${Colors.RESET}`);
+        printPlain(`  -o, --nmap-options   Additional Nmap options (e.g., -p 80,443 -A)`);
+        printPlain(`  -f, --output-file    Save output to file`);
+        printPlain(`  --help               Show this help message`);
+        printPlain("");
+        printWarning("Note: This tool requires Nmap to be installed and typically needs root privileges.");
+    }
+    
+    // Show general help
+    function showHelp() {
+        printPlain(`${Colors.BOLD}Available commands:${Colors.RESET}`);
+        printPlain(`  decoy_scan      Run an Nmap decoy scan`);
+        printPlain(`  nmap            Run Nmap network scanner`);
+        printPlain(`  clear           Clear the terminal`);
+        printPlain(`  help            Show this help message`);
+    }
+    
+    // Event listeners
+    commandInput.addEventListener('keydown', function(e) {
+        // Command history with up/down arrows
+        if (e.key === 'ArrowUp') {
+            if (historyIndex < commandHistory.length - 1) {
+                historyIndex++;
+                this.value = commandHistory[commandHistory.length - 1 - historyIndex];
+            }
+            e.preventDefault();
+        } else if (e.key === 'ArrowDown') {
+            if (historyIndex > 0) {
+                historyIndex--;
+                this.value = commandHistory[commandHistory.length - 1 - historyIndex];
+            } else {
+                historyIndex = -1;
+                this.value = '';
+            }
+            e.preventDefault();
+        } else if (e.key === 'Enter') {
+            const command = this.value.trim();
+            this.value = '';
+            historyIndex = -1;
+            
+            if (command) {
+                processCommand(command);
+            }
+        }
+    });
+
+});
     </script>
 </body>
 </html>
