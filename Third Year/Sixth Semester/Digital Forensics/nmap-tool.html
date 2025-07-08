@@ -8,265 +8,97 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base Styles */
-body {
-    background-color: #000;
-    color: #0f0;
-    font-family: 'Courier New', monospace;
-}
-
-/* Terminal Styling */
-.terminal {
-    background-color: #300a24;
-    color: #f8f8f2;
-    font-family: 'Ubuntu Mono', monospace;
-    border-radius: 12px;
-    padding: 0;
-    position: relative;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    overflow: hidden;
-    resize: horizontal;
-    min-width: 400px;
-    max-width: 100%;
-}
-
-.terminal-header {
-    display: flex;
-    align-items: center;
-    background: linear-gradient(#3a3a3a, #2a2a2a);
-    padding: 8px 12px;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-}
-
-.terminal-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 8px;
-}
-
-.terminal-dot.red { background-color: #ff5f56; }
-.terminal-dot.yellow { background-color: #ffbd2e; }
-.terminal-dot.green { background-color: #27c93f; }
-
-.terminal-title {
-    margin-left: 10px;
-    font-size: 13px;
-    color: #d0d0d0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    flex-grow: 1;
-    text-align: center;
-}
-
-.terminal-body {
-    padding: 15px;
-    background-color: #1e0829;
-    min-height: 200px;
-}
-
-/* For better resize handle visibility */
-#resize-handle {
-    background-color: rgba(0, 255, 0, 0.1);
-    transition: background-color 0.2s;
-}
-
-#resize-handle:hover {
-    background-color: rgba(0, 255, 0, 0.3);
-}
-
-/* Command Line Styling */
-.command-line {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.prompt {
-    display: flex;
-    align-items: center;
-    color: #f8f8f2;
-    margin-right: 10px;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.prompt .user {
-    color: #50fa7b;
-}
-
-.prompt .user:after {
-    content: "@";
-    color: #f8f8f2;
-    margin-right: 2px;
-}
-
-.prompt .host {
-    color: #8be9fd;
-}
-
-.prompt .host:after {
-    content: ":";
-    color: #f8f8f2;
-    margin-right: 2px;
-}
-
-.prompt .path {
-    color: #bd93f9;
-}
-
-.prompt .prompt-end {
-    color: #ff79c6;
-    margin-left: 5px;
-}
-
-.prompt .prompt-end:after {
-    content: "$";
-}
-
-.command {
-    color: #0f0;
-    font-family: 'Ubuntu Mono', monospace;
-}
-
-.output {
-    white-space: pre-wrap;
-    line-height: 1.5;
-    margin-bottom: 15px;
-    color: #0f0;
-    font-family: 'Ubuntu Mono', monospace;
-}
-
-/* Animations */
-.scan-animation {
-    animation: scan 2s infinite;
-}
-
-@keyframes scan {
-    0% { text-shadow: 0 0 5px #0f0; }
-    50% { text-shadow: 0 0 20px #0f0; }
-    100% { text-shadow: 0 0 5px #0f0; }
-}
-
-.tab-content {
-    display: none;
-    background-color: rgba(0, 15, 0, 0.2);
-    border: 1px solid #0f0;
-    margin-top: 10px;
-}
-
-.tab-content.active {
-    display: block;
-    animation: matrixFadeIn 0.5s;
-}
-
-@keyframes matrixFadeIn {
-    from { opacity: 0; text-shadow: 0 0 10px #0f0; }
-    to { opacity: 1; text-shadow: none; }
-}
-
-/* Matrix Theme for All Text Elements */
-h1, h2, h3, h4, h5, h6, p, li, td, th, a, span, input, button {
-    color: #0f0 !important;
-    font-family: 'Courier New', monospace !important;
-    text-shadow: 0 0 3px #0f0;
-}
-
-/* Improved Contrast for Readability */
-.bg-white, .bg-gray-50, .bg-gray-100 {
-    background-color: rgba(0, 20, 0, 0.8) !important;
-    border-color: #0f0 !important;
-}
-
-/* Header and Footer Styling */
-header, footer {
-    background-color: #000 !important;
-    border-color: #0f0 !important;
-    box-shadow: 0 0 15px #0f0;
-}
-
-/* Tab Buttons */
-.tab-btn {
-    background-color: #000 !important;
-    border-color: #0f0 !important;
-    color: #0f0 !important;
-    font-family: 'Courier New', monospace !important;
-}
-
-.tab-btn.active {
-    background-color: rgba(0, 255, 0, 0.2) !important;
-    box-shadow: 0 0 10px #0f0;
-}
-
-/* Input Field Styling */
-input {
-    background-color: transparent !important;
-    border: none !important;
-    outline: none !important;
-    caret-color: #0f0;
-}
-
-input::placeholder {
-    color: #0a0 !important;
-    opacity: 1;
-}
-
-/* Table Styling */
-table {
-    border-color: #0f0 !important;
-}
-
-th {
-    background-color: rgba(0, 30, 0, 0.5) !important;
-}
-
-tr:hover {
-    background-color: rgba(0, 40, 0, 0.3) !important;
-}
-
-/* Link Styling */
-a {
-    text-decoration: none !important;
-    transition: color 0.3s;
-}
-
-a:hover {
-    color: #0f0 !important;
-    text-shadow: 0 0 10px #0f0;
-}
-
-/* Code Blocks */
-code {
-    background-color: rgba(0, 30, 0, 0.5) !important;
-    color: #0f0 !important;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-family: 'Ubuntu Mono', monospace !important;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .terminal-body {
-        padding: 10px;
-    }
-    
-    .command-line {
-        flex-wrap: wrap;
-    }
-    
-    .prompt {
-        margin-bottom: 5px;
-        width: 100%;
-    }
-    
-    #nmap-command {
-        width: 100%;
-        margin-left: 0;
-    }
-}
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+        }
+        .terminal {
+            background-color: #300a24;
+            color: #f8f8f2;
+            font-family: 'Ubuntu Mono', monospace;
+            border-radius: 12px;
+            padding: 0;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            overflow: hidden;
+            min-width: 400px;
+            max-width: 100%;
+        }
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(#3a3a3a, #2a2a2a);
+            padding: 8px 12px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .terminal-dot.red { background-color: #ff5f56; }
+        .terminal-dot.yellow { background-color: #ffbd2e; }
+        .terminal-dot.green { background-color: #27c93f; }
+        .terminal-title {
+            margin-left: 10px;
+            font-size: 13px;
+            color: #d0d0d0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .terminal-body {
+            padding: 15px;
+            background-color: #1e0829;
+            min-height: 200px;
+        }
+        .command-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .prompt {
+            display: flex;
+            align-items: center;
+            color: #f8f8f2;
+            margin-right: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .prompt .user { color: #50fa7b; }
+        .prompt .user:after { content: "@"; color: #f8f8f2; margin-right: 2px; }
+        .prompt .host { color: #8be9fd; }
+        .prompt .host:after { content: ":"; color: #f8f8f2; margin-right: 2px; }
+        .prompt .path { color: #bd93f9; }
+        .prompt .prompt-end { color: #ff79c6; margin-left: 5px; }
+        .prompt .prompt-end:after { content: "$"; }
+        .command { color: #0f0; font-family: 'Ubuntu Mono', monospace; }
+        .output {
+            white-space: pre-wrap;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            color: #0f0;
+            font-family: 'Ubuntu Mono', monospace;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .tab-btn.active {
+            background-color: rgba(0, 255, 0, 0.2) !important;
+            box-shadow: 0 0 10px #0f0;
+        }
+        #resize-handle {
+            width: 6px;
+            cursor: col-resize;
+            background-color: rgba(0, 255, 0, 0.1);
+        }
+        #resize-handle:hover { background-color: rgba(0, 255, 0, 0.3); }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="min-h-screen">
     <header class="bg-black text-green-500 py-6 border-b border-green-500">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
@@ -275,12 +107,10 @@ code {
                     <h1 class="text-2xl md:text-3xl font-bold font-mono">NMap</h1>
                 </div>
                 <nav class="flex space-x-1 md:space-x-4 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
-                    <button onclick="showTab('intro')" class="tab-btn active bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Introduction</button>
+                    <button onclick="showTab('intro')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Introduction</button>
                     <button onclick="showTab('features')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Features</button>
                     <button onclick="showTab('scanning')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Scanning</button>
-                    <button onclick="showTab('use-cases')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Use Cases</button>
-                    <button onclick="showTab('getting-started')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">Getting Started</button>
-                    <button onclick="showTab('movies')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition">NMap in Movies</button>
+                    <button onclick="showTab('movies')" class="tab-btn bg-black hover:bg-green-900 text-green-500 px-3 py-2 rounded-none border border-green-500 text-sm font-mono transition active">Movies</button>
                 </nav>
             </div>
         </div>
@@ -288,43 +118,41 @@ code {
 
     <main class="container mx-auto px-4 py-8">
         <!-- Introduction Tab -->
-        <div id="intro" class="tab-content active">
+        <div id="intro" class="tab-content">
             <div class="bg-black rounded-none border border-green-500 p-6 mb-8">
                 <h2 class="text-2xl font-bold text-green-500 mb-4 flex items-center font-mono">
                     <i class="fas fa-info-circle text-green-500 mr-2"></i> Introduction to NMap
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                        <p class="text-gray-700 mb-4">
+                        <p class="mb-4">
                             NMap&trade; (Network Mapper) is a free and open-source utility for network discovery and security auditing. 
                             It was created by Gordon Lyon (also known by his pseudonym Fyodor Vaskovich) in 1997.
                         </p>
-                        <p class="text-gray-700 mb-4">
+                        <p class="mb-4">
                             NMap is used by network administrators to:
                         </p>
-                        <ul class="list-disc pl-6 text-gray-700 mb-4 space-y-2">
+                        <ul class="list-disc pl-6 mb-4 space-y-2">
                             <li>Discover hosts and services on a computer network</li>
                             <li>Determine what hosts are available on the network</li>
                             <li>Identify open ports and services</li>
                             <li>Detect operating systems and software versions</li>
                             <li>Find vulnerabilities in network infrastructure</li>
                         </ul>
-                        <p class="text-gray-700">
-                            NMap runs on all major computer operating systems, and official binary packages are available for Linux, Windows, and macOS.
-                        </p>
                     </div>
                     <div class="terminal">
                         <div class="terminal-header">
                             <div class="terminal-dot red"></div>
                             <div class="terminal-dot yellow"></div>
                             <div class="terminal-dot green"></div>
-                            <div class="terminal-title">nirajan@ubuntu</div>
+                            <div class="terminal-title">user@ubuntu</div>
                         </div>
-                        <div class="command-line ml-2">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap -sV scanme.nmap.org</span>
-                        </div>
-                        <div class="output ml-2">
+                        <div class="terminal-body">
+                            <div class="command-line">
+                                <span class="prompt">$</span>
+                                <span class="command">nmap -sV scanme.nmap.org</span>
+                            </div>
+                            <div class="output">
 Starting Nmap 7.92 ( https://nmap.org ) at 2023-06-15 10:00 UTC
 Nmap scan report for scanme.nmap.org (45.33.32.156)
 Host is up (0.12s latency).
@@ -335,6 +163,7 @@ PORT     STATE    SERVICE     VERSION
 9929/tcp open     nping-echo  Nping echo
 31337/tcp open     tcpwrapped
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -343,753 +172,159 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
         <!-- Features Tab -->
         <div id="features" class="tab-content">
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-                    <i class="fas fa-star text-yellow-500 mr-2"></i> Core Capabilities and Features
+            <div class="bg-black rounded-none border border-green-500 p-6 mb-8">
+                <h2 class="text-2xl font-bold text-green-500 mb-4 flex items-center">
+                    <i class="fas fa-star text-yellow-500 mr-2"></i> Core Features
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
+                    <div class="bg-gray-900 p-4 rounded-lg border border-green-500">
+                        <h3 class="font-semibold text-lg mb-2 flex items-center">
                             <i class="fas fa-search text-blue-500 mr-2"></i> Host Discovery
                         </h3>
-                        <p class="text-gray-700">
-                            Identify hosts on a network, even those not responding to ping requests using advanced techniques like ARP scanning.
-                        </p>
+                        <p>Identify hosts on a network using advanced techniques</p>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
+                    <div class="bg-gray-900 p-4 rounded-lg border border-green-500">
+                        <h3 class="font-semibold text-lg mb-2 flex items-center">
                             <i class="fas fa-door-open text-green-500 mr-2"></i> Port Scanning
                         </h3>
-                        <p class="text-gray-700">
-                            Detect open ports and services with various scan types (TCP SYN, ACK, UDP, etc.) to identify potential entry points.
-                        </p>
+                        <p>Detect open ports with various scan types</p>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
+                    <div class="bg-gray-900 p-4 rounded-lg border border-green-500">
+                        <h3 class="font-semibold text-lg mb-2 flex items-center">
                             <i class="fas fa-fingerprint text-purple-500 mr-2"></i> Version Detection
                         </h3>
-                        <p class="text-gray-700">
-                            Determine service and application versions running on open ports to identify potential vulnerabilities.
-                        </p>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
-                            <i class="fas fa-laptop-code text-red-500 mr-2"></i> OS Detection
-                        </h3>
-                        <p class="text-gray-700">
-                            Identify operating systems and device types by analyzing network stack characteristics.
-                        </p>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
-                            <i class="fas fa-scroll text-yellow-600 mr-2"></i> Scriptable Interaction
-                        </h3>
-                        <p class="text-gray-700">
-                            Use NSE (Nmap Scripting Engine) to automate tasks like vulnerability detection, backdoor identification, and more.
-                        </p>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <h3 class="font-semibold text-lg text-gray-800 mb-2 flex items-center">
-                            <i class="fas fa-chart-line text-teal-500 mr-2"></i> Performance Optimization
-                        </h3>
-                        <p class="text-gray-700">
-                            Adjust timing, parallelism, and other parameters to optimize scans for speed or stealth.
-                        </p>
+                        <p>Determine service and application versions</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Scanning Techniques Tab -->
+        <!-- Scanning Tab -->
         <div id="scanning" class="tab-content">
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-                    <i class="fas fa-bullseye text-purple-500 mr-2"></i> Detailed Port Scanning Techniques
+            <div class="bg-black rounded-none border border-green-500 p-6 mb-8">
+                <h2 class="text-2xl font-bold text-green-500 mb-4 flex items-center">
+                    <i class="fas fa-bullseye text-purple-500 mr-2"></i> Scanning Techniques
                 </h2>
-                
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Common Scan Types</h3>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white border border-gray-200">
-                            <thead class="bg-gray-100">
-                                <tr>
-                                    <th class="py-2 px-4 border-b text-left">Scan Type</th>
-                                    <th class="py-2 px-4 border-b text-left">Command</th>
-                                    <th class="py-2 px-4 border-b text-left">Description</th>
-                                    <th class="py-2 px-4 border-b text-left">Use Case</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="py-2 px-4 border-b">TCP SYN Scan</td>
-                                    <td class="py-2 px-4 border-b font-mono">-sS</td>
-                                    <td class="py-2 px-4 border-b">Half-open scan, doesn't complete TCP handshake</td>
-                                    <td class="py-2 px-4 border-b">Fast, stealthy scanning</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="py-2 px-4 border-b">TCP Connect Scan</td>
-                                    <td class="py-2 px-4 border-b font-mono">-sT</td>
-                                    <td class="py-2 px-4 border-b">Completes full TCP connection</td>
-                                    <td class="py-2 px-4 border-b">When SYN scan isn't possible</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="py-2 px-4 border-b">UDP Scan</td>
-                                    <td class="py-2 px-4 border-b font-mono">-sU</td>
-                                    <td class="py-2 px-4 border-b">Scans UDP ports</td>
-                                    <td class="py-2 px-4 border-b">DNS, DHCP, SNMP services</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="py-2 px-4 border-b">Version Detection</td>
-                                    <td class="py-2 px-4 border-b font-mono">-sV</td>
-                                    <td class="py-2 px-4 border-b">Probes services to determine version</td>
-                                    <td class="py-2 px-4 border-b">Vulnerability assessment</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="py-2 px-4 border-b">OS Detection</td>
-                                    <td class="py-2 px-4 border-b font-mono">-O</td>
-                                    <td class="py-2 px-4 border-b">Attempts to identify OS</td>
-                                    <td class="py-2 px-4 border-b">Network inventory</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Scan Timing Options</h3>
-                        <div class="space-y-4">
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">-T0 (Paranoid)</h4>
-                                <p class="text-gray-700 text-sm">Very slow, avoids IDS detection</p>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">-T3 (Normal)</h4>
-                                <p class="text-gray-700 text-sm">Default timing, balanced speed and reliability</p>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">-T4 (Aggressive)</h4>
-                                <p class="text-gray-700 text-sm">Faster scan, assumes decent network</p>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">-T5 (Insane)</h4>
-                                <p class="text-gray-700 text-sm">Very fast, may lose accuracy</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Advanced Scanning Techniques</h3>
-                        <div class="space-y-4">
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">Stealth Scanning</h4>
-                                <p class="text-gray-700 text-sm">Use -f (fragmentation) or --mtu to evade detection</p>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">Idle Scanning</h4>
-                                <p class="text-gray-700 text-sm">-sI zombiehost:port - Uses a third party to scan</p>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">Service Detection</h4>
-                                <p class="text-gray-700 text-sm">Combine -sV with --version-intensity for detailed info</p>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">NSE Scripting</h4>
-                                <p class="text-gray-700 text-sm">Use -sC for default scripts or --script for specific ones</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Use Cases Tab -->
-        <div id="use-cases" class="tab-content">
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-                    <i class="fas fa-tasks text-green-600 mr-2"></i> Practical Applications and Use Cases
-                </h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Security Auditing</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
-                                    <i class="fas fa-shield-alt text-red-500"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Vulnerability Assessment</h4>
-                                    <p class="text-gray-700 text-sm">Identify outdated services with known vulnerabilities using version detection.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                                    <i class="fas fa-lock text-blue-500"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Firewall Testing</h4>
-                                    <p class="text-gray-700 text-sm">Verify firewall rules by scanning from different network segments.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                                    <i class="fas fa-user-secret text-purple-500"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Penetration Testing</h4>
-                                    <p class="text-gray-700 text-sm">Initial reconnaissance to map attack surfaces and identify targets.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Network Administration</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                                    <i class="fas fa-network-wired text-green-500"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Network Inventory</h4>
-                                    <p class="text-gray-700 text-sm">Discover all devices on your network and their services.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
-                                    <i class="fas fa-clock text-yellow-500"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Monitoring</h4>
-                                    <p class="text-gray-700 text-sm">Schedule regular scans to detect unauthorized devices or services.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center mr-3">
-                                    <i class="fas fa-cogs text-teal-500"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Service Management</h4>
-                                    <p class="text-gray-700 text-sm">Verify that required services are running on correct ports.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-3 flex items-center">
-                        <i class="fas fa-lightbulb text-blue-500 mr-2"></i> Real-World Scenario
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h4 class="font-medium text-gray-800 mb-2">1. Problem</h4>
-                            <p class="text-gray-700 text-sm">Company notices unusual network traffic from an internal IP.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h4 class="font-medium text-gray-800 mb-2">2. NMap Solution</h4>
-                            <p class="text-gray-700 text-sm">Run <code class="bg-gray-100 px-1 rounded">nmap -sV -O 192.168.1.100</code> to identify device and services.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h4 class="font-medium text-gray-800 mb-2">3. Outcome</h4>
-                            <p class="text-gray-700 text-sm">Discovered unauthorized IoT device with default credentials, removed from network.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Getting Started Tab -->
-        <div id="getting-started" class="tab-content">
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-                    <i class="fas fa-rocket text-red-500 mr-2"></i> Getting Started with NMap
-                </h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Installation Guide</h3>
-                        <div class="space-y-4">
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1 flex items-center">
-                                    <i class="fab fa-windows text-blue-400 mr-2"></i> Windows
-                                </h4>
-                                <p class="text-gray-700 text-sm mb-2">Download installer from nmap.org or use Windows Package Manager:</p>
-                                <div class="terminal p-3 rounded">
-                                    <div class="command-line">
-                                        <span class="prompt">></span>
-                                        <span class="command">winget install nmap.nmap</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1 flex items-center">
-                                    <i class="fab fa-linux text-black mr-2"></i> Linux
-                                </h4>
-                                <p class="text-gray-700 text-sm mb-2">Use your distribution's package manager:</p>
-                                <div class="terminal p-3 rounded">
-                                    <div class="command-line">
-                                        <span class="prompt">$</span>
-                                        <span class="command">sudo apt install nmap  # Debian/Ubuntu</span>
-                                    </div>
-                                    <div class="command-line mt-1">
-                                        <span class="prompt">$</span>
-                                        <span class="command">sudo dnf install nmap  # Fedora/RHEL</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1 flex items-center">
-                                    <i class="fab fa-apple text-gray-600 mr-2"></i> macOS
-                                </h4>
-                                <p class="text-gray-700 text-sm mb-2">Use Homebrew package manager:</p>
-                                <div class="terminal p-3 rounded">
-                                    <div class="command-line">
-                                        <span class="prompt">$</span>
-                                        <span class="command">brew install nmap</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Basic Commands</h3>
-                        <div class="space-y-4">
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">Quick Scan</h4>
-                                <div class="terminal p-3 rounded">
-                                    <div class="command-line">
-                                        <span class="prompt">$</span>
-                                        <span class="command">nmap -F 192.168.1.1</span>
-                                    </div>
-                                </div>
-                                <p class="text-gray-700 text-sm mt-2">Fast scan of common ports (top 100)</p>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">Detailed Scan</h4>
-                                <div class="terminal p-3 rounded">
-                                    <div class="command-line">
-                                        <span class="prompt">$</span>
-                                        <span class="command">nmap -sV -O scanme.nmap.org</span>
-                                    </div>
-                                </div>
-                                <p class="text-gray-700 text-sm mt-2">Service version and OS detection</p>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">Network Range</h4>
-                                <div class="terminal p-3 rounded">
-                                    <div class="command-line">
-                                        <span class="prompt">$</span>
-                                        <span class="command">nmap 192.168.1.1-100</span>
-                                    </div>
-                                </div>
-                                <p class="text-gray-700 text-sm mt-2">Scan first 100 IPs in subnet</p>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <h4 class="font-medium text-gray-800 mb-1">Save Results</h4>
-                                <div class="terminal p-3 rounded">
-                                    <div class="command-line">
-                                        <span class="prompt">$</span>
-                                        <span class="command">nmap -oN scan_results.txt 192.168.1.1</span>
-                                    </div>
-                                </div>
-                                <p class="text-gray-700 text-sm mt-2">Save output to text file</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- New Practical Examples Section -->
-        <div class="mb-8">
-            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                <i class="fas fa-terminal text-purple-500 mr-2"></i> Practical NMap Examples
-            </h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Host Discovery -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">Host Discovery</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap -sn 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Ping scan to discover live hosts without port scanning</p>
-                </div>
-                
-                <!-- Port Scanning -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">Basic Port Scan</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Scans most common ports (top 1000)</p>
-                </div>
-                
-                <!-- Specific Port Scan -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">Specific Port Scan</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap -p 80 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Scan only port 80 (HTTP)</p>
-                </div>
-                
-                <!-- Service Detection -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">Service Detection</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap -sV 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Detects service/version info on open ports</p>
-                </div>
-                
-                <!-- OS Detection -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">OS Detection</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap -O 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Attempts to identify the operating system</p>
-                </div>
-                
-                <!-- Aggressive Scan -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">Aggressive Scan</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap -A 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Enables OS detection, version detection, script scanning, and traceroute</p>
-                </div>
-                
-                <!-- UDP Scan -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">UDP Scan</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap -sU 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Scans UDP ports (often requires root privileges)</p>
-                </div>
-                
-                <!-- Stealth Scan -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">Stealth Scan (SYN)</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap -sS 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Half-open scan that doesn't complete TCP connections</p>
-                </div>
-                
-                <!-- TCP Connect Scan -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">TCP Connect Scan</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap -sT 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Completes full TCP connections (less stealthy than SYN)</p>
-                </div>
-                
-                <!-- NSE Script Scan -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">NSE Script Scan</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap --script ssl-heartbleed 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Runs specific Nmap Scripting Engine (NSE) scripts</p>
-                </div>
-                
-                <!-- Fragmentation Scan -->
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 class="font-medium text-gray-800 mb-1">Fragmentation Scan</h4>
-                    <div class="terminal p-3 rounded">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">nmap -f 192.168.1.103</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 text-sm mt-2">Uses tiny fragmented IP packets to evade detection</p>
-                </div>
-            </div>
-        </div>
-
-        <br>
-
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-terminal text-purple-500 mr-2"></i>NMap Terminal
-                    </h3>
-                    <div class="relative w-3/5">  <!-- Changed container to relative -->
-                        <div class="terminal rounded-br-xl resize-x min-w-[400px] overflow-hidden">  <!-- Added resize classes -->
-                            <div class="terminal-header cursor-move" id="terminal-header">  <!-- Added cursor-move -->
-                                <div class="terminal-dot red"></div>
-                                <div class="terminal-dot yellow"></div>
-                                <div class="terminal-dot green"></div>
-                                <div class="terminal-title">nirajan@ubuntu: ~</div>
-                            </div>
-                            <div class="terminal-body" style="min-height: 300px">
-                                <div id="interactive-terminal">
-                                    <div class="command-line">
-                                        <span class="prompt">
-                                            <span class="user">nirajan</span>
-                                            <span class="host">ubuntu</span>
-                                            <span class="path">~</span>
-                                            <span class="prompt-end"></span>
-                                        </span>
-                                        <input type="text" id="nmap-command" class="bg-transparent border-none text-white w-3/4 font-mono focus:outline-none ml-2" placeholder="type 'nmap --help' for commands" autocomplete="on">
-                                    </div>
-                                    <div id="command-output" class="output mt-2"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Resize handle -->
-                        <div class="absolute right-0 top-0 bottom-0 w-2 cursor-col-resize" id="resize-handle"></div>
-                    </div>
-
-<br>
-
-                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
-                    <h3 class="text-xl font-semibold text-green-800 mb-3 flex items-center">
-                        <i class="fas fa-graduation-cap text-green-500 mr-2"></i> Learning Resources
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <a href="https://nmap.org/book/toc.html" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
-                            <h4 class="font-medium text-gray-800 mb-2 flex items-center">
-                                <i class="fas fa-book text-blue-500 mr-2"></i> Official NMap Book
-                            </h4>
-                            <p class="text-gray-700 text-sm">Free online guide by NMap author</p>
-                        </a>
-                        <a href="https://nmap.org/nsedoc/" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
-                            <h4 class="font-medium text-gray-800 mb-2 flex items-center">
-                                <i class="fas fa-scroll text-purple-500 mr-2"></i> NSE Documentation
-                            </h4>
-                            <p class="text-gray-700 text-sm">Scripting engine reference</p>
-                        </a>
-                        <a href="https://tryhackme.com/room/furthernmap" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
-                            <h4 class="font-medium text-gray-800 mb-2 flex items-center">
-                                <i class="fas fa-gamepad text-red-500 mr-2"></i> TryHackMe NMap Room
-                            </h4>
-                            <p class="text-gray-700 text-sm">Interactive learning platform</p>
-                        </a>
-                    </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-gray-900 border border-green-500">
+                        <thead class="bg-gray-800">
+                            <tr>
+                                <th class="py-2 px-4 border-b border-green-500 text-left">Scan Type</th>
+                                <th class="py-2 px-4 border-b border-green-500 text-left">Command</th>
+                                <th class="py-2 px-4 border-b border-green-500 text-left">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-800">
+                                <td class="py-2 px-4 border-b border-green-500">TCP SYN Scan</td>
+                                <td class="py-2 px-4 border-b border-green-500 font-mono">-sS</td>
+                                <td class="py-2 px-4 border-b border-green-500">Half-open scan, doesn't complete TCP handshake</td>
+                            </tr>
+                            <tr class="hover:bg-gray-800">
+                                <td class="py-2 px-4 border-b border-green-500">UDP Scan</td>
+                                <td class="py-2 px-4 border-b border-green-500 font-mono">-sU</td>
+                                <td class="py-2 px-4 border-b border-green-500">Scans UDP ports</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
         <!-- Movies Tab -->
-        <div id="movies" class="tab-content">
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-                    <i class="fas fa-film text-purple-500 mr-2"></i> NMap in Movies and Pop Culture
+        <div id="movies" class="tab-content active">
+            <div class="bg-black rounded-none border border-green-500 p-6 mb-8">
+                <h2 class="text-2xl font-bold text-green-500 mb-4 flex items-center">
+                    <i class="fas fa-film text-purple-500 mr-2"></i> NMap in Movies
                 </h2>
                 
-                <div class="mb-8">
-                    <p class="text-gray-700 mb-6">
-                        NMap has become a staple in Hollywood's portrayal of hacking and cybersecurity. While often dramatized,
-                        these appearances have contributed to NMap's recognition in popular culture. Below are some notable examples
-                        where NMap was featured in films and TV shows.
-                    </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- The Matrix Reloaded -->
+                    <div class="border border-green-500 rounded-lg overflow-hidden hover:shadow-lg hover:shadow-green-500 transition">
+                        <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-4xl">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">The Matrix Reloaded (2003)</h3>
+                            <p class="text-sm">
+                                Trinity uses NMap to scan a power plant's network in one of the most famous hacking scenes in cinema history.
+                            </p>
+                            <div class="mt-2 text-xs text-gray-400">
+                                <i class="fas fa-clock mr-1"></i> Scene time: 1:12:35
+                            </div>
+                        </div>
+                    </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <!-- The Matrix Reloaded -->
-                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
-                            <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-4xl">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg text-gray-800 mb-2">The Matrix Reloaded (2003)</h3>
-                                <p class="text-gray-700 text-sm">
-                                    In this iconic scene, Trinity uses NMap to scan a power plant's network before hacking into it.
-                                    The sequence shows realistic command-line usage, though the scanning speed is highly exaggerated.
-                                    This was one of the first major Hollywood films to feature a real hacking tool.
-                                </p>
-                                <div class="mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-clock mr-1"></i> Scene time: 1:12:35
-                                </div>
+                    <!-- Live Free or Die Hard -->
+                    <div class="border border-green-500 rounded-lg overflow-hidden hover:shadow-lg hover:shadow-green-500 transition">
+                        <div class="h-48 bg-gradient-to-r from-blue-500 to-teal-500 flex items-center justify-center text-white text-4xl">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">Live Free or Die Hard (2007)</h3>
+                            <p class="text-sm">
+                                Features NMap as part of a cyber attack on U.S. infrastructure during the "fire sale" sequence.
+                            </p>
+                            <div class="mt-2 text-xs text-gray-400">
+                                <i class="fas fa-clock mr-1"></i> Scene time: 0:38:22
                             </div>
                         </div>
-                        
-                        <!-- Live Free or Die Hard -->
-                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
-                            <div class="h-48 bg-gradient-to-r from-blue-500 to-teal-500 flex items-center justify-center text-white text-4xl">
-                                <i class="fas fa-user-secret"></i>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg text-gray-800 mb-2">Live Free or Die Hard (2007)</h3>
-                                <p class="text-gray-700 text-sm">
-                                    The hacker character Matt Farrell uses NMap as part of a cyber attack on U.S. infrastructure.
-                                    The film portrays NMap as part of a sophisticated hacker's toolkit during the "fire sale" sequence.
-                                    While the overall scenario is unrealistic, the tool usage itself is accurate.
-                                </p>
-                                <div class="mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-clock mr-1"></i> Scene time: 0:38:22
-                                </div>
+                    </div>
+                    
+                    <!-- The Girl with the Dragon Tattoo -->
+                    <div class="border border-green-500 rounded-lg overflow-hidden hover:shadow-lg hover:shadow-green-500 transition">
+                        <div class="h-48 bg-gradient-to-r from-red-500 to-orange-500 flex items-center justify-center text-white text-4xl">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">The Girl with the Dragon Tattoo (2011)</h3>
+                            <p class="text-sm">
+                                Lisbeth Salander uses NMap during her investigation to scan corporate networks.
+                            </p>
+                            <div class="mt-2 text-xs text-gray-400">
+                                <i class="fas fa-clock mr-1"></i> Scene time: 1:05:10
                             </div>
                         </div>
-                        
-                        <!-- The Girl with the Dragon Tattoo -->
-                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
-                            <div class="h-48 bg-gradient-to-r from-red-500 to-orange-500 flex items-center justify-center text-white text-4xl">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg text-gray-800 mb-2">The Girl with the Dragon Tattoo (2011)</h3>
-                                <p class="text-gray-700 text-sm">
-                                    Lisbeth Salander uses NMap during her investigation to scan corporate networks.
-                                    The David Fincher adaptation shows a more realistic pace of network scanning compared to
-                                    other films, with Salander waiting for results and interpreting them carefully.
-                                </p>
-                                <div class="mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-clock mr-1"></i> Scene time: 1:05:10
-                                </div>
-                            </div>
+                    </div>
+                    
+                    <!-- Snowden -->
+                    <div class="border border-green-500 rounded-lg overflow-hidden hover:shadow-lg hover:shadow-green-500 transition">
+                        <div class="h-48 bg-gradient-to-r from-green-500 to-blue-500 flex items-center justify-center text-white text-4xl">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        
-                        <!-- Snowden (2016) -->
-                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
-                            <div class="h-48 bg-gradient-to-r from-green-500 to-blue-500 flex items-center justify-center text-white text-4xl">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg text-gray-800 mb-2">Snowden (2016)</h3>
-                                <p class="text-gray-700 text-sm">
-                                    This biographical film shows Edward Snowden using NMap as part of his security assessments.
-                                    The Oliver Stone film includes accurate depictions of network scanning tools being used
-                                    for legitimate security testing purposes, not just hacking.
-                                </p>
-                                <div class="mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-clock mr-1"></i> Scene time: 0:52:45
-                                </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">Snowden (2016)</h3>
+                            <p class="text-sm">
+                                Shows Edward Snowden using NMap as part of his security assessments.
+                            </p>
+                            <div class="mt-2 text-xs text-gray-400">
+                                <i class="fas fa-clock mr-1"></i> Scene time: 0:52:45
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-tv text-blue-500 mr-2"></i> NMap in Television Shows
-                    </h3>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- Mr. Robot -->
-                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
-                            <div class="h-48 bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white text-4xl">
-                                <i class="fas fa-tv"></i>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg text-gray-800 mb-2">Mr. Robot (2015-2019)</h3>
-                                <p class="text-gray-700 text-sm">
-                                    The show frequently features realistic hacking scenes, with NMap appearing in several episodes.
-                                    The technical advisor ensured accurate portrayal of tools and techniques.
-                                    Particularly notable is the episode where Elliot uses NMap for initial reconnaissance.
-                                </p>
-                                <div class="mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-tag mr-1"></i> Featured in multiple episodes
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- CSI: Cyber -->
-                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
-                            <div class="h-48 bg-gradient-to-r from-yellow-500 to-red-500 flex items-center justify-center text-white text-4xl">
-                                <i class="fas fa-search"></i>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg text-gray-800 mb-2">CSI: Cyber (2015-2016)</h3>
-                                <p class="text-gray-700 text-sm">
-                                    This CSI spinoff featured NMap in several cybercrime investigations.
-                                    While the show took creative liberties with forensic procedures,
-                                    its use of NMap for network analysis was generally accurate.
-                                </p>
-                                <div class="mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-tag mr-1"></i> Season 1, Episode 5
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Scorpion -->
-                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
-                            <div class="h-48 bg-gradient-to-r from-pink-500 to-rose-500 flex items-center justify-center text-white text-4xl">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg text-gray-800 mb-2">Scorpion (2014-2018)</h3>
-                                <p class="text-gray-700 text-sm">
-                                    This show about geniuses solving complex problems featured NMap in several episodes.
-                                    The "hacking" scenes are highly dramatized, but the show did use real tools like NMap
-                                    in its technical sequences.
-                                </p>
-                                <div class="mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-tag mr-1"></i> Season 2, Episode 15
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
-                    <h3 class="text-xl font-semibold text-purple-800 mb-3 flex items-center">
+                <div class="mt-8 bg-gray-900 border border-green-500 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-green-500 mb-3 flex items-center">
                         <i class="fas fa-quote-left text-purple-500 mr-2"></i> Hollywood vs Reality
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <h4 class="font-medium text-gray-800 mb-2">Movie Portrayal</h4>
-                            <ul class="list-disc pl-5 text-gray-700 space-y-2">
-                                <li>Instantaneous results with flashy visuals and 3D graphics</li>
-                                <li>Magically bypasses all security measures in seconds</li>
-                                <li>Used to "hack into the mainframe" with a single command</li>
-                                <li>Often shows unrealistic network visualizations</li>
-                                <li>Characters never wait for scans to complete</li>
+                            <h4 class="font-medium mb-2">Movie Portrayal</h4>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Instantaneous results with flashy visuals</li>
+                                <li>Magically bypasses all security measures</li>
+                                <li>Used to "hack into the mainframe" in seconds</li>
                             </ul>
                         </div>
                         <div>
-                            <h4 class="font-medium text-gray-800 mb-2">Real-World Usage</h4>
-                            <ul class="list-disc pl-5 text-gray-700 space-y-2">
-                                <li>Scans take time depending on network size and options used</li>
-                                <li>Just a reconnaissance tool, not an exploit tool</li>
+                            <h4 class="font-medium mb-2">Real-World Usage</h4>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Scans take time depending on network size</li>
+                                <li>Just a reconnaissance tool, not an exploit</li>
                                 <li>Output is text-based unless processed by other tools</li>
-                                <li>Requires careful interpretation of results</li>
-                                <li>Often run multiple times with different options</li>
-                                <li>Ethical hackers always get proper authorization first</li>
                             </ul>
                         </div>
-                    </div>
-                    
-                    <div class="mt-6 bg-white p-4 rounded-lg border border-purple-100">
-                        <h4 class="font-medium text-gray-800 mb-2 flex items-center">
-                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i> Did You Know?
-                        </h4>
-                        <p class="text-gray-700">
-                            The appearance of NMap in <span class="font-semibold">The Matrix Reloaded</span> led to a significant 
-                            increase in downloads and interest in the tool. Creator Gordon Lyon (Fyodor) reported that 
-                            website traffic increased fivefold after the movie's release.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -1106,32 +341,25 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
                     <p class="text-green-600 text-sm mt-1">Educational resource for network security professionals.</p>
                 </div>
                 <div class="flex space-x-4">
-                    <a href="https://nmap.org" target="_blank" class="text-gray-400 hover:text-green-500 transition">
+                    <a href="https://nmap.org" target="_blank" class="hover:text-green-300 transition">
                         <i class="fas fa-globe text-xl"></i>
                     </a>
-                    <a href="https://github.com/nmap/nmap" target="_blank" class="text-gray-400 hover:text-green-500 transition">
+                    <a href="https://github.com/nmap/nmap" target="_blank" class="hover:text-green-300 transition">
                         <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="https://twitter.com/nmap" target="_blank" class="text-gray-400 hover:text-green-500 transition">
-                        <i class="fab fa-twitter text-xl"></i>
                     </a>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-6 pt-6 text-center text-gray-500 text-sm">
-                <p>This is an educational content tool guide only. Always get proper authorization and written consent before scanning networks.</p>
-
-                <br>
-
-                <p class="mt-2 text-sm text-gray-500">
-                    &copy; 2025 Nirajan Dhakal. All Rights Reserved. 
-                    <br class="md:hidden">
-                    NMap&trade; is a registered trademark of Gordon Lyon (Fyodor).
+            <div class="border-t border-gray-800 mt-6 pt-6 text-center text-sm">
+                <p>This is an educational content tool guide only. Always get proper authorization before scanning networks.</p>
+                <p class="mt-2">
+                    &copy; 2025 NMap Web Guide. NMap&trade; is a registered trademark of Gordon Lyon.
                 </p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Tab functionality
         function showTab(tabId) {
             // Hide all tab contents
             document.querySelectorAll('.tab-content').forEach(tab => {
@@ -1150,351 +378,68 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
             event.target.classList.add('active');
         }
 
+        // Set movies tab as active by default
         document.addEventListener('DOMContentLoaded', function() {
-    const commandInput = document.getElementById('nmap-command');
-    const commandOutput = document.getElementById('command-output');
-    let commandHistory = [];
-    let historyIndex = -1;
-
-    // Focus the input immediately
-    commandInput.focus();
-
-    // ANSI color codes for terminal output
-    const Colors = {
-        BLUE: '\x1b[94m',
-        CYAN: '\x1b[96m',
-        GREEN: '\x1b[92m',
-        YELLOW: '\x1b[93m',
-        RED: '\x1b[91m',
-        BOLD: '\x1b[1m',
-        UNDERLINE: '\x1b[4m',
-        RESET: '\x1b[0m'
-    };
-
-    // Helper functions for styled output
-    function printHeader(text) {
-        appendOutput(`${Colors.BLUE}${Colors.BOLD}${Colors.UNDERLINE}${text}${Colors.RESET}\n`);
-    }
-    
-    function printSection(text) {
-        appendOutput(`${Colors.CYAN}${Colors.BOLD}--- ${text} ---${Colors.RESET}\n`);
-    }
-    
-    function printSuccess(text) {
-        appendOutput(`${Colors.GREEN}${text}${Colors.RESET}\n`);
-    }
-    
-    function printWarning(text) {
-        appendOutput(`${Colors.YELLOW}${text}${Colors.RESET}\n`);
-    }
-    
-    function printError(text) {
-        appendOutput(`${Colors.RED}${Colors.BOLD}${text}${Colors.RESET}\n`);
-    }
-    
-    function printPlain(text) {
-        appendOutput(`${text}\n`);
-    }
-    
-    function appendOutput(text) {
-        const outputLine = document.createElement('div');
-        outputLine.className = 'output';
-        outputLine.textContent = text.replace(/\x1b\[\d+m/g, ''); // Remove ANSI codes for HTML display
-        commandOutput.appendChild(outputLine);
-        commandOutput.scrollTop = commandOutput.scrollHeight;
-    }
-
-    // Command processing
-    function processCommand(command) {
-        // Add to history
-        if (command.trim()) {
-            commandHistory.push(command);
-        }
-        
-        // Display the command
-        const cmdLine = document.createElement('div');
-        cmdLine.className = 'command-line';
-        cmdLine.innerHTML = `
-            <span class="prompt">
-                <span class="user">nirajan</span>
-                <span class="host">ubuntu</span>
-                <span class="path">~</span>
-                <span class="prompt-end"></span>
-            </span>
-            <span class="command">${command}</span>`;
-        commandOutput.appendChild(cmdLine);
-        
-        // Parse command
-        const args = command.trim().split(/\s+/);
-        const cmd = args[0].toLowerCase();
-        
-        if (cmd === 'decoy_scan' || cmd === './decoy_scan') {
-            simulateDecoyScanExecution(args.slice(1));
-        } else if (cmd === 'nmap' || cmd === './nmap') {
-            simulateNmapExecution(args.slice(1));
-        } else if (cmd === 'clear') {
-            commandOutput.innerHTML = '';
-        } else if (cmd === 'help' || cmd === '--help') {
-            showHelp();
-        } else if (cmd) {
-            printError(`Command not found: ${cmd}`);
-            printPlain(`Try 'help' for available commands`);
-        }
-    }
-
-    // Simulate nmap execution
-    function simulateNmapExecution(args) {
-        let output = '';
-        if (args.includes('--help') || args.includes('-h')) {
-            output = `NMap 7.92\nUsage: nmap [Scan Type(s)] [Options] {target specification}\n\nTARGET SPECIFICATION:\n  Can pass hostnames, IP addresses, networks, etc.\n  Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254\n\nSCAN TECHNIQUES:\n  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans\n  -sU: UDP Scan\n  -sN/sF/sX: TCP Null, FIN, and Xmas scans`;
-        } else {
-            const target = args.includes('scanme.nmap.org') ? 'scanme.nmap.org' : 
-                         args.includes('localhost') ? 'localhost' : '192.168.1.1';
-            output = `Starting Nmap 7.92 ( https://nmap.org ) at ${new Date().toLocaleString()}
-Nmap scan report for ${target} (${target === 'localhost' ? '127.0.0.1' : '45.33.32.156'})
-Host is up (0.0${Math.floor(Math.random() * 90) + 10}s latency).
-Not shown: ${Math.floor(Math.random() * 900) + 97} closed ports
-PORT     STATE    SERVICE
-22/tcp   open     ssh
-80/tcp   open     http
-443/tcp  ${Math.random() > 0.3 ? 'open' : 'filtered'}     https
-${args.includes('-sV') ? `
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/.
-Nmap done: 1 IP address (1 host up) scanned in ${(Math.random() * 5 + 2).toFixed(2)} seconds` : `
-Nmap done: 1 IP address (1 host up) scanned in ${(Math.random() * 3 + 0.5).toFixed(2)} seconds`}`;
-        }
-        
-        if (output) {
-            const outputDiv = document.createElement('div');
-            outputDiv.className = 'output';
-            outputDiv.textContent = output;
-            commandOutput.appendChild(outputDiv);
-            commandOutput.scrollTop = commandOutput.scrollHeight;
-        }
-    }
-
-    // Simulate the decoy_scan execution
-    function simulateDecoyScanExecution(args) {
-        // Simple argument parser
-        let targetIp = '';
-        let decoys = '';
-        let nmapOptions = [];
-        let outputFile = '';
-        let showHelp = false;
-        
-        for (let i = 0; i < args.length; i++) {
-            const arg = args[i];
-            
-            if (arg === '-d' || arg === '--decoys') {
-                decoys = args[++i] || '';
-            } else if (arg === '-o' || arg === '--nmap-options') {
-                // Capture remaining args as nmap options
-                nmapOptions = args.slice(i + 1);
-                break;
-            } else if (arg === '-f' || arg === '--output-file') {
-                outputFile = args[++i] || '';
-            } else if (arg === '--help') {
-                showHelp = true;
-            } else if (!targetIp && !arg.startsWith('-')) {
-                targetIp = arg;
-            }
-        }
-        
-        if (showHelp || !targetIp && !decoys) {
-            showDecoyScanHelp();
-            return;
-        }
-        
-        if (!targetIp) {
-            printError("Error: Target IP address is required");
-            return;
-        }
-        
-        if (!decoys) {
-            printError("Error: At least one decoy IP is required (use -d/--decoys)");
-            return;
-        }
-        
-        // Simulate the scan
-        printHeader("Nmap Decoy Scan Script");
-        printSection("Scan Parameters");
-        printSuccess(`Target IP: ${Colors.BOLD}${targetIp}${Colors.RESET}`);
-        printSuccess(`Decoy Inputs: ${Colors.BOLD}${decoys}${Colors.RESET}`);
-        
-        // Parse decoys (simplified version)
-        const parsedDecoys = decoys.split(',').map(d => d.trim()).filter(d => d);
-        printSuccess(`Parsed Decoy IPs: ${Colors.BOLD}${parsedDecoys.join(', ')}${Colors.RESET}`);
-        
-        if (nmapOptions.length > 0) {
-            printSuccess(`Additional Nmap Options: ${Colors.BOLD}${nmapOptions.join(' ')}${Colors.RESET}`);
-        }
-        
-        if (outputFile) {
-            printSuccess(`Output will be saved to: ${Colors.BOLD}${outputFile}${Colors.RESET}`);
-        }
-        
-        printPlain("");
-        printWarning("Note: Running Nmap with decoys typically requires root/administrator privileges");
-        printPlain("");
-        
-        printSection("Nmap Command Execution");
-        const nmapCmd = [
-            "nmap",
-            "-Pn",
-            "-sS",
-            "-D", decoys,
-            "-v",
-            ...nmapOptions,
-            targetIp
-        ].join(' ');
-        
-        printSuccess(`Executing: ${Colors.BOLD}${nmapCmd}${Colors.RESET}`);
-        printPlain("-".repeat(70));
-        
-        // Simulate nmap output
-        setTimeout(() => {
-            printSection("Nmap Standard Output");
-            printPlain(`Starting Nmap 7.92 ( https://nmap.org ) at ${new Date().toLocaleString()}`);
-            printPlain(`Nmap scan report for ${targetIp}`);
-            printPlain("Host is up (0.045s latency).");
-            printPlain("");
-            printPlain("PORT     STATE    SERVICE");
-            printPlain("22/tcp   open     ssh");
-            printPlain("80/tcp   open     http");
-            printPlain("443/tcp  filtered https");
-            printPlain("");
-            printPlain("Nmap done: 1 IP address (1 host up) scanned in 2.45 seconds");
-            
-            if (outputFile) {
-                printSection("Output File");
-                printSuccess(`Scan results saved to ${Colors.BOLD}${outputFile}${Colors.RESET}`);
+            // If no tab is active, set movies tab as default
+            if (!document.querySelector('.tab-content.active')) {
+                document.getElementById('movies').classList.add('active');
+                document.querySelector('[onclick="showTab(\'movies\')"]').classList.add('active');
             }
             
-            printSection("Scan Finished");
-            printSuccess("Nmap decoy scan completed.");
-            printSection("Script Execution Complete");
-            printSuccess("Thank you for using the Nmap Decoy Scan script!");
-        }, 800);
-    }
-    
-    // Show help for the decoy_scan tool
-    function showDecoyScanHelp() {
-        printHeader("Nmap Decoy Scan Script Help");
-        printPlain(`${Colors.BOLD}Usage:${Colors.RESET} decoy_scan TARGET_IP [OPTIONS]`);
-        printPlain("");
-        printPlain(`${Colors.BOLD}Required arguments:${Colors.RESET}`);
-        printPlain(`  TARGET_IP            The IP address to scan`);
-        printPlain("");
-        printPlain(`${Colors.BOLD}Decoy options:${Colors.RESET}`);
-        printPlain(`  -d, --decoys IP_LIST Comma-separated list of decoy IPs (e.g., '192.168.1.1,10.0.0.1-5,ME')`);
-        printPlain(`                        Use 'ME' to include your real IP. Ranges are inclusive.`);
-        printPlain("");
-        printPlain(`${Colors.BOLD}Other options:${Colors.RESET}`);
-        printPlain(`  -o, --nmap-options   Additional Nmap options (e.g., -p 80,443 -A)`);
-        printPlain(`  -f, --output-file    Save output to file`);
-        printPlain(`  --help               Show this help message`);
-        printPlain("");
-        printWarning("Note: This tool requires Nmap to be installed and typically needs root privileges.");
-    }
-    
-    // Show general help
-    function showHelp() {
-        printPlain(`${Colors.BOLD}Available commands:${Colors.RESET}`);
-        printPlain(`  decoy_scan      Run an Nmap decoy scan`);
-        printPlain(`  nmap            Run Nmap network scanner`);
-        printPlain(`  clear           Clear the terminal`);
-        printPlain(`  help            Show this help message`);
-    }
-    
-    // Event listeners
-    commandInput.addEventListener('keydown', function(e) {
-        // Command history with up/down arrows
-        if (e.key === 'ArrowUp') {
-            if (historyIndex < commandHistory.length - 1) {
-                historyIndex++;
-                this.value = commandHistory[commandHistory.length - 1 - historyIndex];
-            }
-            e.preventDefault();
-        } else if (e.key === 'ArrowDown') {
-            if (historyIndex > 0) {
-                historyIndex--;
-                this.value = commandHistory[commandHistory.length - 1 - historyIndex];
-            } else {
-                historyIndex = -1;
-                this.value = '';
-            }
-            e.preventDefault();
-        } else if (e.key === 'Enter') {
-            const command = this.value.trim();
-            this.value = '';
-            historyIndex = -1;
+            // Terminal functionality
+            const commandInput = document.getElementById('nmap-command');
+            const commandOutput = document.getElementById('command-output');
             
-            if (command) {
-                processCommand(command);
+            if (commandInput && commandOutput) {
+                commandInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        const command = this.value;
+                        this.value = '';
+                        
+                        // Display the command
+                        const cmdLine = document.createElement('div');
+                        cmdLine.className = 'command-line';
+                        cmdLine.innerHTML = `
+                            <span class="prompt">
+                                <span class="user">user</span>
+                                <span class="host">ubuntu</span>
+                                <span class="path">~</span>
+                                <span class="prompt-end"></span>
+                            </span>
+                            <span class="command">${command}</span>`;
+                        commandOutput.appendChild(cmdLine);
+                        
+                        // Process command
+                        if (command.startsWith('nmap')) {
+                            const output = `Starting Nmap 7.92 ( https://nmap.org ) at ${new Date().toLocaleString()}
+Nmap scan report for example.com (93.184.216.34)
+Host is up (0.045s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE
+80/tcp  open  http
+443/tcp open  https
+
+Nmap done: 1 IP address (1 host up) scanned in 2.45 seconds`;
+                            
+                            const outputDiv = document.createElement('div');
+                            outputDiv.className = 'output';
+                            outputDiv.textContent = output;
+                            commandOutput.appendChild(outputDiv);
+                        } else if (command === 'clear') {
+                            commandOutput.innerHTML = '';
+                        } else {
+                            const outputDiv = document.createElement('div');
+                            outputDiv.className = 'output';
+                            outputDiv.textContent = `Command not found: ${command}`;
+                            commandOutput.appendChild(outputDiv);
+                        }
+                        
+                        // Scroll to bottom
+                        commandOutput.scrollTop = commandOutput.scrollHeight;
+                    }
+                });
             }
-        }
-    });
-
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const terminal = document.querySelector('.terminal');
-    const handle = document.getElementById('resize-handle');
-    const header = document.getElementById('terminal-header');
-    
-    let isResizing = false;
-    let startX, startWidth;
-
-    // Mouse down event for the handle
-    handle.addEventListener('mousedown', function(e) {
-        isResizing = true;
-        startX = e.clientX;
-        startWidth = parseInt(document.defaultView.getComputedStyle(terminal).width, 10);
-        e.preventDefault();
-    });
-
-    // Mouse move event for resizing
-    document.addEventListener('mousemove', function(e) {
-        if (!isResizing) return;
-        const width = startWidth + e.clientX - startX;
-        terminal.style.width = width + 'px';
-    });
-
-    // Mouse up event to stop resizing
-    document.addEventListener('mouseup', function() {
-        isResizing = false;
-    });
-
-    // Make the header draggable for repositioning
-    let isDragging = false;
-    let startPosX, startPosY, startTerminalLeft, startTerminalTop;
-
-    header.addEventListener('mousedown', function(e) {
-        if (e.target === this) {
-            isDragging = true;
-            startPosX = e.clientX;
-            startPosY = e.clientY;
-            const terminalRect = terminal.getBoundingClientRect();
-            startTerminalLeft = terminalRect.left;
-            startTerminalTop = terminalRect.top;
-            terminal.style.position = 'absolute';
-            terminal.style.zIndex = '1000';
-            e.preventDefault();
-        }
-    });
-
-    document.addEventListener('mousemove', function(e) {
-        if (!isDragging) return;
-        const dx = e.clientX - startPosX;
-        const dy = e.clientY - startPosY;
-        terminal.style.left = (startTerminalLeft + dx) + 'px';
-        terminal.style.top = (startTerminalTop + dy) + 'px';
-    });
-
-    document.addEventListener('mouseup', function() {
-        isDragging = false;
-    });
-});
+        });
     </script>
 </body>
 </html>
