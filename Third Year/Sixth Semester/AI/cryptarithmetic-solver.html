@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cryptarithmetic Solver</title>
+    <title>Cryptarithmetic Solver | Nirajan Dhakal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome CDN for icons -->
@@ -12,7 +12,7 @@
         /* Custom styles to enhance Tailwind */
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Soft gradient background */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,14 +21,22 @@
         }
 
         .card {
-            background-color: #ffffff;
-            border-radius: 1.5rem; /* More rounded corners */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
             padding: 2.5rem;
-            max-width: 90%; /* Fluid width */
-            width: 600px; /* Max width for larger screens */
+            max-width: 90%;
+            width: 600px;
             transition: all 0.3s ease-in-out;
-            border: 1px solid #e2e8f0; /* Subtle border */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+        }
+
+        @media (max-width: 640px) {
+            .card {
+                padding: 1.75rem;
+                border-radius: 1rem;
+            }
         }
 
         .input-group {
@@ -47,17 +55,19 @@
         .input-field {
             flex-grow: 1;
             padding: 0.75rem 1rem;
-            border: 1px solid #cbd5e0;
-            border-radius: 0.75rem; /* Rounded input fields */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0.75rem;
             font-size: 1.1rem;
-            color: #2d3748;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
             outline: none;
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
 
         .input-field:focus {
-            border-color: #4299e1; /* Blue focus border */
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3); /* Blue glow on focus */
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         /* Input error state */
@@ -105,38 +115,41 @@
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, #4299e1, #63b3ed); /* Blue gradient */
-            color: white;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            color: #2d3748;
+            border: none;
         }
 
         .btn-primary:hover {
-            background: linear-gradient(45deg, #3182ce, #4299e1);
+            background: linear-gradient(45deg, #fad0c4, #ff9a9e);
+            transform: translateY(-3px);
         }
 
         .btn-secondary {
-            background: linear-gradient(45deg, #a0aec0, #cbd5e0); /* Gray gradient */
-            color: #2d3748;
+            background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+            color: white;
+            border: none;
         }
 
         .btn-secondary:hover {
-            background: linear-gradient(45deg, #718096, #a0aec0);
-            color: white;
+            background: linear-gradient(45deg, #fbc2eb, #a18cd1);
+            transform: translateY(-3px);
         }
 
         .output-section {
-            background-color: #f7fafc;
-            border: 1px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 1rem;
             padding: 2rem;
             margin-top: 2rem;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* Inner shadow */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             min-height: 200px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            /* Animation for appearance */
+            backdrop-filter: blur(5px);
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInSlideUp 0.6s ease-out forwards;
@@ -154,14 +167,15 @@
         }
 
         .output-equation {
-            font-family: 'Courier New', monospace; /* Monospaced for alignment */
+            font-family: 'Courier New', monospace;
             font-size: 1.8rem;
             font-weight: 700;
-            color: #2c5282; /* Darker blue */
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             margin-bottom: 1.5rem;
             line-height: 1.4;
-            display: flex; /* Use flex for side-by-side display of words and numbers */
-            gap: 2rem; /* Space between word and number representation */
+            display: flex;
+            gap: 2rem;
             justify-content: center;
         }
 
@@ -208,24 +222,26 @@
         }
 
         .mapping-item {
-            background-color: #edf2f7;
+            background: rgba(255, 255, 255, 0.2);
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
             font-weight: 600;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-            cursor: pointer; /* Make mapping items clickable */
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
         }
 
         .mapping-item:hover {
             transform: translateY(-3px);
-            background-color: #e2e8f0;
+            background: rgba(255, 255, 255, 0.3);
         }
         .mapping-item.highlight {
-            background-color: #4299e1; /* Blue highlight for mapping item */
-            color: white;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            color: #2d3748;
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.3);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
 
@@ -233,38 +249,55 @@
             position: fixed;
             top: 20px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(-20px);
             color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
             z-index: 1000;
-            display: none; /* Hidden by default */
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            font-size: 1rem;
+            font-size: 0.95rem;
             max-width: 90%;
             text-align: center;
-            /* Animation for appearance */
-            animation: slideInFromTop 0.4s ease-out forwards;
-            display: flex; /* Use flex for icon and text */
+            display: flex;
             align-items: center;
             gap: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            pointer-events: none;
         }
 
         .message-box.show {
-            display: flex; /* Use flex when showing */
             opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .message-box.hide {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
         }
 
         .message-box.info {
-            background-color: #2d3748; /* Dark background */
+            background-color: #3b82f6; /* Blue */
         }
         .message-box.success {
-            background-color: #48bb78; /* Green for success */
+            background-color: #10b981; /* Emerald */
         }
         .message-box.error {
-            background-color: #ef4444; /* Red for error */
+            background-color: #ef4444; /* Red */
+        }
+
+        /* Add subtle glow to messages */
+        .message-box {
+            backdrop-filter: blur(4px);
+        }
+        .message-box.info {
+            box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.5);
+        }
+        .message-box.success {
+            box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.5);
+        }
+        .message-box.error {
+            box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.5);
         }
 
         @keyframes slideInFromTop {
@@ -315,7 +348,7 @@
             <i class="fas fa-brain text-blue-500 mr-3"></i> Cryptarithmetic Solver
         </h1>
 
-        <p class="text-center text-gray-600 mb-8 text-lg">
+        <p class="text-center text-white-600 mb-8 text-lg">
             Enter your cryptarithmetic puzzle to find the unique digit assignments.
         </p>
 
@@ -397,34 +430,39 @@
          * @param {number} duration The duration in milliseconds to show the message.
          * @param {string} type The type of message ('info', 'success', 'error').
          */
-        function showMessage(message, duration = 3000, type = 'info') {
-            messageBox.textContent = ''; // Clear previous content
-            messageBox.className = 'message-box'; // Reset classes
-            messageBox.classList.add(type); // Add type class for styling
-
-            let iconClass = '';
-            if (type === 'success') {
-                iconClass = 'fas fa-check-circle';
-            } else if (type === 'error') {
-                iconClass = 'fas fa-times-circle';
-            } else {
-                iconClass = 'fas fa-info-circle';
+        function showMessage(message, duration = 2500, type = 'info') {
+            // Clear any existing timeout
+            if (messageBox.timeoutId) {
+                clearTimeout(messageBox.timeoutId);
             }
 
-            const iconElement = document.createElement('i');
-            iconElement.className = iconClass;
-            messageBox.appendChild(iconElement);
+            // Reset and prepare message box
+            messageBox.innerHTML = '';
+            messageBox.className = 'message-box';
+            messageBox.classList.add(type);
 
-            const textNode = document.createTextNode(message);
-            messageBox.appendChild(textNode);
+            // Set icon based on message type
+            const icons = {
+                info: 'fas fa-info-circle',
+                success: 'fas fa-check-circle',
+                error: 'fas fa-exclamation-circle'
+            };
+            const icon = document.createElement('i');
+            icon.className = icons[type] || icons.info;
+            messageBox.appendChild(icon);
 
-            // Ensure the message box is hidden before showing to re-trigger animation
-            messageBox.classList.remove('show');
-            // Force reflow to restart animation
-            void messageBox.offsetWidth;
+            // Add message text
+            messageBox.appendChild(document.createTextNode(message));
+
+            // Show with animation
+            messageBox.classList.remove('hide');
+            void messageBox.offsetWidth; // Trigger reflow
             messageBox.classList.add('show');
-            setTimeout(() => {
+
+            // Auto-hide after duration
+            messageBox.timeoutId = setTimeout(() => {
                 messageBox.classList.remove('show');
+                messageBox.classList.add('hide');
             }, duration);
         }
 
