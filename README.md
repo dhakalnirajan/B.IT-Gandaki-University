@@ -1,4 +1,6 @@
-# B.IT-Gandaki-University
+# BIT-Notes
+
+All the resource material contents, codes, lecture notes, and many more.
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://github.com/dhakalnirajan/B.IT-Gandaki-University/blob/main/LICENSE) &nbsp;
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/dhakalnirajan/B.IT-Gandaki-University/graphs/commit-activity) &nbsp;
