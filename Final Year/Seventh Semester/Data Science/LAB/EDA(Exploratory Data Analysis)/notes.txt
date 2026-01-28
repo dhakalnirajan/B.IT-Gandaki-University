@@ -1,0 +1,19 @@
+statistical summary
+pre-analysis technique
+data summerizing technique before fitting machine learning models
+major focus visualization
+It generates summary analysis
+
+Variability -> Data scatterness (how far the data are spread out from the mean value)
+
+Variance
+-if variance small, data value close to the mean
+-if variance large, data value varies a lot
+
+Standard Deviation
+-
+-
+
+Inter-Quartile Range(IQR)
+-
+-
