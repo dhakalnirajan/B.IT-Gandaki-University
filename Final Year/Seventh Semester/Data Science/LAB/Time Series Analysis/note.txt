@@ -1,0 +1,41 @@
+Time series analysis deals with data collected over time (seconds, days, months, years) and focuses on 
+understanding patterns, trends, and making future predictions.
+Time Series=Trend+Seasonality+Cyclic+Noise
+Models:
+-Naive forecasting method
+-Moving average method
+-LSTM
+
+
+1. Naive forecasting method
+-> Naïve forecasting is the simplest time series forecasting method.
+It assumes that the future value will be the same as the most recent observed value.
+
+Key Idea:
+“What happened last time will happen again.”
+No trend, no seasonality, no learning.
+
+2. Moving  Average method
+-> Moving Average (MA) is a basic time series forecasting and smoothing technique 
+that calculates the average of the last n observations to predict the next value.
+
+Key Idea:
+Recent values are more relevant than older ones, and averaging reduces random noise.
+
+3. LSTM (long Short-Term Memory)
+-> LSTM is a type of Recurrent Neural Network (RNN) designed to learn long-term dependencies in sequential data,
+making it very powerful for time series forecasting.
+
+Why LSTM?
+Traditional RNNs suffer from:
+Vanishing gradient problem
+Poor long-term memory
+✅ LSTM solves this using a special memory cell and gates.
+
+Key Idea:
+LSTM decides what to remember, what to forget, and what to output over time.
+
+#Conditional Probability and Baye's Theorem
+
+Baye's Theorem
+-> It is a fundamental framework for "updating beliefs" as new data arrives.
