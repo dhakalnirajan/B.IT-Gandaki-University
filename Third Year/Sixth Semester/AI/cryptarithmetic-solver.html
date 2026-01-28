@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptarithmetic Solver | Nirajan Dhakal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles to enhance Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+            padding: 2.5rem;
+            max-width: 90%;
+            width: 600px;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+        }
+
+        @media (max-width: 640px) {
+            .card {
+                padding: 1.75rem;
+                border-radius: 1rem;
+            }
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            min-width: 80px; /* Fixed width for labels */
+            font-weight: 600;
+            color: #4a5568;
+            margin-right: 0.5rem;
+        }
+
+        .input-field {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .input-field:focus {
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Input error state */
+        .input-field.error {
+            border-color: #ef4444; /* Red border for error */
+            animation: shake 0.3s; /* Shake animation */
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            color: #2d3748;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #fad0c4, #ff9a9e);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, #fbc2eb, #a18cd1);
+            transform: translateY(-3px);
+        }
+
+        .output-section {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .output-equation {
+            font-family: 'Courier New', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .output-equation .word-representation,
+        .output-equation .number-representation {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .output-equation pre {
+            margin: 0; /* Remove default pre margins */
+            padding: 0;
+        }
+
+        /* Styling for individual letters/digits in the equation */
+        .equation-char {
+            display: inline-block;
+            padding: 0 2px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            border-radius: 4px;
+        }
+        .equation-char:hover {
+            background-color: rgba(66, 153, 225, 0.2);
+            transform: translateY(-1px);
+        }
+        .equation-char.highlight {
+            background-color: #90cdf4; /* Lighter blue for highlight */
+            color: #1a202c; /* Darker text for contrast */
+            font-weight: bold;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.4);
+        }
+
+
+        .output-mapping {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: #4a5568;
+        }
+
+        .mapping-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+
+        .mapping-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .mapping-item.highlight {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            color: #2d3748;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .message-box {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            opacity: 0;
+            font-size: 0.95rem;
+            max-width: 90%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            pointer-events: none;
+        }
+
+        .message-box.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .message-box.hide {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+        }
+
+        .message-box.info {
+            background-color: #3b82f6; /* Blue */
+        }
+        .message-box.success {
+            background-color: #10b981; /* Emerald */
+        }
+        .message-box.error {
+            background-color: #ef4444; /* Red */
+        }
+
+        /* Add subtle glow to messages */
+        .message-box {
+            backdrop-filter: blur(4px);
+        }
+        .message-box.info {
+            box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.5);
+        }
+        .message-box.success {
+            box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.5);
+        }
+        .message-box.error {
+            box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.5);
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .card {
+                padding: 1.5rem;
+            }
+            .input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .input-group label {
+                margin-bottom: 0.25rem;
+            }
+            .input-field {
+                width: 100%;
+            }
+            .output-equation {
+                font-size: 1.4rem;
+                flex-direction: column; /* Stack word and number representation on small screens */
+                gap: 1rem;
+            }
+            .output-mapping {
+                font-size: 0.9rem;
+                gap: 0.75rem;
+            }
+            .btn {
+                width: 100%;
+                margin-bottom: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-center text-gray-800 mb-6 flex items-center justify-center">
+            <i class="fas fa-brain text-blue-500 mr-3"></i> Cryptarithmetic Solver
+        </h1>
+
+        <p class="text-center text-white-600 mb-8 text-lg">
+            Enter your cryptarithmetic puzzle to find the unique digit assignments.
+        </p>
+
+        <div class="input-section mb-8">
+            <div class="input-group">
+                <label for="word1">Word 1:</label>
+                <input type="text" id="word1" class="input-field" placeholder="e.g., SEND" value="SEND">
+            </div>
+            <div class="input-group">
+                <label for="word2">Word 2:</label>
+                <input type="text" id="word2" class="input-field" placeholder="e.g., MORE" value="MORE">
+            </div>
+            <div class="input-group">
+                <label for="resultWord">Result:</label>
+                <input type="text" id="resultWord" class="input-field" placeholder="e.g., MONEY" value="MONEY">
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+                <button id="solveBtn" class="btn btn-primary">
+                    <span id="solveBtnText"><i class="fas fa-magic mr-2"></i> Solve Puzzle</span>
+                    <span id="loadingSpinner" class="hidden">
+                        <i class="fas fa-spinner fa-spin mr-2"></i> Solving...
+                    </span>
+                </button>
+                <button id="resetBtn" class="btn btn-secondary">
+                    <i class="fas fa-redo mr-2"></i> Reset
+                </button>
+            </div>
+        </div>
+
+        <div id="outputSection" class="output-section hidden">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4">Solution Found!</h2>
+            <div id="solvedEquation" class="output-equation"></div>
+            <div id="assignedLetters" class="output-mapping"></div>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+                <button id="copySolutionBtn" class="btn btn-secondary">
+                    <i class="fas fa-copy mr-2"></i> Copy Solution
+                </button>
+                <button id="tryAnotherBtn" class="btn btn-secondary">
+                    <i class="fas fa-lightbulb mr-2"></i> Try Another Example
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="messageBox" class="message-box"></div>
+
+    <script>
+        // Global variables for UI elements
+        const word1Input = document.getElementById('word1');
+        const word2Input = document.getElementById('word2');
+        const resultWordInput = document.getElementById('resultWord');
+        const solveBtn = document.getElementById('solveBtn');
+        const solveBtnText = document.getElementById('solveBtnText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const resetBtn = document.getElementById('resetBtn');
+        const outputSection = document.getElementById('outputSection');
+        const solvedEquationDiv = document.getElementById('solvedEquation');
+        const assignedLettersDiv = document.getElementById('assignedLetters');
+        const messageBox = document.getElementById('messageBox');
+        const copySolutionBtn = document.getElementById('copySolutionBtn');
+        const tryAnotherBtn = document.getElementById('tryAnotherBtn'); // New button reference
+
+        // Store current solution for display
+        let currentSolution = null;
+
+        // Predefined examples for "Try Another Example"
+        const examples = [
+            { word1: "SEND", word2: "MORE", resultWord: "MONEY" },
+            { word1: "CROSS", word2: "ROADS", resultWord: "DANGER" },
+            { word1: "BASE", word2: "BALL", resultWord: "GAMES" },
+            { word1: "APPLE", word2: "LEMON", resultWord: "BANANA" }
+        ];
+        let currentExampleIndex = 0;
+
+        /**
+         * Displays a message in a floating box.
+         * @param {string} message The message to display.
+         * @param {number} duration The duration in milliseconds to show the message.
+         * @param {string} type The type of message ('info', 'success', 'error').
+         */
+        function showMessage(message, duration = 2500, type = 'info') {
+            // Clear any existing timeout
+            if (messageBox.timeoutId) {
+                clearTimeout(messageBox.timeoutId);
+            }
+
+            // Reset and prepare message box
+            messageBox.innerHTML = '';
+            messageBox.className = 'message-box';
+            messageBox.classList.add(type);
+
+            // Set icon based on message type
+            const icons = {
+                info: 'fas fa-info-circle',
+                success: 'fas fa-check-circle',
+                error: 'fas fa-exclamation-circle'
+            };
+            const icon = document.createElement('i');
+            icon.className = icons[type] || icons.info;
+            messageBox.appendChild(icon);
+
+            // Add message text
+            messageBox.appendChild(document.createTextNode(message));
+
+            // Show with animation
+            messageBox.classList.remove('hide');
+            void messageBox.offsetWidth; // Trigger reflow
+            messageBox.classList.add('show');
+
+            // Auto-hide after duration
+            messageBox.timeoutId = setTimeout(() => {
+                messageBox.classList.remove('show');
+                messageBox.classList.add('hide');
+            }, duration);
+        }
+
+        /**
+         * Resets all input fields and clears the output section.
+         */
+        function resetSolver() {
+            word1Input.value = '';
+            word2Input.value = '';
+            resultWordInput.value = '';
+            outputSection.classList.add('hidden');
+            solvedEquationDiv.innerHTML = '';
+            assignedLettersDiv.innerHTML = '';
+            currentSolution = null;
+            // Remove error classes from inputs
+            word1Input.classList.remove('error');
+            word2Input.classList.remove('error');
+            resultWordInput.classList.remove('error');
+            showMessage('Solver reset!', 2000, 'info');
+        }
+
+        /**
+         * Validates the input strings.
+         * @param {string} word1 First word.
+         * @param {string} word2 Second word.
+         * @param {string} resultWord Result word.
+         * @returns {boolean} True if inputs are valid, false otherwise.
+         */
+        function validateInputs(word1, word2, resultWord) {
+            let isValid = true;
+
+            // Clear previous error states
+            word1Input.classList.remove('error');
+            word2Input.classList.remove('error');
+            resultWordInput.classList.remove('error');
+
+            if (!word1) {
+                word1Input.classList.add('error');
+                showMessage('Word 1 cannot be empty.', 3500, 'error');
+                isValid = false;
+            }
+            if (!word2) {
+                word2Input.classList.add('error');
+                showMessage('Word 2 cannot be empty.', 3500, 'error');
+                isValid = false;
+            }
+            if (!resultWord) {
+                resultWordInput.classList.add('error');
+                showMessage('Result word cannot be empty.', 3500, 'error');
+                isValid = false;
+            }
+
+            if (!isValid) return false; // Exit if any field is empty
+
+            if (!/^[A-Z]+$/i.test(word1)) {
+                word1Input.classList.add('error');
+                showMessage('Word 1 must contain only alphabetic characters (A-Z).', 3500, 'error');
+                isValid = false;
+            }
+            if (!/^[A-Z]+$/i.test(word2)) {
+                word2Input.classList.add('error');
+                showMessage('Word 2 must contain only alphabetic characters (A-Z).', 3500, 'error');
+                isValid = false;
+            }
+            if (!/^[A-Z]+$/i.test(resultWord)) {
+                resultWordInput.classList.add('error');
+                showMessage('Result word must contain only alphabetic characters (A-Z).', 3500, 'error');
+                isValid = false;
+            }
+
+            if (!isValid) return false; // Exit if any field has invalid characters
+
+            // Ensure words are uppercase for consistent processing
+            word1Input.value = word1.toUpperCase();
+            word2Input.value = word2.toUpperCase();
+            resultWordInput.value = resultWord.toUpperCase();
+
+            // Check for leading zeros: The first letter of each word cannot be zero.
+            const leadingLetters = new Set();
+            if (word1.length > 1) leadingLetters.add(word1[0]);
+            if (word2.length > 1) leadingLetters.add(word2[0]);
+            if (resultWord.length > 1) leadingLetters.add(resultWord[0]);
+
+            const allUniqueLetters = new Set();
+            for (const char of word1 + word2 + resultWord) {
+                allUniqueLetters.add(char);
+            }
+
+            if (allUniqueLetters.size > 10) { // More than 10 unique letters means no solution possible
+                showMessage('Too many unique letters for 0-9 digit assignments (max 10 unique letters allowed).', 3500, 'error');
+                return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * The core Cryptarithmetic Solver function using backtracking.
+         * Constraints applied:
+         * 1. No two letters have the same digit value.
+         * 2. Sum of digits matches the problem.
+         * 3. Digits are 0-9.
+         * 4. Leading letters cannot be zero.
+         * 5. "Only one carry forward" interpreted as: each column's carry to the next column must be 0 or 1.
+         *
+         * @param {string[]} uniqueLetters Array of unique letters in the puzzle.
+         * @param {Object} letterMap Object to store letter-to-digit assignments.
+         * @param {boolean[]} usedDigits Array to track which digits (0-9) are already used.
+         * @param {string} word1 First word.
+         * @param {string} word2 Second word.
+         * @param {string} resultWord Result word.
+         * @param {Set<string>} leadingLetters Set of letters that cannot be zero.
+         * @param {number} k Current index of the unique letter being assigned.
+         * @returns {boolean} True if a solution is found, false otherwise.
+         */
+        function solveCryptarithmetic(uniqueLetters, letterMap, usedDigits, word1, word2, resultWord, leadingLetters, k) {
+            // Base case: If all unique letters have been assigned a digit
+            if (k === uniqueLetters.length) {
+                // Convert words to numbers based on current letterMap
+                const num1 = wordToNumber(word1, letterMap);
+                const num2 = wordToNumber(word2, letterMap);
+                const numResult = wordToNumber(resultWord, letterMap);
+
+                // Check if the arithmetic sum is correct
+                if (num1 + num2 === numResult) {
+                    // Additionally, check the "only one carry forward" constraint.
+                    // This means for each column, the carry to the next column must be 0 or 1.
+                    // We can verify this by performing column-wise addition.
+                    const maxLength = Math.max(word1.length, word2.length, resultWord.length);
+                    let carry = 0;
+                    for (let i = 0; i < maxLength; i++) {
+                        const digit1 = i < word1.length ? letterMap[word1[word1.length - 1 - i]] : 0;
+                        const digit2 = i < word2.length ? letterMap[word2[word2.length - 1 - i]] : 0;
+                        const resultDigit = i < resultWord.length ? letterMap[resultWord[resultWord.length - 1 - i]] : 0;
+
+                        const sum = digit1 + digit2 + carry;
+                        const currentColumnSum = sum % 10;
+                        const nextCarry = Math.floor(sum / 10);
+
+                        // If the current column's sum doesn't match the result digit
+                        // OR if the carry is greater than 1, this solution is invalid.
+                        // The problem statement "only one carry forward" is interpreted as
+                        // carry cannot exceed 1 for any column.
+                        if (currentColumnSum !== resultDigit || nextCarry > 1) {
+                            return false;
+                        }
+                        carry = nextCarry;
+                    }
+                    // If after checking all columns, there's still a carry left and it's not 0 or 1,
+                    // or if the result word was shorter than expected for the final carry.
+                    // The final carry should only be 1 if the result word is one character longer than the longest input word.
+                    if (carry > 1 || (carry > 0 && resultWord.length !== maxLength + 1) || (carry === 0 && resultWord.length > maxLength)) {
+                        return false;
+                    }
+
+                    // If all checks pass, a solution is found
+                    return true;
+                }
+                return false; // Arithmetic doesn't match
+            }
+
+            const currentLetter = uniqueLetters[k];
+
+            // Try assigning digits 0-9 to the current letter
+            for (let digit = 0; digit <= 9; digit++) {
+                // Constraint: Leading letters cannot be 0
+                if (leadingLetters.has(currentLetter) && digit === 0) {
+                    continue;
+                }
+
+                // Constraint: Digit must not be already used
+                if (!usedDigits[digit]) {
+                    letterMap[currentLetter] = digit; // Assign digit
+                    usedDigits[digit] = true;         // Mark digit as used
+
+                    // Recursively try to solve for the next letter
+                    if (solveCryptarithmetic(uniqueLetters, letterMap, usedDigits, word1, word2, resultWord, leadingLetters, k + 1)) {
+                        return true; // Solution found!
+                    }
+
+                    // Backtrack: If no solution found with this assignment, unassign and unmark
+                    delete letterMap[currentLetter];
+                    usedDigits[digit] = false;
+                }
+            }
+            return false; // No digit works for the current letter
+        }
+
+        /**
+         * Converts a word to its numerical value based on the letter-to-digit map.
+         * @param {string} word The word to convert.
+         * @param {Object} letterMap The map of letters to digits.
+         * @returns {number} The numerical value of the word.
+         */
+        function wordToNumber(word, letterMap) {
+            let num = 0;
+            for (let i = 0; i < word.length; i++) {
+                num = num * 10 + letterMap[word[i]];
+            }
+            return num;
+        }
+
+        /**
+         * Event handler for the Solve button.
+         */
+        solveBtn.addEventListener('click', async () => { // Made async to allow for simulated delay
+            const word1 = word1Input.value.trim();
+            const word2 = word2Input.value.trim();
+            const resultWord = resultWordInput.value.trim();
+
+            if (!validateInputs(word1, word2, resultWord)) {
+                return; // Validation failed, message already shown
+            }
+
+            // Show loading state
+            solveBtn.disabled = true;
+            resetBtn.disabled = true;
+            tryAnotherBtn.disabled = true; // Disable try another button during solving
+            solveBtnText.classList.add('hidden');
+            loadingSpinner.classList.remove('hidden');
+            showMessage('Solving puzzle...', 2000, 'info');
+            outputSection.classList.add('hidden'); // Hide previous output
+
+            // Simulate a delay for complex calculations (remove in production if not needed)
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            // Collect all unique letters from the words
+            const allLetters = new Set();
+            for (const char of word1 + word2 + resultWord) {
+                allLetters.add(char);
+            }
+            const uniqueLetters = Array.from(allLetters).sort(); // Sort for consistent assignment order
+
+            // Identify leading letters (cannot be zero)
+            const leadingLetters = new Set();
+            if (word1.length > 1) leadingLetters.add(word1[0]);
+            if (word2.length > 1) leadingLetters.add(word2[0]);
+            if (resultWord.length > 1) leadingLetters.add(resultWord[0]);
+
+            // Initialize data structures for the solver
+            const letterMap = {}; // Stores letter -> digit mapping
+            const usedDigits = new Array(10).fill(false); // Tracks used digits (0-9)
+
+            // Start the backtracking solver
+            const solutionFound = solveCryptarithmetic(uniqueLetters, letterMap, usedDigits, word1, word2, resultWord, leadingLetters, 0);
+
+            // Hide loading state
+            solveBtn.disabled = false;
+            resetBtn.disabled = false;
+            tryAnotherBtn.disabled = false; // Enable try another button
+            solveBtnText.classList.remove('hidden');
+            loadingSpinner.classList.add('hidden');
+
+            if (solutionFound) {
+                currentSolution = {
+                    word1: word1,
+                    word2: word2,
+                    resultWord: resultWord,
+                    letterMap: { ...letterMap } // Clone the map
+                };
+                displaySolution(currentSolution);
+                showMessage('Solution found successfully!', 3000, 'success');
+            } else {
+                showMessage('No solution found for this puzzle. Try different words or check your input!', 5000, 'error');
+                outputSection.classList.add('hidden');
+            }
+        });
+
+        /**
+         * Displays the found solution in the output section.
+         * @param {Object} solution The solution object containing words and letterMap.
+         */
+        function displaySolution(solution) {
+            const { word1, word2, resultWord, letterMap } = solution;
+
+            const num1 = wordToNumber(word1, letterMap);
+            const num2 = wordToNumber(word2, letterMap);
+            const numResult = wordToNumber(resultWord, letterMap);
+
+            const maxWordLength = Math.max(word1.length, word2.length, resultWord.length);
+            const maxNumLength = Math.max(String(num1).length, String(num2).length, String(numResult).length);
+
+            // Helper to create span elements for each character/digit
+            const createSpannedText = (text, type, dataAttr) => {
+                let html = '';
+                for (const char of text) {
+                    html += `<span class="equation-char" data-${dataAttr}="${char}">${char}</span>`;
+                }
+                return html;
+            };
+
+            solvedEquationDiv.innerHTML = `
+                <div class="word-representation">
+                    <pre class="text-xl md:text-2xl font-mono">${createSpannedText(word1.padStart(maxWordLength, ' '), 'letter', 'letter')}</pre>
+                    <pre class="text-xl md:text-2xl font-mono">+ ${createSpannedText(word2.padStart(maxWordLength - 1, ' '), 'letter', 'letter')}</pre>
+                    <pre class="text-xl md:text-2xl font-mono">-----</pre>
+                    <pre class="text-xl md:text-2xl font-mono">${createSpannedText(resultWord.padStart(maxWordLength, ' '), 'letter', 'letter')}</pre>
+                </div>
+                <div class="number-representation">
+                    <pre class="text-xl md:text-2xl font-mono text-blue-700">${createSpannedText(String(num1).padStart(maxNumLength, ' '), 'digit', 'digit')}</pre>
+                    <pre class="text-xl md:text-2xl font-mono text-blue-700">+ ${createSpannedText(String(num2).padStart(maxNumLength - 1, ' '), 'digit', 'digit')}</pre>
+                    <pre class="text-xl md:text-2xl font-mono text-blue-700">-----</pre>
+                    <pre class="text-xl md:text-2xl font-mono text-blue-700">${createSpannedText(String(numResult).padStart(maxNumLength, ' '), 'digit', 'digit')}</pre>
+                </div>
+            `;
+
+            // Display assigned letters
+            assignedLettersDiv.innerHTML = '';
+            const sortedLetters = Object.keys(letterMap).sort(); // Sort letters alphabetically for display
+            sortedLetters.forEach(letter => {
+                const item = document.createElement('div');
+                item.className = 'mapping-item';
+                item.textContent = `${letter} → ${letterMap[letter]}`;
+                item.setAttribute('data-letter', letter); // Add data-letter attribute
+                item.setAttribute('data-digit', letterMap[letter]); // Add data-digit attribute
+                assignedLettersDiv.appendChild(item);
+            });
+
+            // Add event listeners for interactive highlighting
+            addHighlightListeners();
+
+            // Remove 'hidden' class to trigger the animation
+            outputSection.classList.remove('hidden');
+        }
+
+        /**
+         * Adds click listeners to equation characters and mapping items for highlighting.
+         */
+        function addHighlightListeners() {
+            // Remove existing listeners to prevent duplicates
+            document.querySelectorAll('.equation-char, .mapping-item').forEach(el => {
+                el.removeEventListener('click', handleHighlightClick);
+                el.classList.remove('highlight'); // Clear any existing highlights
+            });
+
+            const equationChars = document.querySelectorAll('.equation-char');
+            const mappingItems = document.querySelectorAll('.mapping-item');
+
+            const allInteractiveElements = [...equationChars, ...mappingItems];
+
+            allInteractiveElements.forEach(element => {
+                element.addEventListener('click', handleHighlightClick);
+            });
+        }
+
+        /**
+         * Handles click events for highlighting letters/digits.
+         * @param {Event} event The click event.
+         */
+        function handleHighlightClick(event) {
+            const clickedElement = event.target;
+            const isLetterChar = clickedElement.hasAttribute('data-letter');
+            const isDigitChar = clickedElement.hasAttribute('data-digit') && !clickedElement.hasAttribute('data-letter'); // Ensure it's a digit span, not a letter span
+
+            let targetLetter = null;
+            let targetDigit = null;
+
+            if (isLetterChar) {
+                targetLetter = clickedElement.getAttribute('data-letter');
+                if (targetLetter === ' ') return; // Ignore spaces
+                targetDigit = currentSolution.letterMap[targetLetter];
+            } else if (isDigitChar) {
+                targetDigit = clickedElement.getAttribute('data-digit');
+                if (targetDigit === ' ') return; // Ignore spaces
+                // Find the letter mapped to this digit
+                for (const letter in currentSolution.letterMap) {
+                    if (currentSolution.letterMap[letter] == targetDigit) { // Use == for comparison as targetDigit might be string
+                        targetLetter = letter;
+                        break;
+                    }
+                }
+            } else if (clickedElement.classList.contains('mapping-item')) {
+                targetLetter = clickedElement.getAttribute('data-letter');
+                targetDigit = clickedElement.getAttribute('data-digit');
+            }
+
+            // Clear all current highlights
+            document.querySelectorAll('.equation-char.highlight, .mapping-item.highlight').forEach(el => {
+                el.classList.remove('highlight');
+            });
+
+            if (targetLetter && targetDigit !== null) {
+                // Highlight all instances of the letter in the equation
+                document.querySelectorAll(`.equation-char[data-letter="${targetLetter}"]`).forEach(el => {
+                    el.classList.add('highlight');
+                });
+                // Highlight all instances of the digit in the equation
+                document.querySelectorAll(`.equation-char[data-digit="${targetDigit}"]`).forEach(el => {
+                    el.classList.add('highlight');
+                });
+                // Highlight the corresponding mapping item
+                document.querySelectorAll(`.mapping-item[data-letter="${targetLetter}"][data-digit="${targetDigit}"]`).forEach(el => {
+                    el.classList.add('highlight');
+                });
+            }
+        }
+
+
+        /**
+         * Copies the solution text to the clipboard.
+         */
+        function copySolutionToClipboard() {
+            if (!currentSolution) {
+                showMessage('No solution to copy!', 2000, 'info');
+                return;
+            }
+
+            const { word1, word2, resultWord, letterMap } = currentSolution;
+            const num1 = wordToNumber(word1, letterMap);
+            const num2 = wordToNumber(word2, letterMap);
+            const numResult = wordToNumber(resultWord, letterMap);
+
+            const solutionText = `
+Cryptarithmetic Solution:
+
+  ${word1}
++ ${word2}
+-------
+  ${resultWord}
+
+Which translates to:
+
+  ${num1}
++ ${num2}
+-------
+  ${numResult}
+
+Letter Assignments:
+${Object.keys(letterMap).sort().map(letter => `${letter} = ${letterMap[letter]}`).join('\n')}
+            `.trim();
+
+            // Use document.execCommand('copy') for broader compatibility in iframes
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = solutionText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            try {
+                document.execCommand('copy');
+                showMessage('Solution copied to clipboard!', 2500, 'success');
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                showMessage('Failed to copy solution. Please copy manually.', 3500, 'error');
+            } finally {
+                document.body.removeChild(tempTextArea);
+            }
+        }
+
+        /**
+         * Loads the next example into the input fields and triggers the solve button.
+         */
+        function loadNextExample() {
+            currentExampleIndex = (currentExampleIndex + 1) % examples.length;
+            const example = examples[currentExampleIndex];
+            word1Input.value = example.word1;
+            word2Input.value = example.word2;
+            resultWordInput.value = example.resultWord;
+            showMessage('Loading next example...', 1500, 'info');
+            solveBtn.click(); // Trigger solve for the new example
+        }
+
+
+        // Event listener for the Reset button
+        resetBtn.addEventListener('click', resetSolver);
+
+        // Event listener for the Copy Solution button
+        copySolutionBtn.addEventListener('click', copySolutionToClipboard);
+
+        // Event listener for the Try Another Example button
+        tryAnotherBtn.addEventListener('click', loadNextExample);
+
+        // Add input event listeners to clear error state on typing
+        word1Input.addEventListener('input', () => word1Input.classList.remove('error'));
+        word2Input.addEventListener('input', () => word2Input.classList.remove('error'));
+        resultWordInput.addEventListener('input', () => resultWordInput.classList.remove('error'));
+
+
+        // Initial load: Try to solve the default "SEND + MORE = MONEY" example
+        window.onload = () => {
+            solveBtn.click(); // Simulate a click on solve button
+        };
+    </script>
+</body>
+</html>
