@@ -1,0 +1,13 @@
+Hadoop is an open source framework used for distributed storage and distributed processing of big data.
+Big data is data that is too large or too complex to be handled by traditional data processing software.
+Hadoop stores big data across many machines using the Hadoop Distributed File System, commonly known as HDFS.
+HDFS splits large files into smaller blocks and replicates each block across multiple machines for fault tolerance.
+Hadoop processes big data using a programming model called MapReduce.
+MapReduce breaks a large task into smaller tasks that run in parallel across a Hadoop cluster.
+The Mapper in MapReduce reads input data and converts it into key value pairs.
+The Reducer in MapReduce takes the key value pairs from the Mapper and combines them into a final result.
+YARN is the resource management layer of Hadoop that schedules jobs and manages cluster resources.
+Together, HDFS, MapReduce, and YARN make Hadoop a powerful framework for big data processing.
+Big data analytics helps organizations make better decisions by finding patterns hidden in large data sets.
+Hadoop is widely used in industries such as finance, healthcare, retail, and telecommunications for big data analytics.
+Learning Hadoop and MapReduce is an important skill for anyone working with big data today.
